@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
+    marginBottom: 300,
   },
   upperSection: {
     flex: 1,
@@ -61,7 +62,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     opacity: 0.5,
   },
-  bottomSection: {
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

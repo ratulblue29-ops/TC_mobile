@@ -8,6 +8,7 @@ import {
   Dimensions,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -53,61 +54,69 @@ const WelcomeScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.contentWrapper}>
-        <View style={styles.upperSection}>
-          <ScrollView
-            ref={scrollViewRef}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
-          >
-            {slides.map((slide) => (
-              <View key={slide.id} style={styles.slide}>
-                <View style={styles.logoContainer}>
-                  <Image style={styles.logo} source={require('../../../assets/images/logo.png')} />
+          <View style={styles.upperSection}>
+            <ScrollView
+              ref={scrollViewRef}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onScroll={handleScroll}
+              scrollEventThrottle={16}
+            >
+              {slides.map((slide) => (
+                <View key={slide.id} style={styles.slide}>
+                  <View style={styles.logoContainer}>
+                    <Image style={styles.logo} source={require('../../../assets/images/logo.png')} />
+                  </View>
+                  <Text style={styles.titleText}>
+                    {slide.title1} <Text style={styles.highlight}>{slide.highlight1}</Text>
+                  </Text>
+                  <Text style={styles.titleText}>
+                    {slide.title2} <Text style={styles.highlight}>{slide.highlight2}</Text>
+                  </Text>
                 </View>
-                <Text style={styles.titleText}>
-                  {slide.title1} <Text style={styles.highlight}>{slide.highlight1}</Text>
-                </Text>
-                <Text style={styles.titleText}>
-                  {slide.title2} <Text style={styles.highlight}>{slide.highlight2}</Text>
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
+              ))}
+            </ScrollView>
 
-          <View style={styles.paginationWrapper}>
-            {slides.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  index === activeSlide ? styles.paginationActive : styles.paginationDot,
-                ]}
-              />
-            ))}
+            <View style={styles.paginationWrapper}>
+              {slides.map((_, index) => (
+                <View
+                  key={index}
+                  style={[
+                    index === activeSlide ? styles.paginationActive : styles.paginationDot,
+                  ]}
+                />
+              ))}
+            </View>
           </View>
         </View>
-
-        <View style={styles.bottomSection}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginButtonText}>Login</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.createButton}>
-            <Text style={styles.createButtonText}>Create an account</Text>
-          </TouchableOpacity>
-
-          <View style={styles.footerWrapper}>
-            <Text style={styles.footerText}>
-              By continuing, you agree to Traders Connect's{'\n'}
-              <Text style={styles.footerLink}>Privacy Policy</Text> and{' '}
-              <Text style={styles.footerLink}>Terms of Use</Text>
-            </Text>
-          </View>
-        </View>
-      </View>
       </SafeAreaView>
+
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={true}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity style={styles.loginButton}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.createButton}>
+              <Text style={styles.createButtonText}>Create an account</Text>
+            </TouchableOpacity>
+
+            <View style={styles.footerWrapper}>
+              <Text style={styles.footerText}>
+                By continuing, you agree to Traders Connect's{'\n'}
+                <Text style={styles.footerLink}>Privacy Policy</Text> and{' '}
+                <Text style={styles.footerLink}>Terms of Use</Text>
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </LinearGradient>
   );
 };
