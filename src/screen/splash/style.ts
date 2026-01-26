@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-const bgColor = '#FFFFFF';
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: bgColor,
+    backgroundColor: '#FFFFFF',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
   tagline: {
     color: '#4E5D66',
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '900',
     textAlign: 'center',
     fontFamily: 'InstrumentSans-Medium',
     lineHeight: 26,
