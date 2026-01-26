@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   Text,
@@ -8,7 +8,6 @@ import {
   Dimensions,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,7 +17,6 @@ const { width } = Dimensions.get('window');
 
 const WelcomeScreen = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const scrollViewRef = useRef<ScrollView>(null);
 
   const slides = [
     { id: 1, title1: 'Compete', highlight1: 'smarter', title2: 'Trade', highlight2: 'better' },
@@ -28,19 +26,6 @@ const WelcomeScreen = () => {
     { id: 5, title1: 'Compete', highlight1: 'smarter', title2: 'Trade', highlight2: 'better' },
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const nextSlide = (activeSlide + 1) % slides.length;
-      setActiveSlide(nextSlide);
-      scrollViewRef.current?.scrollTo({
-        x: nextSlide * width,
-        animated: true,
-      });
-    }, 2000);
-
-    return () => clearInterval(timer);
-  }, [activeSlide]);
-
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
     setActiveSlide(slideIndex);
@@ -48,15 +33,14 @@ const WelcomeScreen = () => {
 
   return (
     <LinearGradient
-      colors={['#FFFFFF', '#0B0E20']}
-      locations={[0, 0.65]}
+      colors={['#FFFFFF', '#0B0E20', '#FFFFFF']}
+      locations={[0, 0.65, 0]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.contentWrapper}>
           <View style={styles.upperSection}>
             <ScrollView
-              ref={scrollViewRef}
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
@@ -90,33 +74,25 @@ const WelcomeScreen = () => {
             </View>
           </View>
         </View>
-      </SafeAreaView>
 
-      <Modal
-        animationType="none"
-        transparent={true}
-        visible={true}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
+        <View style={styles.bottomSheet}>
+          <TouchableOpacity style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Login</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity style={styles.createButton}>
-              <Text style={styles.createButtonText}>Create an account</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.createButton}>
+            <Text style={styles.createButtonText}>Create an account</Text>
+          </TouchableOpacity>
 
-            <View style={styles.footerWrapper}>
-              <Text style={styles.footerText}>
-                By continuing, you agree to Traders Connect's{'\n'}
-                <Text style={styles.footerLink}>Privacy Policy</Text> and{' '}
-                <Text style={styles.footerLink}>Terms of Use</Text>
-              </Text>
-            </View>
+          <View style={styles.footerWrapper}>
+            <Text style={styles.footerText}>
+              By continuing, you agree to Traders Connect's{'\n'}
+              <Text style={styles.footerLink}>Privacy Policy</Text> and{' '}
+              <Text style={styles.footerLink}>Terms of Use</Text>
+            </Text>
           </View>
         </View>
-      </Modal>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
