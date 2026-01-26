@@ -33,8 +33,8 @@ const WelcomeScreen = () => {
 
   return (
     <LinearGradient
-      colors={['#FFFFFF', '#0B0E20', '#FFFFFF']}
-      locations={[0, 0.65, 0]}
+      colors={['#FFFFFF', '#0B0E20', '#0B0E20', '#FFFFFF']}
+      locations={[0, 0.65, 0.8, 0]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
