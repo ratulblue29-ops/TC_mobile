@@ -117,14 +117,19 @@ const LoginMScreen = () => {
                 </View>
               </View>
 
-              <TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  { marginTop: isKeyboardVisible ? 0 : 20 }
+                ]} 
+                onPress={handleLogin}
+              >
                 <Text style={styles.forgotText}>Forgot your password?</Text>
               </TouchableOpacity>
 
               <TouchableOpacity 
                 style={[
                   styles.loginButton,
-                  { marginTop: isKeyboardVisible ? 0 : 40 }
+                  { marginTop: isKeyboardVisible ? 30 : 35 }
                 ]} 
                 onPress={handleLogin}
               >
