@@ -62,8 +62,6 @@ const LoginMScreen = () => {
       <Modal
         animationType="slide"
         transparent={true}
-        
-        
         statusBarTranslucent={true}
       >
         <View style={styles.modalOverlay} pointerEvents="box-none">
