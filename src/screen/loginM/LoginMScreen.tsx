@@ -16,7 +16,7 @@ import styles from './style';
 const LoginMScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [modalVisible, setModalVisible] = useState(true);
+  
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ const LoginMScreen = () => {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        
+        
         statusBarTranslucent={true}
       >
         <View style={styles.modalOverlay} pointerEvents="box-none">
@@ -76,7 +76,7 @@ const LoginMScreen = () => {
             >
               <TouchableOpacity
                 style={styles.closeButton}
-                onPress={() => setModalVisible(true)} // will update to go to welcome screen
+                // onPress={() => ()} will update to go to welcome screen
               >
                 <X size={24} color="#000000" />
               </TouchableOpacity>
