@@ -102,6 +102,18 @@ const styles = StyleSheet.create({
     fontFamily: instrumentSansSemiBold,
     color: '#FFFFFF',
   },
+  TopTraders: {
+    width: '90%',
+    marginHorizontal: 20,
+    paddingTop: 20,
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 16,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#0000004b',
+  },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -152,6 +164,7 @@ const styles = StyleSheet.create({
   openPosition: {
     fontSize: 16,
     fontFamily: instrumentSansRegular,
+    paddingTop: 30,
   },
   openAmount: {
     fontWeight: '600',
@@ -172,8 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 16,
     borderRadius: 8,
-    backgroundColor: '#7E8A93',
-    paddingHorizontal: 30,
+    backgroundColor: '#e6e6e6',
   },
   periodTab: {
     paddingVertical: 5,
@@ -196,19 +208,18 @@ const styles = StyleSheet.create({
     marginLeft: -20,
     borderRadius: 16,
   },
-  metricsRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 20,
+  metricsScroll: {
+    paddingLeft: 20,
     marginTop: 20,
-    gap: 12,
   },
   metricCard: {
-    flex: 1,
+    width: 150,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
     borderColor: '#00000023',
+    marginRight: 12,
   },
   metricLabel: {
     fontSize: 14,
@@ -241,11 +252,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#ffffff',
-    borderRadius: 12,
     marginHorizontal: 20,
     padding: 16,
     borderWidth: 1,
     borderColor: '#00000023',
+  },
+  accountCardFirst: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  accountCardLast: {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   accountCardLeft: {
     flex: 1,
@@ -371,10 +389,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   insightBadge: {
+    flexDirection: 'row',
     backgroundColor: '#0B0F20',
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 4,
+    gap: 4,
   },
   insightBadgeText: {
     fontSize: 12,
@@ -399,27 +419,29 @@ const styles = StyleSheet.create({
   paginationDots: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
   },
   paginationDot: {
-    width: 8,
-    height: 8,
+    width: 5,
+    height: 5,
     borderRadius: 4,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
   },
   paginationDotActive: {
     backgroundColor: '#FFFFFF',
-    width: 24,
+    width: 15,
   },
   traderPeriodTab: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
-    backgroundColor: '#7E8A93',
   },
   traderPeriodTabActive: {
     backgroundColor: '#27A69A',
+  },
+  traderPeriodTabActive2: {
+    backgroundColor: '#27A69A',
+    paddingHorizontal: 15,
   },
   traderPeriodTabText: {
     fontSize: 14,
@@ -427,17 +449,35 @@ const styles = StyleSheet.create({
     fontFamily: instrumentSansMedium,
     color: '#FFFFFF',
   },
+  traderPeriodTabText2: {
+    fontSize: 14,
+    fontWeight: '500',
+    fontFamily: instrumentSansMedium,
+    color: '#7E8A93',
+    marginHorizontal: 35,
+  },
   traderPeriodTabTextActive: {
     color: '#FFFFFF',
   },
   traderCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F7F8FA',
-    borderRadius: 12,
-    marginHorizontal: 20,
-    marginBottom: 12,
+    backgroundColor: '#ffffff',
     padding: 16,
+    borderColor: '#0000004b',
+  },
+  traderCardFirst: {
+    borderWidth: 0,
+  },
+  traderCardMiddle: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+  },
+  traderCardLast: {
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
   },
   traderBadge: {
     position: 'relative',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   Text,
   View,
@@ -25,12 +25,15 @@ import BadgeIcon from '../../components/svg/Star';
 
 const { width } = Dimensions.get('window');
 
+const PERIODS = ['Week', 'Month', 'Year'] as const;
+type Period = typeof PERIODS[number];
+
 const DashboardScreen = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState('Week');
-  const [selectedTopTraderPeriod, setSelectedTopTraderPeriod] = useState('Week');
+  const [selectedPeriod, setSelectedPeriod] = useState<Period>('Week');
+  const [selectedTopTraderPeriod, setSelectedTopTraderPeriod] = useState<Period>('Week');
   const [activeInsightIndex, setActiveInsightIndex] = useState(0);
 
-  const chartData = {
+  const chartData = useMemo(() => ({
     labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     datasets: [
       {
@@ -44,9 +47,9 @@ const DashboardScreen = () => {
         strokeWidth: 2,
       },
     ],
-  };
+  }), []);
 
-  const chartConfig = {
+  const chartConfig = useMemo(() => ({
     backgroundColor: '#0B0F20',
     backgroundGradientFrom: '#0B0F20',
     backgroundGradientTo: '#0B0F20',
@@ -64,39 +67,87 @@ const DashboardScreen = () => {
       stroke: '#1F2937',
       strokeWidth: 1,
     },
-  };
+  }), []);
 
-  const linkedAccounts = [
+  const linkedAccounts = useMemo(() => [
     { id: 1, number: 'MT5-104392', broker: 'Exness', status: 'Active', statusColor: '#00897B', amount: '$1,624', change: '+5.1%' },
     { id: 2, number: 'MT5-104392', broker: 'Exness', status: 'Warning', statusColor: '#C3881B', amount: '$1,624', change: '+5.1%' },
     { id: 3, number: 'MT5-104392', broker: 'Exness', status: 'At Risk', statusColor: '#C54545', amount: '$1,624', change: '+5.1%' },
-  ];
+  ], []);
 
-  const copierAccounts = [
-    { id: 1, name: 'Master Account 1', status: 'Active', followers: '10' },
-    { id: 2, name: 'Master Account 2', status: 'Active', followers: '10' },
-    { id: 3, name: 'Master Account 3', status: 'Active', followers: '10' },
-  ];
+  const copierAccounts = useMemo(() => [
+    { id: 1, name: 'Master\nAccount 1', status: 'Active', followers: '10' },
+    { id: 2, name: 'Master\nAccount 2', status: 'Active', followers: '10' },
+    { id: 3, name: 'Master\nAccount 3', status: 'Disabled', followers: '10' },
+  ], []);
 
-  const topTraders = [
+  const topTraders = useMemo(() => [
     { id: 1, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 1 },
     { id: 2, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 2 },
     { id: 3, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 3 },
-  ];
+  ], []);
 
-  const insights = [
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data insights' },
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data insights' },
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data insights' },
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data insights' },
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data insights' },
-  ];
+  const insights = useMemo(() => [
+    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data shows +1.3% average ROI during this\nwindow. Favor high-liquidity instruments.' },
+    { title: 'Risk Alert', time: 'Trade Between 12:00-15:00 UTC', description: 'Increased volatility detected. Consider reducing position sizes during this period.' },
+    { title: 'Market Opportunity', time: 'Trade Between 16:00-19:00 UTC', description: 'Strong trend indicators suggest favorable conditions for momentum strategies.' },
+    { title: 'Portfolio Balance', time: 'Review Your Holdings', description: 'Your portfolio shows concentration risk. Consider diversifying across asset classes.' },
+    { title: 'Performance Tip', time: 'Optimize Your Strategy', description: 'Analysis shows better results with shorter holding periods during current market conditions.' },
+  ], []);
 
-  const getBadgeGradient = (rank: number) => {
-    if (rank === 1) return { start: '#FFC768', end: '#B88423' };
-    if (rank === 2) return { start: '#D0D0D0', end: '#949494' };
-    return { start: '#D28F77', end: '#A05F48' };
-  };
+  const handlePeriodChange = useCallback((period: Period) => {
+    setSelectedPeriod(period);
+  }, []);
+
+  const handleTopTraderPeriodChange = useCallback((period: Period) => {
+    setSelectedTopTraderPeriod(period);
+  }, []);
+
+  const handleInsightChange = useCallback((index: number) => {
+    setActiveInsightIndex(index);
+  }, []);
+
+  const getTraderCardStyle = useCallback((index: number) => {
+    if (index === 0) {
+      return styles.traderCardFirst;
+    }
+    if (index === 1) {
+      return styles.traderCardMiddle;
+    }
+    return styles.traderCardLast;
+  }, []);
+
+  const renderPeriodTabs = useCallback((
+    selected: Period,
+    onPress: (period: Period) => void,
+    tabStyle: any,
+    activeStyle: any,
+    textStyle: any,
+    activeTextStyle: any
+  ) => (
+    <View style={tabStyle}>
+      {PERIODS.map((period) => (
+        <TouchableOpacity
+          key={period}
+          style={[
+            styles.periodTab,
+            selected === period && activeStyle,
+          ]}
+          onPress={() => onPress(period)}
+          activeOpacity={0.7}
+        >
+          <Text
+            style={[
+              textStyle,
+              selected === period && activeTextStyle,
+            ]}
+          >
+            {period}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  ), []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -109,10 +160,10 @@ const DashboardScreen = () => {
           />
           <Text style={styles.headerTitle}>Dashboard</Text>
           <View style={styles.headerIcons}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
               <Bell size={24} color="#0B0F20" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
               <Menu size={24} color="#0B0F20" />
             </TouchableOpacity>
           </View>
@@ -124,7 +175,7 @@ const DashboardScreen = () => {
             <Text style={styles.accountLabel}>Account</Text>
             <Text style={styles.accountNumber}>MT5-104392</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7}>
             <ChevronDown size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
@@ -138,7 +189,7 @@ const DashboardScreen = () => {
               <Text style={styles.upgradeSubtitleBold}>5 copier accounts</Text>
             </Text>
           </View>
-          <TouchableOpacity style={styles.upgradeButton}>
+          <TouchableOpacity style={styles.upgradeButton} activeOpacity={0.7}>
             <Zap size={16} color="#FFFFFF" fill="#FFFFFF" />
             <Text style={styles.upgradeButtonText}>Upgrade</Text>
           </TouchableOpacity>
@@ -147,7 +198,7 @@ const DashboardScreen = () => {
         {/* Overview Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Overview</Text>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
             <ChevronRight size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
@@ -168,27 +219,14 @@ const DashboardScreen = () => {
           </View>
 
           {/* Period Tabs */}
-          <View style={styles.periodTabs}>
-            {['Week', 'Month', 'Year'].map((period) => (
-              <TouchableOpacity
-                key={period}
-                style={[
-                  styles.periodTab,
-                  selectedPeriod === period && styles.periodTabActive,
-                ]}
-                onPress={() => setSelectedPeriod(period)}
-              >
-                <Text
-                  style={[
-                    styles.periodTabText,
-                    selectedPeriod === period && styles.periodTabTextActive,
-                  ]}
-                >
-                  {period}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {renderPeriodTabs(
+            selectedPeriod,
+            handlePeriodChange,
+            styles.periodTabs,
+            styles.periodTabActive,
+            styles.periodTabText,
+            styles.periodTabTextActive
+          )}
 
           {/* Chart */}
           <LineChart
@@ -207,7 +245,7 @@ const DashboardScreen = () => {
         </View>
 
         {/* Metrics Row */}
-        <View style={styles.metricsRow}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.metricsScroll}>
           <View style={styles.metricCard}>
             <ChartPie size={24} color="#00897B" />
             <Text style={styles.metricLabel}>ROI</Text>
@@ -237,18 +275,25 @@ const DashboardScreen = () => {
               <ArrowUpRight size={16} color="#00897B" />
             </View>
           </View>
-        </View>
+        </ScrollView>
 
         {/* Linked Accounts Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Linked Accounts</Text>
-          <TouchableOpacity style={styles.sectionChevron}>
+          <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
             <ChevronRight size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
 
-        {linkedAccounts.map((account) => (
-          <View key={account.id} style={styles.accountCard}>
+        {linkedAccounts.map((account, index) => (
+          <View 
+            key={account.id} 
+            style={[
+              styles.accountCard,
+              index === 0 && styles.accountCardFirst,
+              index === linkedAccounts.length - 1 && styles.accountCardLast,
+            ]}
+          >
             <View style={styles.accountCardLeft}>
               <View style={styles.accountCardHeader}>
                 <Text style={styles.accountCardNumber}>{account.number}</Text>
@@ -273,39 +318,48 @@ const DashboardScreen = () => {
         {/* Copiers Accounts Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Copiers Accounts</Text>
-          <TouchableOpacity style={styles.sectionChevron}>
+          <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
             <ChevronRight size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.copierScroll}>
-          {copierAccounts.map((copier) => (
-            <View key={copier.id} style={styles.copierCard}>
-              <Text style={styles.copierName}>{copier.name}</Text>
-              <View style={styles.copierStatusBadge}>
-                <Text style={styles.copierStatusText}>{copier.status}</Text>
+          {copierAccounts.map((copier) => {
+            const isDisabled = copier.status === 'Disabled';
+            return (
+              <View key={copier.id} style={styles.copierCard}>
+                <Text style={styles.copierName}>{copier.name}</Text>
+                <View style={[
+                  styles.copierStatusBadge,
+                  isDisabled && { borderColor: '#0B0F20' }
+                ]}>
+                  <Text style={[
+                    styles.copierStatusText,
+                    isDisabled && { color: '#0B0F20' }
+                  ]}>{copier.status}</Text>
+                </View>
+                <View style={styles.copierFollowers}>
+                  <NetworkIcon width={16} height={16} color="#FFFFFF" />
+                  <Text style={styles.copierFollowersText}>{copier.followers}</Text>
+                </View>
               </View>
-              <View style={styles.copierFollowers}>
-                <NetworkIcon width={16} height={16} color="#FFFFFF" />
-                <Text style={styles.copierFollowersText}>{copier.followers}</Text>
-              </View>
-            </View>
-          ))}
+            );
+          })}
         </ScrollView>
 
         {/* Smart Insights Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Smart Insights</Text>
-          <TouchableOpacity style={styles.sectionChevron}>
+          <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
             <ChevronRight size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.insightCard}>
           <View style={styles.insightHeader}>
-            <RadioTower size={20} color="#FFFFFF" />
             <Text style={styles.insightTitle}>{insights[activeInsightIndex].title}</Text>
             <View style={styles.insightBadge}>
+              <RadioTower size={12} color="#FFFFFF" />
               <Text style={styles.insightBadgeText}>High</Text>
             </View>
           </View>
@@ -321,7 +375,8 @@ const DashboardScreen = () => {
                   styles.paginationDot,
                   activeInsightIndex === index && styles.paginationDotActive,
                 ]}
-                onPress={() => setActiveInsightIndex(index)}
+                onPress={() => handleInsightChange(index)}
+                activeOpacity={0.7}
               />
             ))}
           </View>
@@ -330,38 +385,24 @@ const DashboardScreen = () => {
         {/* Top Traders Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Top Traders</Text>
-          <TouchableOpacity style={styles.sectionChevron}>
+          <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
             <ChevronRight size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
 
         {/* Top Trader Period Tabs */}
-        <View style={styles.periodTabs2}>
-          {['Week', 'Month', 'Year'].map((period) => (
-            <TouchableOpacity
-              key={period}
-              style={[
-                styles.traderPeriodTab,
-                selectedTopTraderPeriod === period && styles.traderPeriodTabActive,
-              ]}
-              onPress={() => setSelectedTopTraderPeriod(period)}
-            >
-              <Text
-                style={[
-                  styles.traderPeriodTabText,
-                  selectedTopTraderPeriod === period && styles.traderPeriodTabTextActive,
-                ]}
-              >
-                {period}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <View style={styles.TopTraders}>
+          {renderPeriodTabs(
+            selectedTopTraderPeriod,
+            handleTopTraderPeriodChange,
+            styles.periodTabs2,
+            styles.traderPeriodTabActive2,
+            styles.traderPeriodTabText2,
+            styles.traderPeriodTabTextActive
+          )}
 
-        {topTraders.map((trader) => {
-          const gradient = getBadgeGradient(trader.rank);
-          return (
-            <View key={trader.id} style={styles.traderCard}>
+          {topTraders.map((trader, index) => (
+            <View key={trader.id} style={[styles.traderCard, getTraderCardStyle(index)]}>
               <View style={styles.traderBadge}>
                 <BadgeIcon width={32} height={34} />
                 <Text style={styles.traderRank}>{trader.rank}</Text>
@@ -375,8 +416,8 @@ const DashboardScreen = () => {
                 <ArrowUpRight size={16} color="#00897B" />
               </View>
             </View>
-          );
-        })}
+          ))}
+        </View>
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
