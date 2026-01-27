@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import {
   Text,
   View,
@@ -6,6 +6,8 @@ import {
   ScrollView,
   Image,
   Dimensions,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -95,6 +97,8 @@ const DashboardScreen = () => {
     { title: 'Performance Tip', time: 'Optimize Your Strategy', description: 'Analysis shows better results with shorter holding periods during current market conditions.' },
   ], []);
 
+  const insightScrollViewRef = useRef<ScrollView>(null);
+
   const handlePeriodChange = useCallback((period: Period) => {
     setSelectedPeriod(period);
   }, []);
@@ -103,8 +107,17 @@ const DashboardScreen = () => {
     setSelectedTopTraderPeriod(period);
   }, []);
 
+  const handleInsightScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
+    setActiveInsightIndex(slideIndex);
+  }, []);
+
   const handleInsightChange = useCallback((index: number) => {
     setActiveInsightIndex(index);
+    insightScrollViewRef.current?.scrollTo({
+      x: index * width,
+      animated: true,
+    });
   }, []);
 
   const getTraderCardStyle = useCallback((index: number) => {
@@ -355,32 +368,43 @@ const DashboardScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.insightCard}>
-          <View style={styles.insightHeader}>
-            <Text style={styles.insightTitle}>{insights[activeInsightIndex].title}</Text>
-            <View style={styles.insightBadge}>
-              <RadioTower size={12} color="#FFFFFF" />
-              <Text style={styles.insightBadgeText}>High</Text>
-            </View>
-          </View>
-          <Text style={styles.insightTime}>{insights[activeInsightIndex].time}</Text>
-          <Text style={styles.insightDescription}>{insights[activeInsightIndex].description}</Text>
+        <ScrollView
+          ref={insightScrollViewRef}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleInsightScroll}
+          scrollEventThrottle={16}
+        >
+          {insights.map((insight, index) => (
+            <View key={index} style={[styles.insightCard, { width: width - 40 }]}>
+              <View style={styles.insightHeader}>
+                <Text style={styles.insightTitle}>{insight.title}</Text>
+                <View style={styles.insightBadge}>
+                  <RadioTower size={12} color="#FFFFFF" />
+                  <Text style={styles.insightBadgeText}>High</Text>
+                </View>
+              </View>
+              <Text style={styles.insightTime}>{insight.time}</Text>
+              <Text style={styles.insightDescription}>{insight.description}</Text>
 
-          {/* Pagination Dots */}
-          <View style={styles.paginationDots}>
-            {insights.map((_, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.paginationDot,
-                  activeInsightIndex === index && styles.paginationDotActive,
-                ]}
-                onPress={() => handleInsightChange(index)}
-                activeOpacity={0.7}
-              />
-            ))}
-          </View>
-        </View>
+              {/* Pagination Dots */}
+              <View style={styles.paginationDots}>
+                {insights.map((_, dotIndex) => (
+                  <TouchableOpacity
+                    key={dotIndex}
+                    style={[
+                      styles.paginationDot,
+                      activeInsightIndex === dotIndex && styles.paginationDotActive,
+                    ]}
+                    onPress={() => handleInsightChange(dotIndex)}
+                    activeOpacity={0.7}
+                  />
+                ))}
+              </View>
+            </View>
+          ))}
+        </ScrollView>
 
         {/* Top Traders Section */}
         <View style={styles.sectionHeader}>
