@@ -14,12 +14,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   shadow: {
-    top: 11,
     flex: 1,
     backgroundColor: '#F7F8FA',
     borderRadius: 25,
     width: '93%',
     marginHorizontal: 15,
+    marginTop: 12,
+    justifyContent: 'flex-end',
   },
   modalOverlay: {
     flex: 1,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 24,
     paddingBottom: 40,
-    minHeight: '97%',
+    minHeight: '92%',
   },
   closeButton: {
     alignSelf: 'flex-end',
