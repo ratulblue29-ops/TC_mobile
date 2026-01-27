@@ -207,13 +207,13 @@ const DashboardScreen = () => {
         <View style={styles.balanceCard}>
           <View style={styles.balanceHeader}>
             <View>
-              <Text style={styles.balanceAmount}>$175,320.56</Text>
-              <Text style={styles.balanceChange}>+18%</Text>
+              <Text style={styles.balanceAmount}>$32,156.00</Text>
+              <Text style={styles.balanceChange}>+$1,624 (5.1%)</Text>
             </View>
             <View>
               <Text style={styles.openPosition}>
-                <Text style={styles.openAmount}>$256.35 </Text>
-                <Text style={styles.openLabel}>open</Text>
+                <Text style={styles.openAmount}>$21,400</Text>
+                <Text style={styles.openLabel}> Open</Text>
               </Text>
             </View>
           </View>
@@ -401,22 +401,53 @@ const DashboardScreen = () => {
             styles.traderPeriodTabTextActive
           )}
 
-          {topTraders.map((trader, index) => (
-            <View key={trader.id} style={[styles.traderCard, getTraderCardStyle(index)]}>
-              <View style={styles.traderBadge}>
-                <BadgeIcon width={32} height={34} />
-                <Text style={styles.traderRank}>{trader.rank}</Text>
-              </View>
-              <View style={styles.traderInfo}>
-                <Text style={styles.traderName}>{trader.name}</Text>
-                <Text style={styles.traderFollowers}>{trader.followers}</Text>
-              </View>
-              <View style={styles.traderPerformance}>
-                <Text style={styles.traderPerformanceText}>{trader.performance}</Text>
-                <ArrowUpRight size={16} color="#00897B" />
-              </View>
+          {/* Trader Rank 1 - Gold */}
+          <View style={[styles.traderCard, styles.traderCardFirst]}>
+            <View style={styles.traderBadge}>
+              <BadgeIcon width={32} height={34} startColor="#FFC768" endColor="#B88423" />
+              <Text style={styles.traderRank}>1</Text>
             </View>
-          ))}
+            <View style={styles.traderInfo}>
+              <Text style={styles.traderName}>John FX</Text>
+              <Text style={styles.traderFollowers}>120 Followers</Text>
+            </View>
+            <View style={styles.traderPerformance}>
+              <Text style={styles.traderPerformanceText}>+5.1%</Text>
+              <ArrowUpRight size={16} color="#00897B" />
+            </View>
+          </View>
+
+          {/* Trader Rank 2 - Silver */}
+          <View style={[styles.traderCard, styles.traderCardMiddle]}>
+            <View style={styles.traderBadge}>
+              <BadgeIcon width={32} height={34} startColor="#D0D0D0" endColor="#949494" />
+              <Text style={styles.traderRank}>2</Text>
+            </View>
+            <View style={styles.traderInfo}>
+              <Text style={styles.traderName}>John FX</Text>
+              <Text style={styles.traderFollowers}>120 Followers</Text>
+            </View>
+            <View style={styles.traderPerformance}>
+              <Text style={styles.traderPerformanceText}>+5.1%</Text>
+              <ArrowUpRight size={16} color="#00897B" />
+            </View>
+          </View>
+
+          {/* Trader Rank 3 - Bronze */}
+          <View style={[styles.traderCard, styles.traderCardLast]}>
+            <View style={styles.traderBadge}>
+              <BadgeIcon width={32} height={34} startColor="#D28F77" endColor="#A05F48" />
+              <Text style={styles.traderRank}>3</Text>
+            </View>
+            <View style={styles.traderInfo}>
+              <Text style={styles.traderName}>John FX</Text>
+              <Text style={styles.traderFollowers}>120 Followers</Text>
+            </View>
+            <View style={styles.traderPerformance}>
+              <Text style={styles.traderPerformanceText}>+5.1%</Text>
+              <ArrowUpRight size={16} color="#00897B" />
+            </View>
+          </View>
         </View>
 
         <View style={styles.bottomSpacer} />

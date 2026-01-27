@@ -4,6 +4,8 @@ import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 const BadgeIcon = ({
   width = 32,
   height = 34,
+  startColor = "#FFC768",
+  endColor = "#B88423",
   ...props
 }) => {
   return (
@@ -27,8 +29,8 @@ const BadgeIcon = ({
           y2="33.5352"
           gradientUnits="userSpaceOnUse"
         >
-          <Stop offset="0" stopColor="#FFC768" />
-          <Stop offset="1" stopColor="#B88423" />
+          <Stop offset="0" stopColor={startColor} />
+          <Stop offset="1" stopColor={endColor} />
         </LinearGradient>
       </Defs>
     </Svg>
