@@ -12,8 +12,8 @@ const App = () => {
       {/* <SplashScreen /> */}
       {/* <WelcomeScreen /> */}
       {/* <LoginMScreen /> */}
-      <DashboardScreen />
-      {/* <CopierScreen /> */}
+      {/* <DashboardScreen /> */}
+      <CopierScreen />
     </SafeAreaProvider>
   );
 };

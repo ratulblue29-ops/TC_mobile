@@ -11,11 +11,18 @@ import {
   Plus,
 } from 'lucide-react-native';
 import styles from './style';
+import LinearGradient from 'react-native-linear-gradient';
 
 const CopierScreen = () => {
   return (
+   <LinearGradient
+      colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
+      locations={[0, 0.3, 0]}
+      style={styles.gradient}
+   >
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
+       <View style={styles.headerSection}>
         {/* Header */}
         <View style={styles.header}>
           <Image
@@ -29,8 +36,10 @@ const CopierScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+       </View>
       </ScrollView>
     </SafeAreaView>
+   </LinearGradient>
   );
 };
 

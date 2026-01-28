@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F7F8FA',
+    backgroundColor: 'transparent',
   },
   header: {
     flexDirection: 'row',
@@ -11,6 +14,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 12,
+  },
+  headerSection: {
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    borderColor: '#00000027',
+    paddingBottom: 17,
   },
   logoIcon: {
     width: 39.37,
