@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#0B0F20',
     borderRadius: 16,
     marginHorizontal: 20,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   balanceHeader: {
     flexDirection: 'row',
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'InstrumentSans-Medium',
     color: '#FFFFFF',
-    paddingHorizontal: 39.5,
+    marginHorizontal: 32,
   },
   periodTabTextActive: {
     color: '#FFFFFF',
@@ -446,10 +447,10 @@ const styles = StyleSheet.create({
   },
   traderPeriodTabActive: {
     backgroundColor: '#27A69A',
+    marginHorizontal: 5,
   },
   traderPeriodTabActive2: {
     backgroundColor: '#27A69A',
-    paddingHorizontal: 15,
   },
   traderPeriodTabText: {
     fontSize: 14,

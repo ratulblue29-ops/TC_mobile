@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DashboardScreen from '../screen/Dashboard/DashboardScreen';
@@ -60,6 +60,11 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
           }
         };
 
+        const containerStyle = useMemo(
+          () => [styles.iconContainer, isFocused && styles.activeIconContainer],
+          [isFocused]
+        );
+
         return (
           <TouchableOpacity
             key={index}
@@ -70,7 +75,7 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.tabButton}>
-            <View style={[styles.iconContainer, isFocused && styles.activeIconContainer]}>
+            <View style={containerStyle}>
               {renderIcon()}
             </View>
           </TouchableOpacity>
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     paddingTop: 15,
     paddingHorizontal: 8,
-    paddingBottom: 45,
+    paddingBottom: 35,
     elevation: 8,
   },
   tabButton: {
@@ -115,11 +120,12 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 44,
     height: 44,
+    borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 100,
+    overflow: 'hidden',
   },
   activeIconContainer: {
-    backgroundColor: '#00897b1a',
+    backgroundColor: 'rgba(0, 137, 123, 0.1)',
   },
 });
