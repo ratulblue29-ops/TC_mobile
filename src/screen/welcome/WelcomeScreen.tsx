@@ -10,13 +10,25 @@ import {
   NativeSyntheticEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 
 const { width } = Dimensions.get('window');
 
-const WelcomeScreen = () => {
+type WelcomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Welcome'>;
+
+type Props = {
+  navigation: WelcomeScreenNavigationProp;
+};
+
+const WelcomeScreen = ({ navigation }: Props) => {
   const [activeSlide, setActiveSlide] = useState(0);
+
+  const handleLoginPress = () => {
+    navigation.navigate('LoginM');
+  };
 
   const slides = [
     { id: 1, title1: 'Compete', highlight1: 'smarter', title2: 'Trade', highlight2: 'better' },
@@ -76,7 +88,7 @@ const WelcomeScreen = () => {
         </View>
 
         <View style={styles.bottomSheet}>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
 

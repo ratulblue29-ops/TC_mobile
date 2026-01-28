@@ -529,9 +529,6 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
-  bottomSpacer: {
-    height: 100,
-  },
 });
 
 export default styles;

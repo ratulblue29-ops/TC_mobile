@@ -584,8 +584,6 @@ const DashboardScreen = () => {
             </View>
           ))}
         </View>
-
-        <View style={styles.bottomSpacer} />
       </ScrollView>
     </SafeAreaView>
    </LinearGradient>

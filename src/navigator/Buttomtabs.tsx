@@ -100,15 +100,12 @@ const styles = StyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingVertical: 12,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    paddingTop: 15,
     paddingHorizontal: 8,
+    paddingBottom: 45,
     elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: -2},
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
   },
   tabButton: {
     flex: 1,
@@ -120,9 +117,9 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 22,
+    borderRadius: 100,
   },
   activeIconContainer: {
-    backgroundColor: 'rgba(0, 137, 123, 0.1)',
+    backgroundColor: '#00897b1a',
   },
 });

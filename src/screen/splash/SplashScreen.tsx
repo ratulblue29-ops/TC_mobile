@@ -1,16 +1,24 @@
 import { Image, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import styles from './style';
 
-const SplashScreen = () => {
+type SplashScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Splash'>;
+
+type Props = {
+  navigation: SplashScreenNavigationProp;
+};
+
+const SplashScreen = ({ navigation }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Navigation logic will go here
+      navigation.replace('Welcome');
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>

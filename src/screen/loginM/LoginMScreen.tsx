@@ -9,11 +9,19 @@ import {
   Keyboard,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import { Mail, LockKeyhole, X } from 'lucide-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 
-const LoginMScreen = () => {
+type LoginMScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginM'>;
+
+type Props = {
+  navigation: LoginMScreenNavigationProp;
+};
+
+const LoginMScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
@@ -46,10 +54,16 @@ const LoginMScreen = () => {
 
     try {
       // Login logic here
+      // For now, navigate to BottomTabs
+      navigation.replace('BottomTabs');
     } catch (error) {
       console.error(error);
     }
   };
+
+const handleClose = () => {
+  navigation.goBack();
+};
 
   return (
    <LinearGradient
@@ -63,6 +77,7 @@ const LoginMScreen = () => {
         animationType="slide"
         transparent={true}
         statusBarTranslucent={true}
+        visible={true}
       >
         <View style={styles.modalOverlay} pointerEvents="box-none">
           <View style={styles.modalContainer}>
@@ -74,7 +89,7 @@ const LoginMScreen = () => {
             >
               <TouchableOpacity
                 style={styles.closeButton}
-                // onPress={() => ()} will update to go to welcome screen
+                onPress={handleClose}
               >
                 <X size={24} color="#000000" />
               </TouchableOpacity>
