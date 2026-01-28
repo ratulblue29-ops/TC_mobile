@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   Text,
   View,
@@ -24,78 +24,210 @@ import { LineChart } from 'react-native-chart-kit';
 import styles from './style';
 import NetworkIcon from '../../components/svg/Sitemap';
 import BadgeIcon from '../../components/svg/Star';
+import LinearGradient from 'react-native-linear-gradient';
 
 const { width } = Dimensions.get('window');
 
 const PERIODS = ['Week', 'Month', 'Year'] as const;
 type Period = typeof PERIODS[number];
 
+// ============================================
+// DUMMY DATA
+// ============================================
+
+// Chart Data
+const chartData = {
+  labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  datasets: [
+    {
+      data: [50, 100, 80, 150, 120, 180, 160],
+      color: () => '#27A69A',
+      strokeWidth: 2,
+    },
+    {
+      data: [30, 60, 50, 90, 70, 110, 100],
+      color: () => '#4E5D66',
+      strokeWidth: 2,
+    },
+  ],
+};
+
+const chartConfig = {
+  backgroundColor: '#0B0F20',
+  backgroundGradientFrom: '#0B0F20',
+  backgroundGradientTo: '#0B0F20',
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  style: {
+    borderRadius: 16,
+  },
+  propsForDots: {
+    r: '0',
+  },
+  propsForBackgroundLines: {
+    strokeDasharray: '',
+    stroke: '#1F2937',
+    strokeWidth: 1,
+  },
+};
+
+// Metrics Data
+const metricsData = [
+  {
+    id: 1,
+    icon: 'Zap',
+    label: 'Total Profit',
+    value: '$1,624',
+    change: '+5.1%',
+    changeColor: '#00897B',
+  },
+  {
+    id: 2,
+    icon: 'RadioTower',
+    label: 'Open Position',
+    value: '$1,624',
+    change: '+5.1%',
+    changeColor: '#00897B',
+  },
+  {
+    id: 3,
+    icon: 'ChartPie',
+    label: 'Win Rate',
+    value: '3.4%',
+    change: '+2.1%',
+    changeColor: '#00897B',
+  },
+];
+
+// Linked Accounts Data
+const linkedAccountsData = [
+  {
+    id: 1,
+    number: 'MT5-104392',
+    broker: 'Exness',
+    status: 'Active',
+    statusColor: '#00897B',
+    amount: '$1,624',
+    change: '+5.1%',
+  },
+  {
+    id: 2,
+    number: 'MT5-104392',
+    broker: 'Exness',
+    status: 'Warning',
+    statusColor: '#C3881B',
+    amount: '$1,624',
+    change: '+5.1%',
+  },
+  {
+    id: 3,
+    number: 'MT5-104392',
+    broker: 'Exness',
+    status: 'At Risk',
+    statusColor: '#C54545',
+    amount: '$1,624',
+    change: '+5.1%',
+  },
+];
+
+// Copier Accounts Data
+const copierAccountsData = [
+  {
+    id: 1,
+    name: 'Master\nAccount 1',
+    status: 'Active',
+    followers: '10',
+  },
+  {
+    id: 2,
+    name: 'Master\nAccount 2',
+    status: 'Active',
+    followers: '10',
+  },
+  {
+    id: 3,
+    name: 'Master\nAccount 3',
+    status: 'Disabled',
+    followers: '10',
+  },
+];
+
+// Insights Data
+const insightsData = [
+  {
+    id: 1,
+    title: 'Best ROI Window',
+    time: 'Trade Between 08:00-11:00 UTC',
+    description: 'Historical data shows +1.3% average ROI during this\nwindow. Favor high-liquidity instruments.',
+    priority: 'High',
+  },
+  {
+    id: 2,
+    title: 'Risk Alert',
+    time: 'Trade Between 12:00-15:00 UTC',
+    description: 'Increased volatility detected. Consider reducing position sizes during this period.',
+    priority: 'High',
+  },
+  {
+    id: 3,
+    title: 'Market Opportunity',
+    time: 'Trade Between 16:00-19:00 UTC',
+    description: 'Strong trend indicators suggest favorable conditions for momentum strategies.',
+    priority: 'High',
+  },
+  {
+    id: 4,
+    title: 'Portfolio Balance',
+    time: 'Review Your Holdings',
+    description: 'Your portfolio shows concentration risk. Consider diversifying across asset classes.',
+    priority: 'High',
+  },
+  {
+    id: 5,
+    title: 'Performance Tip',
+    time: 'Optimize Your Strategy',
+    description: 'Analysis shows better results with shorter holding periods during current market conditions.',
+    priority: 'High',
+  },
+];
+
+// Top Traders Data
+const topTradersData = [
+  {
+    id: 1,
+    name: 'John FX',
+    followers: '120 Followers',
+    performance: '+5.1%',
+    rank: 1,
+    badgeColors: { start: '#FFC768', end: '#B88423' },
+  },
+  {
+    id: 2,
+    name: 'John FX',
+    followers: '120 Followers',
+    performance: '+5.1%',
+    rank: 2,
+    badgeColors: { start: '#D0D0D0', end: '#949494' },
+  },
+  {
+    id: 3,
+    name: 'John FX',
+    followers: '120 Followers',
+    performance: '+5.1%',
+    rank: 3,
+    badgeColors: { start: '#D28F77', end: '#A05F48' },
+  },
+];
+
+// ============================================
+// COMPONENT
+// ============================================
+
 const DashboardScreen = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>('Week');
   const [selectedTopTraderPeriod, setSelectedTopTraderPeriod] = useState<Period>('Week');
   const [activeInsightIndex, setActiveInsightIndex] = useState(0);
-
-  const chartData = useMemo(() => ({
-    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    datasets: [
-      {
-        data: [50, 100, 80, 150, 120, 180, 160],
-        color: () => '#27A69A',
-        strokeWidth: 2,
-      },
-      {
-        data: [30, 60, 50, 90, 70, 110, 100],
-        color: () => '#4E5D66',
-        strokeWidth: 2,
-      },
-    ],
-  }), []);
-
-  const chartConfig = useMemo(() => ({
-    backgroundColor: '#0B0F20',
-    backgroundGradientFrom: '#0B0F20',
-    backgroundGradientTo: '#0B0F20',
-    decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
-    propsForDots: {
-      r: '0',
-    },
-    propsForBackgroundLines: {
-      strokeDasharray: '',
-      stroke: '#1F2937',
-      strokeWidth: 1,
-    },
-  }), []);
-
-  const linkedAccounts = useMemo(() => [
-    { id: 1, number: 'MT5-104392', broker: 'Exness', status: 'Active', statusColor: '#00897B', amount: '$1,624', change: '+5.1%' },
-    { id: 2, number: 'MT5-104392', broker: 'Exness', status: 'Warning', statusColor: '#C3881B', amount: '$1,624', change: '+5.1%' },
-    { id: 3, number: 'MT5-104392', broker: 'Exness', status: 'At Risk', statusColor: '#C54545', amount: '$1,624', change: '+5.1%' },
-  ], []);
-
-  const copierAccounts = useMemo(() => [
-    { id: 1, name: 'Master\nAccount 1', status: 'Active', followers: '10' },
-    { id: 2, name: 'Master\nAccount 2', status: 'Active', followers: '10' },
-    { id: 3, name: 'Master\nAccount 3', status: 'Disabled', followers: '10' },
-  ], []);
-
-  const topTraders = useMemo(() => [
-    { id: 1, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 1 },
-    { id: 2, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 2 },
-    { id: 3, name: 'John FX', followers: '120 Followers', performance: '+5.1%', rank: 3 },
-  ], []);
-
-  const insights = useMemo(() => [
-    { title: 'Best ROI Window', time: 'Trade Between 08:00-11:00 UTC', description: 'Historical data shows +1.3% average ROI during this\nwindow. Favor high-liquidity instruments.' },
-    { title: 'Risk Alert', time: 'Trade Between 12:00-15:00 UTC', description: 'Increased volatility detected. Consider reducing position sizes during this period.' },
-    { title: 'Market Opportunity', time: 'Trade Between 16:00-19:00 UTC', description: 'Strong trend indicators suggest favorable conditions for momentum strategies.' },
-    { title: 'Portfolio Balance', time: 'Review Your Holdings', description: 'Your portfolio shows concentration risk. Consider diversifying across asset classes.' },
-    { title: 'Performance Tip', time: 'Optimize Your Strategy', description: 'Analysis shows better results with shorter holding periods during current market conditions.' },
-  ], []);
 
   const insightScrollViewRef = useRef<ScrollView>(null);
 
@@ -162,9 +294,28 @@ const DashboardScreen = () => {
     </View>
   ), []);
 
+  const renderMetricIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'Zap':
+        return <Zap size={24} color="#00897B" />;
+      case 'RadioTower':
+        return <RadioTower size={24} color="#00897B" />;
+      case 'ChartPie':
+        return <ChartPie size={24} color="#00897B" />;
+      default:
+        return null;
+    }
+  };
+
   return (
+   <LinearGradient
+      colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
+      locations={[0, 0.3, 0]}
+      style={styles.gradient}
+   >
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
+       <View style={styles.headerSection}>
         {/* Header */}
         <View style={styles.header}>
           <Image
@@ -192,6 +343,7 @@ const DashboardScreen = () => {
             <ChevronDown size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
+       </View>
 
         {/* Pro Trader Upgrade Card */}
         <View style={styles.upgradeCard}>
@@ -257,37 +409,21 @@ const DashboardScreen = () => {
           />
         </View>
 
-        {/* Metrics Row */}
+        {/* Metrics Cards */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.metricsScroll}>
-          <View style={styles.metricCard}>
-            <ChartPie size={24} color="#00897B" />
-            <Text style={styles.metricLabel}>ROI</Text>
-            <Text style={styles.metricValue}>3.4%</Text>
-            <View style={styles.metricChange}>
-              <Text style={styles.metricChangeText}>+2.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
+          {metricsData.map((metric) => (
+            <View key={metric.id} style={styles.metricCard}>
+              {renderMetricIcon(metric.icon)}
+              <Text style={styles.metricLabel}>{metric.label}</Text>
+              <Text style={styles.metricValue}>{metric.value}</Text>
+              <View style={styles.metricChange}>
+                <Text style={[styles.metricChangeText, { color: metric.changeColor }]}>
+                  {metric.change}
+                </Text>
+                <ArrowUpRight size={16} color={metric.changeColor} />
+              </View>
             </View>
-          </View>
-
-          <View style={styles.metricCard}>
-            <ChartPie size={24} color="#00897B" />
-            <Text style={styles.metricLabel}>P&L</Text>
-            <Text style={styles.metricValue}>$1,624</Text>
-            <View style={styles.metricChange}>
-              <Text style={styles.metricChangeText}>+2.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
-            </View>
-          </View>
-
-          <View style={styles.metricCard}>
-            <ChartPie size={24} color="#00897B" />
-            <Text style={styles.metricLabel}>Win Rate</Text>
-            <Text style={styles.metricValue}>3.4%</Text>
-            <View style={styles.metricChange}>
-              <Text style={styles.metricChangeText}>+2.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
-            </View>
-          </View>
+          ))}
         </ScrollView>
 
         {/* Linked Accounts Section */}
@@ -298,13 +434,13 @@ const DashboardScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {linkedAccounts.map((account, index) => (
+        {linkedAccountsData.map((account, index) => (
           <View 
             key={account.id} 
             style={[
               styles.accountCard,
               index === 0 && styles.accountCardFirst,
-              index === linkedAccounts.length - 1 && styles.accountCardLast,
+              index === linkedAccountsData.length - 1 && styles.accountCardLast,
             ]}
           >
             <View style={styles.accountCardLeft}>
@@ -337,7 +473,7 @@ const DashboardScreen = () => {
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.copierScroll}>
-          {copierAccounts.map((copier) => {
+          {copierAccountsData.map((copier) => {
             const isDisabled = copier.status === 'Disabled';
             return (
               <View key={copier.id} style={styles.copierCard}>
@@ -376,13 +512,13 @@ const DashboardScreen = () => {
           onScroll={handleInsightScroll}
           scrollEventThrottle={16}
         >
-          {insights.map((insight, index) => (
-            <View key={index} style={[styles.insightCard, { width: width - 40 }]}>
+          {insightsData.map((insight, index) => (
+            <View key={insight.id} style={[styles.insightCard, { width: width - 40 }]}>
               <View style={styles.insightHeader}>
                 <Text style={styles.insightTitle}>{insight.title}</Text>
                 <View style={styles.insightBadge}>
                   <RadioTower size={12} color="#FFFFFF" />
-                  <Text style={styles.insightBadgeText}>High</Text>
+                  <Text style={styles.insightBadgeText}>{insight.priority}</Text>
                 </View>
               </View>
               <Text style={styles.insightTime}>{insight.time}</Text>
@@ -390,7 +526,7 @@ const DashboardScreen = () => {
 
               {/* Pagination Dots */}
               <View style={styles.paginationDots}>
-                {insights.map((_, dotIndex) => (
+                {insightsData.map((_, dotIndex) => (
                   <TouchableOpacity
                     key={dotIndex}
                     style={[
@@ -425,58 +561,34 @@ const DashboardScreen = () => {
             styles.traderPeriodTabTextActive
           )}
 
-          {/* Trader Rank 1 - Gold */}
-          <View style={[styles.traderCard, styles.traderCardFirst]}>
-            <View style={styles.traderBadge}>
-              <BadgeIcon width={32} height={34} startColor="#FFC768" endColor="#B88423" />
-              <Text style={styles.traderRank}>1</Text>
+          {/* Top Traders List */}
+          {topTradersData.map((trader, index) => (
+            <View key={trader.id} style={[styles.traderCard, getTraderCardStyle(index)]}>
+              <View style={styles.traderBadge}>
+                <BadgeIcon 
+                  width={32} 
+                  height={34} 
+                  startColor={trader.badgeColors.start} 
+                  endColor={trader.badgeColors.end} 
+                />
+                <Text style={styles.traderRank}>{trader.rank}</Text>
+              </View>
+              <View style={styles.traderInfo}>
+                <Text style={styles.traderName}>{trader.name}</Text>
+                <Text style={styles.traderFollowers}>{trader.followers}</Text>
+              </View>
+              <View style={styles.traderPerformance}>
+                <Text style={styles.traderPerformanceText}>{trader.performance}</Text>
+                <ArrowUpRight size={16} color="#00897B" />
+              </View>
             </View>
-            <View style={styles.traderInfo}>
-              <Text style={styles.traderName}>John FX</Text>
-              <Text style={styles.traderFollowers}>120 Followers</Text>
-            </View>
-            <View style={styles.traderPerformance}>
-              <Text style={styles.traderPerformanceText}>+5.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
-            </View>
-          </View>
-
-          {/* Trader Rank 2 - Silver */}
-          <View style={[styles.traderCard, styles.traderCardMiddle]}>
-            <View style={styles.traderBadge}>
-              <BadgeIcon width={32} height={34} startColor="#D0D0D0" endColor="#949494" />
-              <Text style={styles.traderRank}>2</Text>
-            </View>
-            <View style={styles.traderInfo}>
-              <Text style={styles.traderName}>John FX</Text>
-              <Text style={styles.traderFollowers}>120 Followers</Text>
-            </View>
-            <View style={styles.traderPerformance}>
-              <Text style={styles.traderPerformanceText}>+5.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
-            </View>
-          </View>
-
-          {/* Trader Rank 3 - Bronze */}
-          <View style={[styles.traderCard, styles.traderCardLast]}>
-            <View style={styles.traderBadge}>
-              <BadgeIcon width={32} height={34} startColor="#D28F77" endColor="#A05F48" />
-              <Text style={styles.traderRank}>3</Text>
-            </View>
-            <View style={styles.traderInfo}>
-              <Text style={styles.traderName}>John FX</Text>
-              <Text style={styles.traderFollowers}>120 Followers</Text>
-            </View>
-            <View style={styles.traderPerformance}>
-              <Text style={styles.traderPerformanceText}>+5.1%</Text>
-              <ArrowUpRight size={16} color="#00897B" />
-            </View>
-          </View>
+          ))}
         </View>
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
     </SafeAreaView>
+   </LinearGradient>
   );
 };
 
