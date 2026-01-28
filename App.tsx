@@ -9,9 +9,9 @@ const App = () => {
   return (
     <SafeAreaProvider>
       {/* <SplashScreen /> */}
-      <WelcomeScreen />
+      {/* <WelcomeScreen /> */}
       {/* <LoginMScreen /> */}
-      {/* <DashboardScreen /> */}
+      <DashboardScreen />
     </SafeAreaProvider>
   );
 };

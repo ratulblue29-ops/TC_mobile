@@ -220,12 +220,12 @@ const DashboardScreen = () => {
         <View style={styles.balanceCard}>
           <View style={styles.balanceHeader}>
             <View>
-              <Text style={styles.balanceAmount}>$32,156.00</Text>
-              <Text style={styles.balanceChange}>+$1,624 (5.1%)</Text>
+              <Text style={styles.balanceAmount}>$175,320.56</Text>
+              <Text style={styles.balanceChange}>+18%</Text>
             </View>
             <View>
               <Text style={styles.openPosition}>
-                <Text style={styles.openAmount}>$21,400</Text>
+                <Text style={styles.openAmount}>$256.35</Text>
                 <Text style={styles.openLabel}> Open</Text>
               </Text>
             </View>

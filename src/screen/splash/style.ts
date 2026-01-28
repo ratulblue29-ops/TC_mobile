@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   tagline: {
     color: '#4E5D66',
     fontSize: 18,
-    fontWeight: '900',
     textAlign: 'center',
     fontFamily: 'InstrumentSans-Medium',
     lineHeight: 26,

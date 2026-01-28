@@ -1,10 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-const instrumentSansBold = 'InstrumentSans-Bold';
-const instrumentSansMedium = 'InstrumentSans-Medium';
-const instrumentSansRegular = 'InstrumentSans-Regular';
-const instrumentSansSemiBold = 'InstrumentSans-SemiBold';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -24,7 +19,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
   headerIcons: {
@@ -44,14 +39,14 @@ const styles = StyleSheet.create({
   accountLabel: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#4E5D66',
     marginBottom: 4,
   },
   accountNumber: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
   upgradeCard: {
@@ -70,13 +65,13 @@ const styles = StyleSheet.create({
   upgradeTitle: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
   upgradeSubtitle: {
     fontSize: 15,
-    fontFamily: instrumentSansRegular,
+    fontFamily: 'InstrumentSans-Regular',
   },
   upgradeSubtitleRegular: {
     fontWeight: '400',
@@ -84,7 +79,7 @@ const styles = StyleSheet.create({
   },
   upgradeSubtitleBold: {
     fontWeight: '700',
-    fontFamily: instrumentSansBold,
+    fontFamily: 'InstrumentSans-Bold',
     color: '#0B0F20',
   },
   upgradeButton: {
@@ -99,7 +94,7 @@ const styles = StyleSheet.create({
   upgradeButtonText: {
     fontSize: 14,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
   TopTraders: {
@@ -125,7 +120,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#2C3440',
   },
   sectionChevron: {
@@ -151,24 +146,24 @@ const styles = StyleSheet.create({
   balanceAmount: {
     fontSize: 24,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
     marginBottom: 4,
   },
   balanceChange: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#4DB6AC',
   },
   openPosition: {
     fontSize: 16,
-    fontFamily: instrumentSansRegular,
+    fontFamily: 'InstrumentSans-Regular',
     paddingTop: 30,
   },
   openAmount: {
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
   openLabel: {
@@ -197,7 +192,7 @@ const styles = StyleSheet.create({
   periodTabText: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#FFFFFF',
     paddingHorizontal: 39.5,
   },
@@ -224,7 +219,7 @@ const styles = StyleSheet.create({
   metricLabel: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#4E5D66',
     marginTop: 8,
     marginBottom: 4,
@@ -232,7 +227,7 @@ const styles = StyleSheet.create({
   metricValue: {
     fontSize: 20,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
@@ -244,7 +239,7 @@ const styles = StyleSheet.create({
   metricChangeText: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#00897B',
   },
   accountCard: {
@@ -277,7 +272,7 @@ const styles = StyleSheet.create({
   accountCardNumber: {
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
   statusBadge: {
@@ -289,12 +284,12 @@ const styles = StyleSheet.create({
   statusBadgeText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
   },
   accountCardBroker: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#2C3440',
   },
   accountCardRight: {
@@ -303,7 +298,7 @@ const styles = StyleSheet.create({
   accountCardAmount: {
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
@@ -315,7 +310,7 @@ const styles = StyleSheet.create({
   accountCardChangeText: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#00897B',
   },
   copierScroll: {
@@ -334,7 +329,7 @@ const styles = StyleSheet.create({
   copierName: {
     fontSize: 16,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#0B0F20',
     marginBottom: 8,
   },
@@ -350,7 +345,7 @@ const styles = StyleSheet.create({
   copierStatusText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#00897B',
   },
   copierFollowers: {
@@ -366,7 +361,7 @@ const styles = StyleSheet.create({
   copierFollowersText: {
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
   insightCard: {
@@ -385,7 +380,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
   insightBadge: {
@@ -399,20 +394,20 @@ const styles = StyleSheet.create({
   insightBadgeText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#FFFFFF',
   },
   insightTime: {
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
     marginBottom: 8,
   },
   insightDescription: {
     fontSize: 14,
     fontWeight: '400',
-    fontFamily: instrumentSansRegular,
+    fontFamily: 'InstrumentSans-Regular',
     color: '#FFFFFF',
     marginBottom: 16,
   },
@@ -446,13 +441,13 @@ const styles = StyleSheet.create({
   traderPeriodTabText: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#FFFFFF',
   },
   traderPeriodTabText2: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#7E8A93',
     marginHorizontal: 35,
   },
@@ -491,7 +486,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     fontSize: 14,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
   traderInfo: {
@@ -500,14 +495,14 @@ const styles = StyleSheet.create({
   traderName: {
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
   traderFollowers: {
     fontSize: 14,
     fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#2C3440',
   },
   traderPerformance: {
@@ -518,7 +513,7 @@ const styles = StyleSheet.create({
   traderPerformanceText: {
     fontSize: 20,
     fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
   bottomSpacer: {

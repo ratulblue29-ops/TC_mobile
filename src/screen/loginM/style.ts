@@ -1,10 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-const instrumentSansBold = 'InstrumentSans-Bold';
-const instrumentSansMedium = 'InstrumentSans-Medium';
-const instrumentSansRegular = 'InstrumentSans-Regular';
-const instrumentSansSemiBold = 'InstrumentSans-SemiBold';
-
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
@@ -42,15 +37,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    fontFamily: instrumentSansBold,
+    fontFamily: 'InstrumentSans-Bold',
     color: '#0B0F20',
     marginBottom: 8,
   },
   subtext: {
     fontSize: 17,
-    fontWeight: '400',
-    fontFamily: instrumentSansRegular,
+    fontFamily: 'InstrumentSans-Regular',
     color: '#2C3440',
     lineHeight: 24,
     marginBottom: 32,
@@ -86,22 +79,19 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#4E5D66',
     marginBottom: 4,
   },
   input: {
     fontSize: 18,
-    fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#0B0F20',
     paddingVertical: 0,
   },
   forgotText: {
     fontSize: 17,
-    fontWeight: '500',
-    fontFamily: instrumentSansMedium,
+    fontFamily: 'InstrumentSans-Medium',
     color: '#000000',
     textDecorationLine: 'underline',
     marginBottom: 32,
@@ -114,8 +104,7 @@ const styles = StyleSheet.create({
   },
   loginButtonText: {
     fontSize: 18,
-    fontWeight: '600',
-    fontFamily: instrumentSansSemiBold,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
   },
 });
