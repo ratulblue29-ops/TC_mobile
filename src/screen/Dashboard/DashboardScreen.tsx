@@ -76,16 +76,16 @@ const chartConfig = {
 const metricsData = [
   {
     id: 1,
-    icon: 'Zap',
-    label: 'Total Profit',
+    icon: 'ChartPie',
+    label: 'ROI',
     value: '$1,624',
     change: '+5.1%',
     changeColor: '#00897B',
   },
   {
     id: 2,
-    icon: 'RadioTower',
-    label: 'Open Position',
+    icon: 'ChartPie',
+    label: 'PnL',
     value: '$1,624',
     change: '+5.1%',
     changeColor: '#00897B',
