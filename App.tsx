@@ -4,6 +4,7 @@ import SplashScreen from './src/screen/splash/SplashScreen';
 import WelcomeScreen from './src/screen/welcome/WelcomeScreen';
 import LoginMScreen from './src/screen/loginM/LoginMScreen';
 import DashboardScreen from './src/screen/Dashboard/DashboardScreen';
+import CopierScreen from './src/screen/Copier/CopierScreen';
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       {/* <SplashScreen /> */}
       {/* <WelcomeScreen /> */}
       {/* <LoginMScreen /> */}
-      <DashboardScreen />
+      {/* <DashboardScreen /> */}
+      <CopierScreen />
     </SafeAreaProvider>
   );
 };
