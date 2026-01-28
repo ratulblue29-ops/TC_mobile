@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 36,
     fontFamily: 'InstrumentSans-Bold',
-    fontWeight: '900',
     color: '#FFFFFF',
     textAlign: 'center',
   },
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 25,
     fontFamily: 'InstrumentSans-SemiBold',
-    fontWeight: '900',
     color: '#0B0F20',
   },
   createButton: {
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 25,
     fontFamily: 'InstrumentSans-SemiBold',
-    fontWeight: '900',
     color: '#FFFFFF',
   },
   footerWrapper: {
@@ -107,13 +104,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
     fontFamily: 'InstrumentSans-Regular',
-    fontWeight: '900',
     color: '#6B7280',
     textAlign: 'center',
   },
   footerLink: {
     fontFamily: 'InstrumentSans-SemiBold',
-    fontWeight: '900',
     textDecorationLine: 'underline',
     color: '#000000',
   },
