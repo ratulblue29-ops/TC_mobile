@@ -62,6 +62,35 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
+  tabContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  tabPill: {
+    flexDirection: 'row',
+    backgroundColor: '#D4DADF',
+    borderRadius: 12,
+    padding: 4,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 8,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabActive: {
+    backgroundColor: '#00897B',
+  },
+  tabText: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#0B0F20',
+  },
+  tabTextActive: {
+    color: '#FFFFFF',
+  },
 });
 
 export default styles;

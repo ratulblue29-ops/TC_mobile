@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -15,7 +15,10 @@ import {
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
+type TabType = 'Accounts' | 'Templates';
+
 const AnalyzerScreen = () => {
+  const [activeTab, setActiveTab] = useState<TabType>('Accounts');
   return (
    <LinearGradient
       colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
@@ -51,6 +54,28 @@ const AnalyzerScreen = () => {
             <ChevronDown size={24} color="#0B0F20" />
           </TouchableOpacity>
         </View>
+        <View style={styles.tabContainer}>
+            <View style={styles.tabPill}>
+              <TouchableOpacity
+                style={[styles.tab, activeTab === 'Accounts' && styles.tabActive]}
+                onPress={() => setActiveTab('Accounts')}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.tabText, activeTab === 'Accounts' && styles.tabTextActive]}>
+                  Accounts
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.tab, activeTab === 'Templates' && styles.tabActive]}
+                onPress={() => setActiveTab('Templates')}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.tabText, activeTab === 'Templates' && styles.tabTextActive]}>
+                  Templates
+                </Text>
+              </TouchableOpacity>
+            </View>
+           </View>
        </View>
       </ScrollView>
     </SafeAreaView>
