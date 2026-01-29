@@ -15,10 +15,10 @@ import {
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
-type TabType = 'Accounts' | 'Templates';
+type TabType = 'Performance' | 'Analysis Hub';
 
 const AnalyzerScreen = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('Accounts');
+  const [activeTab, setActiveTab] = useState<TabType>('Performance');
   return (
    <LinearGradient
       colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
@@ -57,21 +57,21 @@ const AnalyzerScreen = () => {
         <View style={styles.tabContainer}>
             <View style={styles.tabPill}>
               <TouchableOpacity
-                style={[styles.tab, activeTab === 'Accounts' && styles.tabActive]}
-                onPress={() => setActiveTab('Accounts')}
+                style={[styles.tab, activeTab === 'Performance' && styles.tabActive]}
+                onPress={() => setActiveTab('Performance')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.tabText, activeTab === 'Accounts' && styles.tabTextActive]}>
-                  Accounts
+                <Text style={[styles.tabText, activeTab === 'Performance' && styles.tabTextActive]}>
+                  Performance
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.tab, activeTab === 'Templates' && styles.tabActive]}
-                onPress={() => setActiveTab('Templates')}
+                style={[styles.tab, activeTab === 'Analysis Hub' && styles.tabActive]}
+                onPress={() => setActiveTab('Analysis Hub')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.tabText, activeTab === 'Templates' && styles.tabTextActive]}>
-                  Templates
+                <Text style={[styles.tabText, activeTab === 'Analysis Hub' && styles.tabTextActive]}>
+                  Analysis Hub
                 </Text>
               </TouchableOpacity>
             </View>
