@@ -1,50 +1,81 @@
-import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-} from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Bell,
-  Menu,
-  ChevronDown,
-} from 'lucide-react-native';
+import { Bell, Menu } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
+type TabType = 'All Instruments' | 'Watchlist';
+
 const SentimentsScreen = () => {
+  const [activeTab, setActiveTab] = useState<TabType>('All Instruments');
   return (
-   <LinearGradient
+    <LinearGradient
       colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
       locations={[0, 0.3, 0]}
       style={styles.gradient}
-   >
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-       <View style={styles.headerSection}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Image
-            source={require('../../../assets/images/logo_icon.png')}
-            style={styles.logoIcon}
-          />
-          <Text style={styles.headerTitle}>Sentiments</Text>
-          <View style={styles.headerIcons}>
-            <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
-              <Bell size={24} color="#0B0F20" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
-              <Menu size={24} color="#0B0F20" />
-            </TouchableOpacity>
+    >
+      <SafeAreaView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.headerSection}>
+            {/* Header */}
+            <View style={styles.header}>
+              <Image
+                source={require('../../../assets/images/logo_icon.png')}
+                style={styles.logoIcon}
+              />
+              <Text style={styles.headerTitle}>Sentiments</Text>
+              <View style={styles.headerIcons}>
+                <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+                  <Bell size={24} color="#0B0F20" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+                  <Menu size={24} color="#0B0F20" />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.tabContainer}>
+              <View style={styles.tabPill}>
+                <TouchableOpacity
+                  style={[
+                    styles.tab,
+                    activeTab === 'All Instruments' && styles.tabActive,
+                  ]}
+                  onPress={() => setActiveTab('All Instruments')}
+                  activeOpacity={0.7}
+                >
+                  <Text
+                    style={[
+                      styles.tabText,
+                      activeTab === 'All Instruments' && styles.tabTextActive,
+                    ]}
+                  >
+                    All Instruments
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.tab,
+                    activeTab === 'Watchlist' && styles.tabActive,
+                  ]}
+                  onPress={() => setActiveTab('Watchlist')}
+                  activeOpacity={0.7}
+                >
+                  <Text
+                    style={[
+                      styles.tabText,
+                      activeTab === 'Watchlist' && styles.tabTextActive,
+                    ]}
+                  >
+                    Watchlist
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-        </View>
-       </View>
-      </ScrollView>
-    </SafeAreaView>
-   </LinearGradient>
+        </ScrollView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
