@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     bottom: 10,
     height: 1,
     backgroundColor: '#E5E7EC',
-    
   },
   statSectionWrap: {
     backgroundColor: '#F7F8FA',
