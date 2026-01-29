@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#0000001c',
   },
+  categoryPillActive: {
+    backgroundColor: '#00897b25',
+    borderColor: '#00897b25',
+  },
   categoryText: {
     fontSize: 14,
     fontWeight: '400',

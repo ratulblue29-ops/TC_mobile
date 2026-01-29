@@ -289,7 +289,10 @@ const SentimentsScreen = () => {
               {categories.map(category => (
                 <TouchableOpacity
                   key={category}
-                  style={styles.categoryPill}
+                  style={[
+                    styles.categoryPill,
+                    activeCategory === category && styles.categoryPillActive,
+                  ]}
                   onPress={() => setActiveCategory(category)}
                   activeOpacity={0.7}
                 >
