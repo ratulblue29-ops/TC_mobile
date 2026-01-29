@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
+    marginTop: 12,
   },
   paginationActive: {
     width: 20,

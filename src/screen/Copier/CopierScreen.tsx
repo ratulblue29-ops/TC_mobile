@@ -79,6 +79,7 @@ const CopierScreen = () => {
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerSection}>
+           <View>
             <View style={styles.header}>
               <Image
                 source={require('../../../assets/images/logo_icon.png')}
@@ -91,9 +92,8 @@ const CopierScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
-
-          <View style={styles.tabContainer}>
+           </View>
+           <View style={styles.tabContainer}>
             <View style={styles.tabPill}>
               <TouchableOpacity
                 style={[styles.tab, activeTab === 'Accounts' && styles.tabActive]}
@@ -123,6 +123,7 @@ const CopierScreen = () => {
                 </Text>
               </TouchableOpacity>
             </View>
+           </View>
           </View>
 
           <View style={styles.searchContainer}>
