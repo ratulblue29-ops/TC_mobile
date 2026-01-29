@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -15,7 +15,11 @@ import {
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
+type TabType = 'Prop Firms' | 'Broker';
+
 const CompareScreen = () => {
+  const [activeTab, setActiveTab] = useState<TabType>('Prop Firms');
+
   return (
    <LinearGradient
       colors={['#ffffff', '#F7F8FA', '#F7F8FA']}
@@ -26,6 +30,7 @@ const CompareScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
        <View style={styles.headerSection}>
         {/* Header */}
+       <View>
         <View style={styles.header}>
           <Image
             source={require('../../../assets/images/logo_icon.png')}
@@ -41,6 +46,29 @@ const CompareScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+       </View>
+       <View style={styles.tabContainer}>
+            <View style={styles.tabPill}>
+              <TouchableOpacity
+                style={[styles.tab, activeTab === 'Prop Firms' && styles.tabActive]}
+                onPress={() => setActiveTab('Prop Firms')}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.tabText, activeTab === 'Prop Firms' && styles.tabTextActive]}>
+                  Prop Firms
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.tab, activeTab === 'Broker' && styles.tabActive]}
+                onPress={() => setActiveTab('Broker')}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.tabText, activeTab === 'Broker' && styles.tabTextActive]}>
+                  Broker
+                </Text>
+              </TouchableOpacity>
+            </View>
+           </View>
        </View>
       </ScrollView>
     </SafeAreaView>
