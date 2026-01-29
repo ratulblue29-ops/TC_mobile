@@ -185,7 +185,12 @@ const CompareScreen = () => {
           <View style={styles.compareSection}>
             <Text style={styles.compareTitle}>Compare Prop Firms</Text>
             <View style={styles.compareCard}>
-              <View style={styles.dropdownContainer}>
+              <View
+                style={[
+                  styles.dropdownContainer,
+                  styles.dropdownContainerFirst,
+                ]}
+              >
                 <View style={styles.iconBox} />
                 <View style={styles.dropdownContent}>
                   <Text style={styles.dropdownText}>{selectedFirm1}</Text>
@@ -207,7 +212,9 @@ const CompareScreen = () => {
                 <ChevronDown size={20} color={COLORS.textSecondary} />
               </View>
 
-              <View style={styles.dropdownContainer}>
+              <View
+                style={[styles.dropdownContainer, styles.dropdownContainerLast]}
+              >
                 <TouchableOpacity style={styles.addButton} activeOpacity={0.7}>
                   <View style={styles.addIconCircle}>
                     <Plus size={16} color={COLORS.primary} />

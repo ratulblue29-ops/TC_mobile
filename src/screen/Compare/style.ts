@@ -97,6 +97,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#C8C8C8',
   },
+  dropdownContainerFirst: {
+    borderTopStartRadius: 12,
+    borderTopEndRadius: 12,
+  },
+  dropdownContainerLast: {
+    borderBottomStartRadius: 12,
+    borderBottomEndRadius: 12,
+  },
   iconBox: {
     width: 26,
     height: 26,
