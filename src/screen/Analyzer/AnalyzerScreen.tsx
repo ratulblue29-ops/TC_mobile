@@ -284,7 +284,13 @@ const GaugeChart = ({ value }: { value: number }) => {
   );
 };
 
-const Header = () => (
+const Header = ({
+  activeTab,
+  onTabChange,
+}: {
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
+}) => (
   <View style={styles.headerSection}>
     <View style={styles.header}>
       <Image
@@ -311,36 +317,28 @@ const Header = () => (
         <ChevronDown size={24} color={COLORS.secondary} />
       </TouchableOpacity>
     </View>
-  </View>
-);
 
-const MainTabs = ({
-  activeTab,
-  onTabChange,
-}: {
-  activeTab: TabType;
-  onTabChange: (tab: TabType) => void;
-}) => (
-  <View style={styles.tabContainer}>
-    <View style={styles.tabPill}>
-      <TouchableOpacity
-        style={[styles.tab, activeTab === 'Performance' && styles.tabActive]}
-        onPress={() => onTabChange('Performance')}
-        activeOpacity={0.7}
-      >
-        <Text style={[styles.tabText, activeTab === 'Performance' && styles.tabTextActive]}>
-          Performance
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.tab, activeTab === 'Analysis Hub' && styles.tabActive]}
-        onPress={() => onTabChange('Analysis Hub')}
-        activeOpacity={0.7}
-      >
-        <Text style={[styles.tabText, activeTab === 'Analysis Hub' && styles.tabTextActive]}>
-          Analysis Hub
-        </Text>
-      </TouchableOpacity>
+    <View style={styles.tabContainer}>
+      <View style={styles.tabPill}>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'Performance' && styles.tabActive]}
+          onPress={() => onTabChange('Performance')}
+          activeOpacity={0.7}
+        >
+          <Text style={[styles.tabText, activeTab === 'Performance' && styles.tabTextActive]}>
+            Performance
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'Analysis Hub' && styles.tabActive]}
+          onPress={() => onTabChange('Analysis Hub')}
+          activeOpacity={0.7}
+        >
+          <Text style={[styles.tabText, activeTab === 'Analysis Hub' && styles.tabTextActive]}>
+            Analysis Hub
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 );
@@ -570,8 +568,7 @@ const AnalyzerScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header />
-          <MainTabs activeTab={activeTab} onTabChange={handleTabChange} />
+          <Header activeTab={activeTab} onTabChange={handleTabChange} />
           <ROITabs activeROITab={activeROITab} onROITabChange={handleROITabChange} />
           <ROICard />
           <StatisticsCard />
