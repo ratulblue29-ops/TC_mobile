@@ -2,14 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootNavigator from './src/navigator/RootNavigator';
-import AccountsScreen from './src/screen/Accounts/AccountsScreen';
+import AccountManagementScreen from './src/screen/AccountManagement/AccountManagementScreen';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <RootNavigator />
-        {/* <AccountsScreen /> */}
+        {/* <RootNavigator /> */}
+        <AccountManagementScreen />
       </NavigationContainer>
     </SafeAreaProvider>
   );
