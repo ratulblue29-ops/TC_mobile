@@ -757,7 +757,6 @@ const DashboardScreen = () => {
       <SelectAccountModal
         visible={isAccountModalVisible}
         onClose={handleCloseAccountModal}
-        accounts={linkedAccountsData}
         selectedAccountId={selectedAccountId}
         onSelectAccount={handleSelectAccount}
       />

@@ -36,21 +36,112 @@ type AccountData = {
 type SelectAccountModalProps = {
   visible: boolean;
   onClose: () => void;
-  accounts: AccountData[];
   selectedAccountId: number;
   onSelectAccount: (accountId: number) => void;
 };
 
+const linkedAccountsData: AccountData[] = [
+  {
+    id: 1,
+    number: 'MT5-104392',
+    broker: 'Exness',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$1,624',
+    change: '+5.1%',
+  },
+  {
+    id: 2,
+    number: 'MT5-104393',
+    broker: 'Exness',
+    status: 'Warning',
+    statusColor: COLORS.warning,
+    amount: '$2,850',
+    change: '+3.2%',
+  },
+  {
+    id: 3,
+    number: 'MT5-104394',
+    broker: 'Exness',
+    status: 'At Risk',
+    statusColor: COLORS.danger,
+    amount: '$980',
+    change: '-1.5%',
+  },
+  {
+    id: 4,
+    number: 'MT5-104395',
+    broker: 'IC Markets',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$5,420',
+    change: '+7.8%',
+  },
+  {
+    id: 5,
+    number: 'MT5-104396',
+    broker: 'IC Markets',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$3,150',
+    change: '+4.6%',
+  },
+  {
+    id: 6,
+    number: 'MT5-104397',
+    broker: 'FTMO',
+    status: 'Warning',
+    statusColor: COLORS.warning,
+    amount: '$1,890',
+    change: '+1.2%',
+  },
+  {
+    id: 7,
+    number: 'MT5-104398',
+    broker: 'FTMO',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$4,750',
+    change: '+6.3%',
+  },
+  {
+    id: 8,
+    number: 'MT5-104399',
+    broker: 'Pepperstone',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$2,340',
+    change: '+2.9%',
+  },
+  {
+    id: 9,
+    number: 'MT5-104400',
+    broker: 'Pepperstone',
+    status: 'At Risk',
+    statusColor: COLORS.danger,
+    amount: '$780',
+    change: '-2.1%',
+  },
+  {
+    id: 10,
+    number: 'MT5-104401',
+    broker: 'XM Global',
+    status: 'Active',
+    statusColor: COLORS.success,
+    amount: '$6,890',
+    change: '+8.5%',
+  },
+];
+
 const SelectAccountModal = ({
   visible,
   onClose,
-  accounts,
   selectedAccountId,
   onSelectAccount,
 }: SelectAccountModalProps) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredAccounts = accounts.filter(
+  const filteredAccounts = linkedAccountsData.filter(
     account =>
       account.number.toLowerCase().includes(searchQuery.toLowerCase()) ||
       account.broker.toLowerCase().includes(searchQuery.toLowerCase()),
