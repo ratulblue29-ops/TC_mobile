@@ -7,10 +7,10 @@ import AccountsScreen from './src/screen/Accounts/AccountsScreen';
 const App = () => {
   return (
     <SafeAreaProvider>
-      {/* <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer> */}
-      <AccountsScreen />
+      <NavigationContainer>
+        {/* <RootNavigator /> */}
+        <AccountsScreen />
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 };
