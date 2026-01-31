@@ -10,6 +10,9 @@ import {
   NativeSyntheticEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { DashboardStackParamList } from '../../navigator/DashboardStack';
 import {
   Bell,
   Menu,
@@ -26,6 +29,11 @@ import NetworkIcon from '../../components/svg/Sitemap';
 import BadgeIcon from '../../components/svg/Star';
 import LinearGradient from 'react-native-linear-gradient';
 import SelectAccountModal from '../../components/modal/dashboardModal/SelectAccountModal';
+
+type DashboardNavigationProp = NativeStackNavigationProp<
+  DashboardStackParamList,
+  'DashboardHome'
+>;
 
 const { width } = Dimensions.get('window');
 
@@ -442,38 +450,52 @@ const LinkedAccountCard = ({
   index: number;
   isFirst: boolean;
   isLast: boolean;
-}) => (
-  <View
-    style={[
-      styles.accountCard,
-      isFirst && styles.accountCardFirst,
-      isLast && styles.accountCardLast,
-    ]}
-  >
-    <View style={styles.accountCardLeft}>
-      <View style={styles.accountCardHeader}>
-        <Text style={styles.accountCardNumber}>{account.number}</Text>
-        <View
-          style={[styles.statusBadge, { borderColor: account.statusColor }]}
-        >
-          <Text
-            style={[styles.statusBadgeText, { color: account.statusColor }]}
+}) => {
+  const navigation = useNavigation<DashboardNavigationProp>(); // Add this
+
+  const handlePress = () => {
+    // Add this function
+    navigation.navigate('AccountDetails', {
+      accountId: account.id,
+      accountNumber: account.number,
+    });
+  };
+
+  return (
+    <TouchableOpacity // Changed from View to TouchableOpacity
+      style={[
+        styles.accountCard,
+        isFirst && styles.accountCardFirst,
+        isLast && styles.accountCardLast,
+      ]}
+      onPress={handlePress} // Add this
+      activeOpacity={0.7} // Add this
+    >
+      <View style={styles.accountCardLeft}>
+        <View style={styles.accountCardHeader}>
+          <Text style={styles.accountCardNumber}>{account.number}</Text>
+          <View
+            style={[styles.statusBadge, { borderColor: account.statusColor }]}
           >
-            {account.status}
-          </Text>
+            <Text
+              style={[styles.statusBadgeText, { color: account.statusColor }]}
+            >
+              {account.status}
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.accountCardBroker}>{account.broker}</Text>
+      </View>
+      <View style={styles.accountCardRight}>
+        <Text style={styles.accountCardAmount}>{account.amount}</Text>
+        <View style={styles.accountCardChange}>
+          <Text style={styles.accountCardChangeText}>{account.change}</Text>
+          <ArrowUpRight size={16} color={COLORS.primary} />
         </View>
       </View>
-      <Text style={styles.accountCardBroker}>{account.broker}</Text>
-    </View>
-    <View style={styles.accountCardRight}>
-      <Text style={styles.accountCardAmount}>{account.amount}</Text>
-      <View style={styles.accountCardChange}>
-        <Text style={styles.accountCardChangeText}>{account.change}</Text>
-        <ArrowUpRight size={16} color={COLORS.primary} />
-      </View>
-    </View>
-  </View>
-);
+    </TouchableOpacity> // Changed from View
+  );
+};
 
 const LinkedAccounts = ({ onOpenModal }: { onOpenModal: () => void }) => (
   <>

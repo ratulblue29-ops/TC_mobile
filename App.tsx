@@ -8,8 +8,8 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        {/* <RootNavigator /> */}
-        <AccountsScreen />
+        <RootNavigator />
+        {/* <AccountsScreen /> */}
       </NavigationContainer>
     </SafeAreaProvider>
   );

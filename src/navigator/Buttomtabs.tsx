@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import DashboardScreen from '../screen/Dashboard/DashboardScreen';
+import React, { useMemo } from 'react';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import DashboardStack from './DashboardStack';
 import CopierScreen from '../screen/Copier/CopierScreen';
 import AnalyzerScreen from '../screen/Analyzer/AnalyzerScreen';
 import CompareScreen from '../screen/Compare/CompareScreen';
@@ -9,16 +9,16 @@ import SentimentsScreen from '../screen/Sentiments/SentimentsScreen';
 import HomeIcon from '../components/svg/Home';
 import SwapIcon from '../components/svg/Convert';
 import RadarIcon from '../components/svg/Group';
-import {Copy} from 'lucide-react-native';
+import { Copy } from 'lucide-react-native';
 import TrendUpIcon from '../components/svg/Chart';
 
 const Tab = createBottomTabNavigator();
 
-const CustomTabBar = ({state, descriptors, navigation}: any) => {
+const CustomTabBar = ({ state, descriptors, navigation }: any) => {
   return (
     <View style={styles.tabBar}>
       {state.routes.map((route: any, index: number) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const isFocused = state.index === index;
 
         const onPress = () => {
@@ -46,15 +46,41 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
 
           switch (route.name) {
             case 'Dashboard':
-              return <HomeIcon width={iconSize} height={iconSize} color={iconColor} />;
+              return (
+                <HomeIcon
+                  width={iconSize}
+                  height={iconSize}
+                  color={iconColor}
+                />
+              );
             case 'Copier':
-              return <SwapIcon width={iconSize} height={iconSize} color={iconColor} />;
+              return (
+                <SwapIcon
+                  width={iconSize}
+                  height={iconSize}
+                  color={iconColor}
+                />
+              );
             case 'Analyzer':
-              return <RadarIcon width={iconSize} height={iconSize} color={iconColor} />;
+              return (
+                <RadarIcon
+                  width={iconSize}
+                  height={iconSize}
+                  color={iconColor}
+                />
+              );
             case 'Compare':
-              return <Copy width={iconSize} height={iconSize} color={iconColor} />;
+              return (
+                <Copy width={iconSize} height={iconSize} color={iconColor} />
+              );
             case 'Sentiments':
-              return <TrendUpIcon width={iconSize} height={iconSize} color={iconColor} />;
+              return (
+                <TrendUpIcon
+                  width={iconSize}
+                  height={iconSize}
+                  color={iconColor}
+                />
+              );
             default:
               return null;
           }
@@ -62,22 +88,21 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
 
         const containerStyle = useMemo(
           () => [styles.iconContainer, isFocused && styles.activeIconContainer],
-          [isFocused]
+          [isFocused],
         );
 
         return (
           <TouchableOpacity
             key={index}
             accessibilityRole="button"
-            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabButton}>
-            <View style={containerStyle}>
-              {renderIcon()}
-            </View>
+            style={styles.tabButton}
+          >
+            <View style={containerStyle}>{renderIcon()}</View>
           </TouchableOpacity>
         );
       })}
@@ -91,8 +116,9 @@ export default function BottomTabs() {
       tabBar={props => <CustomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
-      }}>
-      <Tab.Screen name="Dashboard" component={DashboardScreen} />
+      }}
+    >
+      <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Copier" component={CopierScreen} />
       <Tab.Screen name="Analyzer" component={AnalyzerScreen} />
       <Tab.Screen name="Compare" component={CompareScreen} />
