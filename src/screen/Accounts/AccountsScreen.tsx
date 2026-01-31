@@ -27,6 +27,7 @@ import { LineChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import AccountSettingsModal from '../../components/modal/AccountModal/AccountSettingsModal';
 
 const { width } = Dimensions.get('window');
 
@@ -177,7 +178,7 @@ const metricsData = [
   },
 ];
 
-const Header = () => (
+const Header = ({ onSettingsPress }: { onSettingsPress: () => void }) => (
   <View style={styles.headerSection}>
     <View style={styles.header}>
       <Image
@@ -204,7 +205,11 @@ const Header = () => (
         <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
           <ChevronDown size={24} color={COLORS.secondary} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          activeOpacity={0.7}
+          onPress={onSettingsPress}
+        >
           <Settings size={24} color={COLORS.secondary} />
         </TouchableOpacity>
       </View>
@@ -532,6 +537,15 @@ const AccountsScreen = () => {
   const [activeTab, setActiveTab] = useState<TabType>('Portfolio');
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('Week');
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
+
+  const handleOpenSettings = useCallback(() => {
+    setIsSettingsModalVisible(true);
+  }, []);
+
+  const handleCloseSettings = useCallback(() => {
+    setIsSettingsModalVisible(false);
+  }, []);
 
   return (
     <LinearGradient
@@ -541,7 +555,7 @@ const AccountsScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header />
+          <Header onSettingsPress={handleOpenSettings} />
           <AccountDetailsCard />
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
           <PortfolioCarousel
@@ -554,6 +568,11 @@ const AccountsScreen = () => {
           <SyncStatus />
         </ScrollView>
       </SafeAreaView>
+
+      <AccountSettingsModal
+        visible={isSettingsModalVisible}
+        onClose={handleCloseSettings}
+      />
     </LinearGradient>
   );
 };
