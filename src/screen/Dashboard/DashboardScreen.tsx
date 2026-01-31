@@ -25,6 +25,7 @@ import styles from './style';
 import NetworkIcon from '../../components/svg/Sitemap';
 import BadgeIcon from '../../components/svg/Star';
 import LinearGradient from 'react-native-linear-gradient';
+import SelectAccountModal from '../../components/modal/dashboardModal/SelectAccountModal';
 
 const { width } = Dimensions.get('window');
 
@@ -53,7 +54,7 @@ const COLORS = {
 };
 
 const PERIODS = ['Week', 'Month', 'Year'] as const;
-type Period = typeof PERIODS[number];
+type Period = (typeof PERIODS)[number];
 
 // ============================================
 // DATA
@@ -178,35 +179,40 @@ const insightsData = [
     id: 1,
     title: 'Best ROI Window',
     time: 'Trade Between 08:00-11:00 UTC',
-    description: 'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.1',
+    description:
+      'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.1',
     priority: 'High',
   },
   {
     id: 2,
     title: 'Best ROI Window',
     time: 'Trade Between 08:00-11:00 UTC',
-    description: 'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.2',
+    description:
+      'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.2',
     priority: 'High',
   },
   {
     id: 3,
     title: 'Best ROI Window',
     time: 'Trade Between 08:00-11:00 UTC',
-    description: 'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.3',
+    description:
+      'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.3',
     priority: 'High',
   },
   {
     id: 4,
     title: 'Best ROI Window',
     time: 'Trade Between 08:00-11:00 UTC',
-    description: 'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.4',
+    description:
+      'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.4',
     priority: 'High',
   },
   {
     id: 5,
     title: 'Best ROI Window',
     time: 'Trade Between 08:00-11:00 UTC',
-    description: 'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.5',
+    description:
+      'Historical data shows +1.3% average ROI during this window. Favor high-liquidity instruments.5',
     priority: 'High',
   },
 ];
@@ -277,7 +283,9 @@ const UpgradeCard = () => (
     <View style={styles.upgradeContent}>
       <Text style={styles.upgradeTitle}>Unlock Pro Trader</Text>
       <Text style={styles.upgradeSubtitle}>
-        <Text style={styles.upgradeSubtitleRegular}>Advanced analytics &{'\n'}</Text>
+        <Text style={styles.upgradeSubtitleRegular}>
+          Advanced analytics &{'\n'}
+        </Text>
         <Text style={styles.upgradeSubtitleBold}>5 copier accounts</Text>
       </Text>
     </View>
@@ -288,10 +296,20 @@ const UpgradeCard = () => (
   </View>
 );
 
-const SectionHeader = ({ title }: { title: string }) => (
+const SectionHeader = ({
+  title,
+  onPress,
+}: {
+  title: string;
+  onPress?: () => void;
+}) => (
   <View style={styles.sectionHeader}>
     <Text style={styles.sectionTitle}>{title}</Text>
-    <TouchableOpacity style={styles.sectionChevron} activeOpacity={0.7}>
+    <TouchableOpacity
+      style={styles.sectionChevron}
+      activeOpacity={0.7}
+      onPress={onPress}
+    >
       <ChevronRight size={24} color={COLORS.secondary} />
     </TouchableOpacity>
   </View>
@@ -315,22 +333,14 @@ const PeriodTabs = ({
   activeTextStyle: any;
 }) => (
   <View style={tabStyle}>
-    {periods.map((period) => (
+    {periods.map(period => (
       <TouchableOpacity
         key={period}
-        style={[
-          styles.periodTab,
-          selectedPeriod === period && activeStyle,
-        ]}
+        style={[styles.periodTab, selectedPeriod === period && activeStyle]}
         onPress={() => onPeriodChange(period)}
         activeOpacity={0.7}
       >
-        <Text
-          style={[
-            textStyle,
-            selectedPeriod === period && activeTextStyle,
-          ]}
-        >
+        <Text style={[textStyle, selectedPeriod === period && activeTextStyle]}>
           {period}
         </Text>
       </TouchableOpacity>
@@ -399,14 +409,20 @@ const BalanceCard = ({
 );
 
 const MetricsCards = () => (
-  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.metricsScroll}>
-    {metricsData.map((metric) => (
+  <ScrollView
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    style={styles.metricsScroll}
+  >
+    {metricsData.map(metric => (
       <View key={metric.id} style={styles.metricCard}>
         <MetricIcon iconName={metric.icon} />
         <Text style={styles.metricLabel}>{metric.label}</Text>
         <Text style={styles.metricValue}>{metric.value}</Text>
         <View style={styles.metricChange}>
-          <Text style={[styles.metricChangeText, { color: metric.changeColor }]}>
+          <Text
+            style={[styles.metricChangeText, { color: metric.changeColor }]}
+          >
             {metric.change}
           </Text>
           <ArrowUpRight size={16} color={metric.changeColor} />
@@ -422,7 +438,7 @@ const LinkedAccountCard = ({
   isFirst,
   isLast,
 }: {
-  account: typeof linkedAccountsData[0];
+  account: (typeof linkedAccountsData)[0];
   index: number;
   isFirst: boolean;
   isLast: boolean;
@@ -437,8 +453,12 @@ const LinkedAccountCard = ({
     <View style={styles.accountCardLeft}>
       <View style={styles.accountCardHeader}>
         <Text style={styles.accountCardNumber}>{account.number}</Text>
-        <View style={[styles.statusBadge, { borderColor: account.statusColor }]}>
-          <Text style={[styles.statusBadgeText, { color: account.statusColor }]}>
+        <View
+          style={[styles.statusBadge, { borderColor: account.statusColor }]}
+        >
+          <Text
+            style={[styles.statusBadgeText, { color: account.statusColor }]}
+          >
             {account.status}
           </Text>
         </View>
@@ -455,9 +475,9 @@ const LinkedAccountCard = ({
   </View>
 );
 
-const LinkedAccounts = () => (
+const LinkedAccounts = ({ onOpenModal }: { onOpenModal: () => void }) => (
   <>
-    <SectionHeader title="Linked Accounts" />
+    <SectionHeader title="Linked Accounts" onPress={onOpenModal} />
     {linkedAccountsData.map((account, index) => (
       <LinkedAccountCard
         key={account.id}
@@ -470,19 +490,25 @@ const LinkedAccounts = () => (
   </>
 );
 
-const CopierCard = ({ copier }: { copier: typeof copierAccountsData[0] }) => {
+const CopierCard = ({ copier }: { copier: (typeof copierAccountsData)[0] }) => {
   const isDisabled = copier.status === 'Disabled';
   return (
     <View style={styles.copierCard}>
       <Text style={styles.copierName}>{copier.name}</Text>
-      <View style={[
-        styles.copierStatusBadge,
-        isDisabled && { borderColor: COLORS.secondary }
-      ]}>
-        <Text style={[
-          styles.copierStatusText,
-          isDisabled && { color: COLORS.secondary }
-        ]}>{copier.status}</Text>
+      <View
+        style={[
+          styles.copierStatusBadge,
+          isDisabled && { borderColor: COLORS.secondary },
+        ]}
+      >
+        <Text
+          style={[
+            styles.copierStatusText,
+            isDisabled && { color: COLORS.secondary },
+          ]}
+        >
+          {copier.status}
+        </Text>
       </View>
       <View style={styles.copierFollowers}>
         <NetworkIcon width={16} height={16} color={COLORS.white} />
@@ -495,8 +521,12 @@ const CopierCard = ({ copier }: { copier: typeof copierAccountsData[0] }) => {
 const CopierAccounts = () => (
   <>
     <SectionHeader title="Copiers Accounts" />
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.copierScroll}>
-      {copierAccountsData.map((copier) => (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      style={styles.copierScroll}
+    >
+      {copierAccountsData.map(copier => (
         <CopierCard key={copier.id} copier={copier} />
       ))}
     </ScrollView>
@@ -508,7 +538,7 @@ const InsightCard = ({
   activeIndex,
   onDotPress,
 }: {
-  insight: typeof insightsData[0];
+  insight: (typeof insightsData)[0];
   activeIndex: number;
   onDotPress: (index: number) => void;
 }) => (
@@ -560,7 +590,7 @@ const SmartInsights = ({
       onScroll={onScroll}
       scrollEventThrottle={16}
     >
-      {insightsData.map((insight) => (
+      {insightsData.map(insight => (
         <InsightCard
           key={insight.id}
           insight={insight}
@@ -576,7 +606,7 @@ const TraderCard = ({
   trader,
   style,
 }: {
-  trader: typeof topTradersData[0];
+  trader: (typeof topTradersData)[0];
   style: any;
 }) => (
   <View style={[styles.traderCard, style]}>
@@ -644,10 +674,14 @@ const TopTraders = ({
 
 const DashboardScreen = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>('Week');
-  const [selectedTopTraderPeriod, setSelectedTopTraderPeriod] = useState<Period>('Week');
+  const [selectedTopTraderPeriod, setSelectedTopTraderPeriod] =
+    useState<Period>('Week');
   const [activeInsightIndex, setActiveInsightIndex] = useState(0);
 
   const insightScrollViewRef = useRef<ScrollView>(null);
+
+  const [isAccountModalVisible, setIsAccountModalVisible] = useState(false);
+  const [selectedAccountId, setSelectedAccountId] = useState(1);
 
   const handlePeriodChange = useCallback((period: Period) => {
     setSelectedPeriod(period);
@@ -657,10 +691,13 @@ const DashboardScreen = () => {
     setSelectedTopTraderPeriod(period);
   }, []);
 
-  const handleInsightScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
-    setActiveInsightIndex(slideIndex);
-  }, []);
+  const handleInsightScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
+      setActiveInsightIndex(slideIndex);
+    },
+    [],
+  );
 
   const handleInsightChange = useCallback((index: number) => {
     setActiveInsightIndex(index);
@@ -668,6 +705,18 @@ const DashboardScreen = () => {
       x: index * width,
       animated: true,
     });
+  }, []);
+
+  const handleOpenAccountModal = useCallback(() => {
+    setIsAccountModalVisible(true);
+  }, []);
+
+  const handleCloseAccountModal = useCallback(() => {
+    setIsAccountModalVisible(false);
+  }, []);
+
+  const handleSelectAccount = useCallback((accountId: number) => {
+    setSelectedAccountId(accountId);
   }, []);
 
   return (
@@ -680,30 +729,38 @@ const DashboardScreen = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Header />
           <UpgradeCard />
-          
+
           <SectionHeader title="Overview" />
           <BalanceCard
             selectedPeriod={selectedPeriod}
             onPeriodChange={handlePeriodChange}
           />
-          
+
           <MetricsCards />
-          <LinkedAccounts />
+          <LinkedAccounts onOpenModal={handleOpenAccountModal} />
           <CopierAccounts />
-          
+
           <SmartInsights
             activeIndex={activeInsightIndex}
             onScroll={handleInsightScroll}
             onDotPress={handleInsightChange}
             scrollViewRef={insightScrollViewRef}
           />
-          
+
           <TopTraders
             selectedPeriod={selectedTopTraderPeriod}
             onPeriodChange={handleTopTraderPeriodChange}
           />
         </ScrollView>
       </SafeAreaView>
+
+      <SelectAccountModal
+        visible={isAccountModalVisible}
+        onClose={handleCloseAccountModal}
+        accounts={linkedAccountsData}
+        selectedAccountId={selectedAccountId}
+        onSelectAccount={handleSelectAccount}
+      />
     </LinearGradient>
   );
 };
