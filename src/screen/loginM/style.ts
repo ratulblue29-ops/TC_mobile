@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     paddingBottom: 40,
     minHeight: '92%',
+    maxHeight: '92%',
   },
   closeButton: {
     alignSelf: 'flex-end',
