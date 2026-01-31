@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { ChevronRight, Trash2 } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import UserSettingsIcon from '../../svg/AccGear';
 import ShieldWalletIcon from '../../svg/ProCard';
 import CurrencyCircleIcon from '../../svg/Euro';
@@ -19,6 +21,13 @@ const COLORS = {
   chevron: '#999999',
   overlay: 'rgba(0, 0, 0, 0.5)',
 };
+
+type RootStackParamList = {
+  AccountManagement: undefined;
+  // Add other routes as needed
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 type MenuItemType = {
   id: string;
@@ -66,6 +75,14 @@ const AccountSettingsModal = ({
   visible,
   onClose,
 }: AccountSettingsModalProps) => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleAccountManagement = () => {
+    onClose(); // Close the modal first
+    // Navigate to Account Management screen
+    navigation.navigate('AccountManagement');
+  };
+
   const menuItems: MenuItemType[] = [
     {
       id: '1',
@@ -74,9 +91,7 @@ const AccountSettingsModal = ({
       iconComponent: (
         <UserSettingsIcon width={28} height={28} color={COLORS.primary} />
       ),
-      onPress: () => {
-        console.log('Account Management pressed');
-      },
+      onPress: handleAccountManagement,
     },
     {
       id: '2',

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Settings, ChevronDown, ChevronLeft } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -149,12 +150,14 @@ const SaveButton = ({ onPress }: { onPress: () => void }) => (
 );
 
 const AccountManagementScreen = () => {
+  const navigation = useNavigation();
   const [accountName, setAccountName] = useState('MT5-104392');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleBackPress = () => {
-    console.log('Back pressed');
+    // Navigate back to the previous screen
+    navigation.goBack();
   };
 
   const handleAccountPress = () => {
