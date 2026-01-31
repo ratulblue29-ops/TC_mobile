@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   gradient: {
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     color: '#0B0F20',
   },
   detailsCard: {
-    backgroundColor: '#F7F8FA',
+    backgroundColor: '#E6EAED',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 16,
@@ -104,13 +106,13 @@ const styles = StyleSheet.create({
   tabPill: {
     flexDirection: 'row',
     backgroundColor: '#E8E8E8',
-    borderRadius: 25,
+    borderRadius: 12,
     padding: 4,
   },
   tab: {
     flex: 1,
     paddingVertical: 10,
-    borderRadius: 20,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 20,
     padding: 20,
+    width: width - 40,
   },
   portfolioLabel: {
     fontSize: 14,
@@ -207,13 +210,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
-    marginTop: 12,
+    marginTop: 16,
+    marginBottom: 8,
   },
   paginationDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#374151',
+    backgroundColor: '#9CA3AF',
   },
   paginationDotActive: {
     width: 20,

@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import React, { useState, useRef, useCallback } from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  FlatList,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Settings,
@@ -41,16 +50,38 @@ const COLORS = {
 type TabType = 'Portfolio' | 'ROI Trends' | 'Trades';
 type PeriodType = 'Week' | 'Month' | 'Year';
 
-const chartData = {
-  labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  datasets: [
-    {
-      data: [150, 200, 180, 300, 510, 400, 350],
-      color: () => COLORS.primaryLight,
-      strokeWidth: 2,
-    },
-  ],
-};
+const chartDataSets = [
+  {
+    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    datasets: [
+      {
+        data: [150, 200, 180, 300, 510, 400, 350],
+        color: () => COLORS.primaryLight,
+        strokeWidth: 2,
+      },
+    ],
+  },
+  {
+    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    datasets: [
+      {
+        data: [200, 250, 220, 350, 460, 380, 420],
+        color: () => COLORS.primaryLight,
+        strokeWidth: 2,
+      },
+    ],
+  },
+  {
+    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    datasets: [
+      {
+        data: [180, 230, 190, 280, 490, 410, 380],
+        color: () => COLORS.primaryLight,
+        strokeWidth: 2,
+      },
+    ],
+  },
+];
 
 const chartConfig = {
   backgroundColor: COLORS.chartBg,
@@ -276,109 +307,163 @@ const TabNavigation = ({
   </View>
 );
 
-const PortfolioCard = ({
+const PortfolioCardItem = ({
+  chartData,
   selectedPeriod,
   onPeriodChange,
 }: {
+  chartData: (typeof chartDataSets)[0];
   selectedPeriod: PeriodType;
   onPeriodChange: (period: PeriodType) => void;
+}) => (
+  <View style={styles.portfolioCard}>
+    <Text style={styles.portfolioLabel}>Portfolio Value</Text>
+
+    <View style={styles.portfolioHeader}>
+      <View>
+        <Text style={styles.portfolioValue}>$175,320.56</Text>
+        <Text style={styles.portfolioChange}>+18%</Text>
+      </View>
+      <View>
+        <Text style={styles.openValue}>
+          <Text style={styles.openAmount}>$256.35</Text>
+          <Text style={styles.openLabel}> open</Text>
+        </Text>
+      </View>
+    </View>
+
+    <View style={styles.periodToggle}>
+      <TouchableOpacity
+        style={[
+          styles.periodButton,
+          selectedPeriod === 'Week' && styles.periodButtonActive,
+        ]}
+        onPress={() => onPeriodChange('Week')}
+        activeOpacity={0.7}
+      >
+        <Text
+          style={[
+            styles.periodText,
+            selectedPeriod === 'Week' && styles.periodTextActive,
+          ]}
+        >
+          Week
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          styles.periodButton,
+          selectedPeriod === 'Month' && styles.periodButtonActive,
+        ]}
+        onPress={() => onPeriodChange('Month')}
+        activeOpacity={0.7}
+      >
+        <Text
+          style={[
+            styles.periodText,
+            selectedPeriod === 'Month' && styles.periodTextActive,
+          ]}
+        >
+          Month
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          styles.periodButton,
+          selectedPeriod === 'Year' && styles.periodButtonActive,
+        ]}
+        onPress={() => onPeriodChange('Year')}
+        activeOpacity={0.7}
+      >
+        <Text
+          style={[
+            styles.periodText,
+            selectedPeriod === 'Year' && styles.periodTextActive,
+          ]}
+        >
+          Year
+        </Text>
+      </TouchableOpacity>
+    </View>
+
+    <LineChart
+      data={chartData}
+      width={width - 60}
+      height={220}
+      chartConfig={chartConfig}
+      bezier
+      style={styles.chart}
+      withInnerLines={true}
+      withOuterLines={false}
+      withVerticalLines={false}
+      withHorizontalLines={true}
+      withDots={true}
+    />
+  </View>
+);
+
+const PortfolioCarousel = ({
+  selectedPeriod,
+  onPeriodChange,
+  activeSlide,
+  onSlideChange,
+}: {
+  selectedPeriod: PeriodType;
+  onPeriodChange: (period: PeriodType) => void;
+  activeSlide: number;
+  onSlideChange: (index: number) => void;
 }) => {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const flatListRef = useRef<FlatList>(null);
+
+  const handleScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
+      if (slideIndex !== activeSlide) {
+        onSlideChange(slideIndex);
+      }
+    },
+    [activeSlide, onSlideChange],
+  );
+
+  const handleDotPress = useCallback(
+    (index: number) => {
+      flatListRef.current?.scrollToIndex({ index, animated: true });
+      onSlideChange(index);
+    },
+    [onSlideChange],
+  );
 
   return (
-    <View style={styles.portfolioCard}>
-      <Text style={styles.portfolioLabel}>Portfolio Value</Text>
-
-      <View style={styles.portfolioHeader}>
-        <View>
-          <Text style={styles.portfolioValue}>$175,320.56</Text>
-          <Text style={styles.portfolioChange}>+18%</Text>
-        </View>
-        <View>
-          <Text style={styles.openValue}>
-            <Text style={styles.openAmount}>$256.35</Text>
-            <Text style={styles.openLabel}> open</Text>
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.periodToggle}>
-        <TouchableOpacity
-          style={[
-            styles.periodButton,
-            selectedPeriod === 'Week' && styles.periodButtonActive,
-          ]}
-          onPress={() => onPeriodChange('Week')}
-          activeOpacity={0.7}
-        >
-          <Text
-            style={[
-              styles.periodText,
-              selectedPeriod === 'Week' && styles.periodTextActive,
-            ]}
-          >
-            Week
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.periodButton,
-            selectedPeriod === 'Month' && styles.periodButtonActive,
-          ]}
-          onPress={() => onPeriodChange('Month')}
-          activeOpacity={0.7}
-        >
-          <Text
-            style={[
-              styles.periodText,
-              selectedPeriod === 'Month' && styles.periodTextActive,
-            ]}
-          >
-            Month
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.periodButton,
-            selectedPeriod === 'Year' && styles.periodButtonActive,
-          ]}
-          onPress={() => onPeriodChange('Year')}
-          activeOpacity={0.7}
-        >
-          <Text
-            style={[
-              styles.periodText,
-              selectedPeriod === 'Year' && styles.periodTextActive,
-            ]}
-          >
-            Year
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <LineChart
-        data={chartData}
-        width={width - 60}
-        height={220}
-        chartConfig={chartConfig}
-        bezier
-        style={styles.chart}
-        withInnerLines={true}
-        withOuterLines={false}
-        withVerticalLines={false}
-        withHorizontalLines={true}
-        withDots={true}
+    <View>
+      <FlatList
+        ref={flatListRef}
+        data={chartDataSets}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        renderItem={({ item }) => (
+          <PortfolioCardItem
+            chartData={item}
+            selectedPeriod={selectedPeriod}
+            onPeriodChange={onPeriodChange}
+          />
+        )}
+        keyExtractor={(_, index) => index.toString()}
+        snapToInterval={width}
+        decelerationRate="fast"
       />
 
       <View style={styles.paginationDots}>
-        {[0, 1, 2].map(index => (
+        {chartDataSets.map((_, index) => (
           <TouchableOpacity
             key={index}
             style={[
               styles.paginationDot,
               activeSlide === index && styles.paginationDotActive,
             ]}
-            onPress={() => setActiveSlide(index)}
+            onPress={() => handleDotPress(index)}
             activeOpacity={0.7}
           />
         ))}
@@ -387,45 +472,41 @@ const PortfolioCard = ({
   );
 };
 
-const MetricCard = ({ metric }: { metric: (typeof metricsData)[0] }) => {
-  const isSpecialCard = metric.id === 1 || metric.id === 2;
+const MetricCard = ({ metric }: { metric: (typeof metricsData)[0] }) => (
+  <View style={[styles.metricCard, { backgroundColor: metric.bgColor }]}>
+    <Text style={styles.metricLabel}>{metric.label}</Text>
+    <Text style={[styles.metricValue, { color: metric.valueColor }]}>
+      {metric.value}
+    </Text>
 
-  return (
-    <View style={[styles.metricCard, { backgroundColor: metric.bgColor }]}>
-      <Text style={styles.metricLabel}>{metric.label}</Text>
-      <Text style={[styles.metricValue, { color: metric.valueColor }]}>
-        {metric.value}
-      </Text>
+    {metric.subValue && (
+      <Text style={styles.metricSubValue}>{metric.subValue}</Text>
+    )}
 
-      {metric.subValue && (
-        <Text style={styles.metricSubValue}>{metric.subValue}</Text>
-      )}
-
-      {metric.change && (
-        <View style={styles.metricChangeContainer}>
-          <Text
-            style={[
-              styles.metricChangeText,
-              {
-                color:
-                  metric.changeType === 'positive'
-                    ? COLORS.success
-                    : COLORS.danger,
-              },
-            ]}
-          >
-            {metric.change}
-          </Text>
-          {metric.changeType === 'positive' ? (
-            <ArrowUp size={14} color={COLORS.success} />
-          ) : (
-            <ArrowDown size={14} color={COLORS.danger} />
-          )}
-        </View>
-      )}
-    </View>
-  );
-};
+    {metric.change && (
+      <View style={styles.metricChangeContainer}>
+        <Text
+          style={[
+            styles.metricChangeText,
+            {
+              color:
+                metric.changeType === 'positive'
+                  ? COLORS.success
+                  : COLORS.danger,
+            },
+          ]}
+        >
+          {metric.change}
+        </Text>
+        {metric.changeType === 'positive' ? (
+          <ArrowUp size={14} color={COLORS.success} />
+        ) : (
+          <ArrowDown size={14} color={COLORS.danger} />
+        )}
+      </View>
+    )}
+  </View>
+);
 
 const KeyMetrics = () => (
   <View style={styles.metricsSection}>
@@ -450,6 +531,7 @@ const SyncStatus = () => (
 const AccountsScreen = () => {
   const [activeTab, setActiveTab] = useState<TabType>('Portfolio');
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('Week');
+  const [activeSlide, setActiveSlide] = useState(0);
 
   return (
     <LinearGradient
@@ -462,9 +544,11 @@ const AccountsScreen = () => {
           <Header />
           <AccountDetailsCard />
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-          <PortfolioCard
+          <PortfolioCarousel
             selectedPeriod={selectedPeriod}
             onPeriodChange={setSelectedPeriod}
+            activeSlide={activeSlide}
+            onSlideChange={setActiveSlide}
           />
           <KeyMetrics />
           <SyncStatus />
