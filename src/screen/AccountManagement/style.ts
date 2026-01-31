@@ -1,6 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   gradient: {
@@ -10,15 +8,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  },
   headerSection: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
@@ -27,16 +18,21 @@ const styles = StyleSheet.create({
     borderColor: '#00000027',
     paddingBottom: 17,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+  },
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
-    marginRight: 22,
   },
-  headerIcons: {
-    flexDirection: 'row',
-    gap: 12,
+  headerSpacer: {
+    width: 24,
   },
   iconButton: {
     padding: 4,
@@ -49,17 +45,116 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   accountLabel: {
-    fontSize: 16,
-    fontWeight: '500',
-    fontFamily: 'InstrumentSans-Medium',
-    color: '#4E5D66',
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#757575',
     marginBottom: 4,
   },
   accountNumber: {
-    fontSize: 18,
+    fontSize: 20,
+    fontFamily: 'InstrumentSans-Bold',
+    color: '#0B0F20',
+  },
+  accountActions: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  settingsCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  sectionLabel: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-Medium',
+    color: '#4E5D66',
+    marginBottom: 16,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  inputContent: {
+    flex: 1,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#757575',
+  },
+  input: {
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#212121',
+  },
+  passwordCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  passwordFieldTop: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    paddingHorizontal: 16,
+    paddingTop: 10,
+    borderTopEndRadius: 16,
+    borderTopStartRadius: 16,
+  },
+  passwordFieldMiddle: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    paddingHorizontal: 16,
+    paddingTop: 10,
+  },
+  passwordFieldBottom: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    paddingHorizontal: 16,
+    paddingTop: 10,
+    borderBottomEndRadius: 16,
+    borderBottomStartRadius: 16,
+    marginBottom: 20,
+  },
+  passwordInput: {
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#212121',
+  },
+  saveButton: {
+    backgroundColor: '#00897B',
+    marginHorizontal: 16,
+    marginTop: 24,
+    marginBottom: 32,
+    paddingVertical: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  saveButtonText: {
+    fontSize: 16,
     fontWeight: '600',
     fontFamily: 'InstrumentSans-SemiBold',
-    color: '#0B0F20',
+    color: '#FFFFFF',
   },
 });
 
