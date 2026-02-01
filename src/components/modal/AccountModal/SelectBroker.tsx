@@ -102,7 +102,11 @@ const SelectBroker = ({
       animationType="slide"
       onRequestClose={onClose}
     >
-      <TouchableOpacity style={styles.overlay} onPress={onClose}>
+      <TouchableOpacity
+        style={styles.overlay}
+        activeOpacity={1}
+        onPress={onClose}
+      >
         <View style={styles.modalContainer}>
           <TouchableOpacity
             activeOpacity={1}
@@ -160,17 +164,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContainer: {
-    flex: 1,
     justifyContent: 'flex-end',
   },
   modalContent: {
-    flex: 1,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingBottom: 20,
     maxHeight: '97%',
-    justifyContent: 'flex-end',
   },
   header: {
     paddingHorizontal: 20,
