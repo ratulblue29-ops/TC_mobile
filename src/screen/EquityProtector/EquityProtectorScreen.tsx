@@ -1,7 +1,13 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Animated,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Settings, ChevronDown, ChevronLeft } from 'lucide-react-native';
+import { Settings, ChevronDown, ChevronLeft, Bell } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,9 +15,40 @@ import LinearGradient from 'react-native-linear-gradient';
 const COLORS = {
   primary: '#00897B',
   secondary: '#0B0F20',
+  textSecondary: '#9E9E9E',
   gradientStart: '#FFFFFF',
   gradientEnd: '#F7F8FA',
 };
+
+type ToggleItem = {
+  id: string;
+  label: string;
+  description: string;
+  enabled: boolean;
+};
+
+type PercentageItem = {
+  id: string;
+  label: string;
+  description: string;
+  percentage: string;
+};
+
+const CustomSwitch = ({
+  value,
+  onValueChange,
+}: {
+  value: boolean;
+  onValueChange: () => void;
+}) => (
+  <TouchableOpacity
+    style={[styles.switchTrack, value && styles.switchTrackActive]}
+    onPress={onValueChange}
+    activeOpacity={0.8}
+  >
+    <View style={[styles.switchThumb, value && styles.switchThumbActive]} />
+  </TouchableOpacity>
+);
 
 const Header = ({
   onBackPress,
@@ -60,11 +97,129 @@ const Header = ({
   </View>
 );
 
+const ToggleItemCard = ({
+  item,
+  onToggle,
+}: {
+  item: ToggleItem;
+  onToggle: (id: string) => void;
+}) => (
+  <View style={styles.itemRow}>
+    <View style={styles.iconWrapper}>
+      <Bell size={20} color={COLORS.primary} />
+    </View>
+    <View style={styles.itemContent}>
+      <Text style={styles.itemLabel}>{item.label}</Text>
+      <Text style={styles.itemDescription}>{item.description}</Text>
+    </View>
+    <CustomSwitch
+      value={item.enabled}
+      onValueChange={() => onToggle(item.id)}
+    />
+  </View>
+);
+
+const PercentageItemCard = ({ item }: { item: PercentageItem }) => (
+  <View style={styles.itemRow}>
+    <View style={styles.iconWrapper}>
+      <Bell size={20} color={COLORS.primary} />
+    </View>
+    <View style={styles.itemContent}>
+      <Text style={styles.itemLabel}>{item.label}</Text>
+      <Text style={styles.itemDescription}>{item.description}</Text>
+    </View>
+    <Text style={styles.percentageValue}>{item.percentage}</Text>
+  </View>
+);
+
+const SectionCard = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <View style={styles.sectionCard}>
+    <Text style={styles.sectionTitle}>{title}</Text>
+    {children}
+  </View>
+);
+
 const EquityProtectorScreen = () => {
   const navigation = useNavigation();
 
+  const [equityProtection, setEquityProtection] = useState<ToggleItem[]>([
+    {
+      id: '1',
+      label: 'Notification Alert',
+      description: 'Description will go here ...',
+      enabled: true,
+    },
+    {
+      id: '2',
+      label: 'Disable Copy Trading',
+      description: 'Description will go here ...',
+      enabled: true,
+    },
+    {
+      id: '3',
+      label: 'Close Open Trades',
+      description: 'Description will go here ...',
+      enabled: true,
+    },
+  ]);
+
+  const stopLossProtection: PercentageItem[] = [
+    {
+      id: '1',
+      label: 'Drawdown Protection',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+    {
+      id: '2',
+      label: 'Disable Copy Trading',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+    {
+      id: '3',
+      label: 'Close Open Trades',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+  ];
+
+  const takeProfitProtection: PercentageItem[] = [
+    {
+      id: '1',
+      label: '% Profit Protection',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+    {
+      id: '2',
+      label: '% Value Profit Protection',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+    {
+      id: '3',
+      label: '% Absolute Maximum',
+      description: 'Description will go here ...',
+      percentage: '0.0%',
+    },
+  ];
+
+  const handleToggle = (id: string) => {
+    setEquityProtection(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, enabled: !item.enabled } : item,
+      ),
+    );
+  };
+
   const handleBackPress = () => {
-    // Navigate back to the previous screen
     navigation.goBack();
   };
 
@@ -89,6 +244,30 @@ const EquityProtectorScreen = () => {
             onAccountPress={handleAccountPress}
             onSettingsPress={handleSettingsPress}
           />
+
+          <View style={styles.content}>
+            <SectionCard title="Equity Protection">
+              {equityProtection.map(item => (
+                <ToggleItemCard
+                  key={item.id}
+                  item={item}
+                  onToggle={handleToggle}
+                />
+              ))}
+            </SectionCard>
+
+            <SectionCard title="Stop Lose Protection">
+              {stopLossProtection.map(item => (
+                <PercentageItemCard key={item.id} item={item} />
+              ))}
+            </SectionCard>
+
+            <SectionCard title="Take Profit Protectuin">
+              {takeProfitProtection.map(item => (
+                <PercentageItemCard key={item.id} item={item} />
+              ))}
+            </SectionCard>
+          </View>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
