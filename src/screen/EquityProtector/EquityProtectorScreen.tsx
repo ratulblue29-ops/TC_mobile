@@ -100,36 +100,50 @@ const Header = ({
 const ToggleItemCard = ({
   item,
   onToggle,
+  showSeparator,
 }: {
   item: ToggleItem;
   onToggle: (id: string) => void;
+  showSeparator?: boolean;
 }) => (
-  <View style={styles.itemRow}>
-    <View style={styles.iconWrapper}>
-      <Bell size={20} color={COLORS.primary} />
+  <>
+    <View style={styles.itemRow}>
+      <View style={styles.iconWrapper}>
+        <Bell size={20} color={COLORS.primary} />
+      </View>
+      <View style={styles.itemContent}>
+        <Text style={styles.itemLabel}>{item.label}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+      <CustomSwitch
+        value={item.enabled}
+        onValueChange={() => onToggle(item.id)}
+      />
     </View>
-    <View style={styles.itemContent}>
-      <Text style={styles.itemLabel}>{item.label}</Text>
-      <Text style={styles.itemDescription}>{item.description}</Text>
-    </View>
-    <CustomSwitch
-      value={item.enabled}
-      onValueChange={() => onToggle(item.id)}
-    />
-  </View>
+    {showSeparator && <View style={styles.separator} />}
+  </>
 );
 
-const PercentageItemCard = ({ item }: { item: PercentageItem }) => (
-  <View style={styles.itemRow}>
-    <View style={styles.iconWrapper}>
-      <Bell size={20} color={COLORS.primary} />
+const PercentageItemCard = ({
+  item,
+  showSeparator,
+}: {
+  item: PercentageItem;
+  showSeparator?: boolean;
+}) => (
+  <>
+    <View style={styles.itemRow}>
+      <View style={styles.iconWrapper}>
+        <Bell size={20} color={COLORS.primary} />
+      </View>
+      <View style={styles.itemContent}>
+        <Text style={styles.itemLabel}>{item.label}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+      <Text style={styles.percentageValue}>{item.percentage}</Text>
     </View>
-    <View style={styles.itemContent}>
-      <Text style={styles.itemLabel}>{item.label}</Text>
-      <Text style={styles.itemDescription}>{item.description}</Text>
-    </View>
-    <Text style={styles.percentageValue}>{item.percentage}</Text>
-  </View>
+    {showSeparator && <View style={styles.separator} />}
+  </>
 );
 
 const SectionCard = ({
@@ -247,24 +261,33 @@ const EquityProtectorScreen = () => {
 
           <View style={styles.content}>
             <SectionCard title="Equity Protection">
-              {equityProtection.map(item => (
+              {equityProtection.map((item, index) => (
                 <ToggleItemCard
                   key={item.id}
                   item={item}
                   onToggle={handleToggle}
+                  showSeparator={index < equityProtection.length - 1}
                 />
               ))}
             </SectionCard>
 
             <SectionCard title="Stop Lose Protection">
-              {stopLossProtection.map(item => (
-                <PercentageItemCard key={item.id} item={item} />
+              {stopLossProtection.map((item, index) => (
+                <PercentageItemCard
+                  key={item.id}
+                  item={item}
+                  showSeparator={index < stopLossProtection.length - 1}
+                />
               ))}
             </SectionCard>
 
             <SectionCard title="Take Profit Protectuin">
-              {takeProfitProtection.map(item => (
-                <PercentageItemCard key={item.id} item={item} />
+              {takeProfitProtection.map((item, index) => (
+                <PercentageItemCard
+                  key={item.id}
+                  item={item}
+                  showSeparator={index < takeProfitProtection.length - 1}
+                />
               ))}
             </SectionCard>
           </View>

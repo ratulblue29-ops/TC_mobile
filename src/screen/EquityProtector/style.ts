@@ -126,6 +126,10 @@ const styles = StyleSheet.create({
   switchThumbActive: {
     alignSelf: 'flex-end',
   },
+  separator: {
+    height: 1,
+    backgroundColor: '#E8E8E8',
+  },
 });
 
 export default styles;
