@@ -9,6 +9,9 @@ import WelcomeScreen from '../screen/welcome/WelcomeScreen';
 import LoginMScreen from '../screen/loginM/LoginMScreen';
 import BottomTabs from './Buttomtabs';
 import AccountManagementScreen from '../screen/AccountManagement/AccountManagementScreen';
+import AddAccountScreen from '../screen/AddAccount/AddAccountScreen';
+import EquityProtectorScreen from '../screen/EquityProtector/EquityProtectorScreen';
+import TradingSymbolsScreen from '../screen/TradingSymbols/TradingSymbolsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -16,6 +19,9 @@ export type RootStackParamList = {
   LoginM: undefined;
   BottomTabs: undefined;
   AccountManagement: undefined;
+  AddAccount: undefined;
+  EquityProtector: undefined;
+  TradingSymbols: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +40,9 @@ const RootNavigator: React.FC = () => {
         name="AccountManagement"
         component={AccountManagementScreen}
       />
+      <Stack.Screen name="AddAccount" component={AddAccountScreen} />
+      <Stack.Screen name="EquityProtector" component={EquityProtectorScreen} />
+      <Stack.Screen name="TradingSymbols" component={TradingSymbolsScreen} />
     </Stack.Navigator>
   );
 };

@@ -28,6 +28,9 @@ import { Dimensions } from 'react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 import AccountSettingsModal from '../../components/modal/AccountModal/AccountSettingsModal';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 
 const { width } = Dimensions.get('window');
 
@@ -50,6 +53,7 @@ const COLORS = {
 
 type TabType = 'Portfolio' | 'ROI Trends' | 'Trades';
 type PeriodType = 'Week' | 'Month' | 'Year';
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const chartDataSets = [
   {
@@ -178,7 +182,13 @@ const metricsData = [
   },
 ];
 
-const Header = ({ onSettingsPress }: { onSettingsPress: () => void }) => (
+const Header = ({
+  onSettingsPress,
+  onAddAccountPress,
+}: {
+  onSettingsPress: () => void;
+  onAddAccountPress: () => void;
+}) => (
   <View style={styles.headerSection}>
     <View style={styles.header}>
       <Image
@@ -190,7 +200,11 @@ const Header = ({ onSettingsPress }: { onSettingsPress: () => void }) => (
         <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
           <Menu size={24} color={COLORS.secondary} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          activeOpacity={0.7}
+          onPress={onAddAccountPress}
+        >
           <Plus size={24} color={COLORS.secondary} />
         </TouchableOpacity>
       </View>
@@ -534,6 +548,7 @@ const SyncStatus = () => (
 );
 
 const AccountsScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
   const [activeTab, setActiveTab] = useState<TabType>('Portfolio');
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('Week');
   const [activeSlide, setActiveSlide] = useState(0);
@@ -547,6 +562,10 @@ const AccountsScreen = () => {
     setIsSettingsModalVisible(false);
   }, []);
 
+  const handleAddAccount = useCallback(() => {
+    navigation.navigate('AddAccount');
+  }, [navigation]);
+
   return (
     <LinearGradient
       colors={[COLORS.gradientStart, COLORS.gradientEnd, COLORS.gradientEnd]}
@@ -555,7 +574,10 @@ const AccountsScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header onSettingsPress={handleOpenSettings} />
+          <Header
+            onSettingsPress={handleOpenSettings}
+            onAddAccountPress={handleAddAccount}
+          />
           <AccountDetailsCard />
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
           <PortfolioCarousel

@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { ChevronRight, Trash2 } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigator/RootNavigator';
 import UserSettingsIcon from '../../svg/AccGear';
 import ShieldWalletIcon from '../../svg/ProCard';
 import CurrencyCircleIcon from '../../svg/Euro';
@@ -20,11 +21,6 @@ const COLORS = {
   danger: '#DC2626',
   chevron: '#999999',
   overlay: 'rgba(0, 0, 0, 0.5)',
-};
-
-type RootStackParamList = {
-  AccountManagement: undefined;
-  // Add other routes as needed
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -83,6 +79,18 @@ const AccountSettingsModal = ({
     navigation.navigate('AccountManagement');
   };
 
+  const handleEquityProtector = () => {
+    onClose(); // Close the modal first
+    // Navigate to Equity Protector screen
+    navigation.navigate('EquityProtector');
+  };
+
+  const handleTradingSymbols = () => {
+    onClose(); // Close the modal first
+    // Navigate to Trading Symbols screen
+    navigation.navigate('TradingSymbols');
+  };
+
   const menuItems: MenuItemType[] = [
     {
       id: '1',
@@ -100,9 +108,7 @@ const AccountSettingsModal = ({
       iconComponent: (
         <ShieldWalletIcon width={28} height={28} color={COLORS.primary} />
       ),
-      onPress: () => {
-        console.log('Equity Protector pressed');
-      },
+      onPress: handleEquityProtector,
     },
     {
       id: '3',
@@ -111,9 +117,7 @@ const AccountSettingsModal = ({
       iconComponent: (
         <CurrencyCircleIcon width={28} height={28} color={COLORS.primary} />
       ),
-      onPress: () => {
-        console.log('Trading Symbols pressed');
-      },
+      onPress: handleTradingSymbols,
     },
     {
       id: '4',
