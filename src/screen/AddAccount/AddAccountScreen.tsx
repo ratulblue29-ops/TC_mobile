@@ -11,6 +11,7 @@ import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import SelectBroker from '../../components/modal/AccountModal/SelectBroker';
 
 const COLORS = {
   primary: '#00897B',
@@ -113,9 +114,11 @@ const DropdownField = ({
 const AccountDetailsForm = ({
   formData,
   onFormChange,
+  onBrokerPress,
 }: {
   formData: FormData;
   onFormChange: (field: keyof FormData, value: string) => void;
+  onBrokerPress: () => void;
 }) => (
   <View style={styles.formCard}>
     <Text style={styles.sectionHeader}>Account Details</Text>
@@ -137,7 +140,7 @@ const AccountDetailsForm = ({
       <DropdownField
         label="Select Broker"
         value={formData.broker}
-        onPress={() => console.log('Select broker pressed')}
+        onPress={onBrokerPress}
         showLabel={false}
         style={{ paddingVertical: 7 }}
       />
@@ -204,6 +207,7 @@ const AddButton = ({ onPress }: { onPress: () => void }) => (
 
 const AddAccountScreen = () => {
   const navigation = useNavigation();
+  const [isBrokerModalVisible, setIsBrokerModalVisible] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     accountName: 'Andrew-920',
     serverType: 'MetaTrader 4',
@@ -220,6 +224,18 @@ const AddAccountScreen = () => {
 
   const handleFormChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleBrokerPress = () => {
+    setIsBrokerModalVisible(true);
+  };
+
+  const handleBrokerSelect = (broker: string) => {
+    setFormData(prev => ({ ...prev, broker }));
+  };
+
+  const handleCloseBrokerModal = () => {
+    setIsBrokerModalVisible(false);
   };
 
   const handleAddAccount = () => {
@@ -240,6 +256,7 @@ const AddAccountScreen = () => {
             <AccountDetailsForm
               formData={formData}
               onFormChange={handleFormChange}
+              onBrokerPress={handleBrokerPress}
             />
             <SupportLink />
           </View>
@@ -247,6 +264,13 @@ const AddAccountScreen = () => {
 
         <AddButton onPress={handleAddAccount} />
       </SafeAreaView>
+
+      <SelectBroker
+        visible={isBrokerModalVisible}
+        onClose={handleCloseBrokerModal}
+        onSelectBroker={handleBrokerSelect}
+        selectedBroker={formData.broker}
+      />
     </LinearGradient>
   );
 };
