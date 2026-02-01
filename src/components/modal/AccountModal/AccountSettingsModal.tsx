@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { ChevronRight, Trash2 } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,7 @@ import { RootStackParamList } from '../../../navigator/RootNavigator';
 import UserSettingsIcon from '../../svg/AccGear';
 import ShieldWalletIcon from '../../svg/ProCard';
 import CurrencyCircleIcon from '../../svg/Euro';
+import DeleteAccount from './DeleteAccount';
 
 const COLORS = {
   white: '#FFFFFF',
@@ -72,23 +73,35 @@ const AccountSettingsModal = ({
   onClose,
 }: AccountSettingsModalProps) => {
   const navigation = useNavigation<NavigationProp>();
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const handleAccountManagement = () => {
-    onClose(); // Close the modal first
-    // Navigate to Account Management screen
+    onClose();
     navigation.navigate('AccountManagement');
   };
 
   const handleEquityProtector = () => {
-    onClose(); // Close the modal first
-    // Navigate to Equity Protector screen
+    onClose();
     navigation.navigate('EquityProtector');
   };
 
   const handleTradingSymbols = () => {
-    onClose(); // Close the modal first
-    // Navigate to Trading Symbols screen
+    onClose();
     navigation.navigate('TradingSymbols');
+  };
+
+  const handleDeletePress = () => {
+    setIsDeleteModalVisible(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log('Account deleted');
+    setIsDeleteModalVisible(false);
+    onClose();
   };
 
   const menuItems: MenuItemType[] = [
@@ -125,49 +138,55 @@ const AccountSettingsModal = ({
       subtitle: 'Showing the list of all the accounts',
       iconComponent: <Trash2 size={28} color={COLORS.danger} />,
       titleColor: COLORS.danger,
-      onPress: () => {
-        console.log('Delete Account pressed');
-      },
+      onPress: handleDeletePress,
     },
   ];
 
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="slide"
-      onRequestClose={onClose}
-    >
-      <TouchableOpacity
-        style={styles.overlay}
-        activeOpacity={1}
-        onPress={onClose}
+    <>
+      <Modal
+        visible={visible && !isDeleteModalVisible}
+        transparent
+        animationType="slide"
+        onRequestClose={onClose}
       >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={e => e.stopPropagation()}
-          >
-            <View style={styles.modalContent}>
-              <View style={styles.pullIndicator} />
+        <TouchableOpacity
+          style={styles.overlay}
+          activeOpacity={1}
+          onPress={onClose}
+        >
+          <View style={styles.modalContainer}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={e => e.stopPropagation()}
+            >
+              <View style={styles.modalContent}>
+                <View style={styles.pullIndicator} />
 
-              <View style={styles.header}>
-                <Text style={styles.title}>Account Settings</Text>
-                <Text style={styles.subtitle}>
-                  Showing the list of all the accounts
-                </Text>
-              </View>
+                <View style={styles.header}>
+                  <Text style={styles.title}>Account Settings</Text>
+                  <Text style={styles.subtitle}>
+                    Showing the list of all the accounts
+                  </Text>
+                </View>
 
-              <View style={styles.menuContainer}>
-                {menuItems.map(item => (
-                  <MenuItem key={item.id} item={item} />
-                ))}
+                <View style={styles.menuContainer}>
+                  {menuItems.map(item => (
+                    <MenuItem key={item.id} item={item} />
+                  ))}
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
-    </Modal>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <DeleteAccount
+        visible={isDeleteModalVisible}
+        onClose={handleCloseDeleteModal}
+        onConfirmDelete={handleConfirmDelete}
+      />
+    </>
   );
 };
 
