@@ -18,6 +18,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import CopyAccountModal from '../../components/modal/CopierModal/CopyAccount';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -103,9 +104,10 @@ const CopySettingsSection = ({
         onPress={onCopyToPress}
         activeOpacity={0.7}
       >
+        <Text style={styles.fieldLabel}>Copy to Account</Text>
         <View style={styles.fieldValue}>
           <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
-            Copy to Account
+            {copyToAccount || 'Select account'}
           </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
@@ -116,10 +118,8 @@ const CopySettingsSection = ({
         onPress={onRiskTypePress}
         activeOpacity={0.7}
       >
+        <Text style={styles.fieldLabel}>Risk Type</Text>
         <View style={styles.fieldValue}>
-          <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
-            Risk Type
-          </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
       </TouchableOpacity>
@@ -231,17 +231,19 @@ const EditSlaveScreen = () => {
   const [copyStopLoss, setCopyStopLoss] = useState(true);
   const [copyTakeProfit, setCopyTakeProfit] = useState(true);
   const [copyPendingOrders, setCopyPendingOrders] = useState(true);
+  const [isCopyFromModalVisible, setIsCopyFromModalVisible] = useState(false);
+  const [isCopyToModalVisible, setIsCopyToModalVisible] = useState(false);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleCopyFromPress = () => {
-    console.log('Select copy from account');
+    setIsCopyFromModalVisible(true);
   };
 
   const handleCopyToPress = () => {
-    console.log('Select copy to account');
+    setIsCopyToModalVisible(true);
   };
 
   const handleRiskTypePress = () => {
@@ -271,6 +273,22 @@ const EditSlaveScreen = () => {
   const handleSaveSettings = () => {
     console.log('Save settings');
     navigation.goBack();
+  };
+
+  const handleSelectCopyFromAccount = (accountNumber: string) => {
+    setCopyFromAccount(accountNumber);
+  };
+
+  const handleSelectCopyToAccount = (accountNumber: string) => {
+    setCopyToAccount(accountNumber);
+  };
+
+  const handleCloseCopyFromModal = () => {
+    setIsCopyFromModalVisible(false);
+  };
+
+  const handleCloseCopyToModal = () => {
+    setIsCopyToModalVisible(false);
   };
 
   return (
@@ -315,6 +333,20 @@ const EditSlaveScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      <CopyAccountModal
+        visible={isCopyFromModalVisible}
+        onClose={handleCloseCopyFromModal}
+        onSelectAccount={handleSelectCopyFromAccount}
+        currentAccount={copyFromAccount}
+      />
+
+      <CopyAccountModal
+        visible={isCopyToModalVisible}
+        onClose={handleCloseCopyToModal}
+        onSelectAccount={handleSelectCopyToAccount}
+        currentAccount={copyToAccount}
+      />
     </LinearGradient>
   );
 };
