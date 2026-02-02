@@ -41,8 +41,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   sectionLabel: {
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#2C3440',
+    marginBottom: 8,
+  },
+  sectionLabel2: {
     fontSize: 14,
-    fontFamily: 'InstrumentSans-Regular',
+    fontFamily: 'InstrumentSans-SemiBold',
     color: '#AAB3BA',
     marginBottom: 8,
   },
@@ -62,16 +68,23 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E2E2E2',
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+  },
+  fieldContainerStart: {
+    borderTopStartRadius: 12,
+    borderTopEndRadius: 12,
   },
   fieldContainerLast: {
-    borderBottomWidth: 0,
+    borderBottomStartRadius: 12,
+    borderBottomEndRadius: 12,
+    marginBottom: 6,
   },
   fieldLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'InstrumentSans-Medium',
-    color: '#757575',
+    color: '#4E5D66',
     marginBottom: 8,
   },
   fieldLabelSmall: {
@@ -86,9 +99,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   fieldText: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-Medium',
-    color: '#1A1A1A',
+    color: '#0B0F20',
   },
   fieldPlaceholder: {
     color: '#BDBDBD',
@@ -127,15 +140,15 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   toggleTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
-    color: '#1A1A1A',
+    color: '#0B0F20',
     marginBottom: 4,
   },
   toggleSubtitle: {
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: 'InstrumentSans-Regular',
-    color: '#BDBDBD',
+    color: '#4E5D66',
   },
   switchTrack: {
     width: 58,
@@ -175,15 +188,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   advanceTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
-    color: '#1A1A1A',
+    color: '#0B0F20',
     marginBottom: 4,
   },
   advanceSubtitle: {
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: 'InstrumentSans-Regular',
-    color: '#BDBDBD',
+    color: '#4E5D66',
   },
   buttonContainer: {
     paddingHorizontal: 20,

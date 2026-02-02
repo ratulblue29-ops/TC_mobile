@@ -87,7 +87,7 @@ const CopySettingsSection = ({
       <Text style={styles.cardHeader}>Account Settings</Text>
 
       <TouchableOpacity
-        style={styles.fieldContainer}
+        style={[styles.fieldContainer, styles.fieldContainerStart]}
         onPress={onCopyFromPress}
         activeOpacity={0.7}
       >
@@ -159,8 +159,8 @@ const OtherProtectionSection = ({
   onTogglePendingOrders: () => void;
 }) => (
   <View style={styles.sectionContainer}>
-    <Text style={styles.sectionLabel}>Other Protection</Text>
     <View style={styles.settingsCard}>
+      <Text style={styles.sectionLabel2}>Other Protection</Text>
       <View style={styles.toggleItem}>
         <View style={styles.toggleTextContainer}>
           <Text style={styles.toggleTitle}>Copy Stop Loss</Text>
