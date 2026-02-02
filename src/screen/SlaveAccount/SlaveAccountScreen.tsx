@@ -22,7 +22,7 @@ type RoutePropType = RouteProp<CopierStackParamList, 'SlaveAccountDetails'>;
 
 const COLORS = {
   white: '#FFFFFF',
-  teal: '#00BCD4',
+  teal: '#00897B',
   orange: '#FF9800',
   red: '#F44336',
   peach: '#FFF4E6',
@@ -131,7 +131,7 @@ const SettingsMenuItem = ({
       </Text>
       <Text style={styles.menuSubtitle}>{subtitle}</Text>
     </View>
-    <ChevronRight size={20} color="#9CA3AF" />
+    <ChevronRight size={20} color="#5C5C5C" />
   </TouchableOpacity>
 );
 

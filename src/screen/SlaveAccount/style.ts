@@ -115,9 +115,9 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
-    color: '#0B0F20',
+    color: '#2C3440',
     marginBottom: 16,
     paddingHorizontal: 6,
   },
@@ -125,15 +125,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 16,
     paddingVertical: 12,
+    paddingHorizontal: 12,
     marginHorizontal: 6,
     borderWidth: 1,
     borderColor: '#E2E2E2',
   },
   settingsHeader: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#AAB3BA',
-    textTransform: 'uppercase',
     paddingHorizontal: 16,
     marginBottom: 8,
   },
@@ -158,18 +158,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   menuTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
   menuTitleDestructive: {
-    color: '#F44336',
+    color: '#D10000',
   },
   menuSubtitle: {
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: 'InstrumentSans-Regular',
-    color: '#9CA3AF',
+    color: '#4E5D66',
   },
 });
 
