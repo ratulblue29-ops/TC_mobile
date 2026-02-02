@@ -7,6 +7,7 @@ import { CopierStackParamList } from '../../navigator/CopierStack';
 import { Ellipsis, ChevronLeft } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import MasterAccountSettingsModal from '../../components/modal/CopierModal/MasterAccountSettingsModal';
 
 type NavigationProp = NativeStackNavigationProp<
   CopierStackParamList,
@@ -53,9 +54,11 @@ const CustomSwitch = ({
 const Header = ({
   accountName,
   onBackPress,
+  onSettingsPress,
 }: {
   accountName: string;
   onBackPress: () => void;
+  onSettingsPress: () => void;
 }) => (
   <View style={styles.headerSection}>
     <View style={styles.header}>
@@ -68,7 +71,11 @@ const Header = ({
       </TouchableOpacity>
       <Text style={styles.headerTitle}>{accountName}</Text>
       <View style={styles.headerIcons}>
-        <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          activeOpacity={0.7}
+          onPress={onSettingsPress}
+        >
           <Ellipsis size={24} color="#0B0F20" />
         </TouchableOpacity>
       </View>
@@ -156,6 +163,7 @@ const MasterAccountScreen = () => {
   const { accountName } = route.params;
 
   const [masterEnabled, setMasterEnabled] = useState(true);
+  const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false);
   const [slaves, setSlaves] = useState<SlaveAccount[]>([
     {
       id: 1,
@@ -224,6 +232,22 @@ const MasterAccountScreen = () => {
     navigation.goBack();
   };
 
+  const handleOpenSettings = () => {
+    setIsSettingsModalVisible(true);
+  };
+
+  const handleCloseSettings = () => {
+    setIsSettingsModalVisible(false);
+  };
+
+  const handleAddSlave = () => {
+    console.log('Add slave account');
+  };
+
+  const handleDeleteMaster = () => {
+    console.log('Delete master account');
+  };
+
   const enabledCount = slaves.filter(s => s.enabled).length;
   const disabledCount = slaves.length - enabledCount;
 
@@ -235,7 +259,11 @@ const MasterAccountScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header accountName={accountName} onBackPress={handleBackPress} />
+          <Header
+            accountName={accountName}
+            onBackPress={handleBackPress}
+            onSettingsPress={handleOpenSettings}
+          />
           <MasterAccountCard
             accountName={accountName}
             enabled={masterEnabled}
@@ -249,6 +277,13 @@ const MasterAccountScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      <MasterAccountSettingsModal
+        visible={isSettingsModalVisible}
+        onClose={handleCloseSettings}
+        onAddSlave={handleAddSlave}
+        onDeleteMaster={handleDeleteMaster}
+      />
     </LinearGradient>
   );
 };
