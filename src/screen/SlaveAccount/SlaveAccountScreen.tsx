@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  CompositeNavigationProp,
+} from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CopierStackParamList } from '../../navigator/CopierStack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import {
   ChevronLeft,
   ChevronRight,
@@ -14,9 +20,9 @@ import {
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
-type NavigationProp = NativeStackNavigationProp<
-  CopierStackParamList,
-  'SlaveAccountDetails'
+type NavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<CopierStackParamList, 'SlaveAccountDetails'>,
+  NativeStackNavigationProp<RootStackParamList>
 >;
 type RoutePropType = RouteProp<CopierStackParamList, 'SlaveAccountDetails'>;
 
@@ -206,7 +212,11 @@ const SlaveAccountScreen = () => {
   };
 
   const handleEditPress = () => {
-    console.log('Edit slave account');
+    navigation.navigate('EditSlave', {
+      accountName,
+      riskType,
+      riskPercentage,
+    });
   };
 
   const handleMapSymbolsPress = () => {
