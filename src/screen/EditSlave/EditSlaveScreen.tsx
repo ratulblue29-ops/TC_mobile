@@ -103,10 +103,9 @@ const CopySettingsSection = ({
         onPress={onCopyToPress}
         activeOpacity={0.7}
       >
-        <Text style={styles.fieldLabel}>Copy to Account</Text>
         <View style={styles.fieldValue}>
           <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
-            {copyToAccount || 'Select account'}
+            Copy to Account
           </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
@@ -117,8 +116,10 @@ const CopySettingsSection = ({
         onPress={onRiskTypePress}
         activeOpacity={0.7}
       >
-        <Text style={styles.fieldLabel}>Risk Type</Text>
         <View style={styles.fieldValue}>
+          <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
+            Risk Type
+          </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
       </TouchableOpacity>
