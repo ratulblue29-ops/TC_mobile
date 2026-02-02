@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ellipsis } from 'lucide-react-native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { CopierStackParamList } from '../../navigator/CopierStack';
+import { Ellipsis, ChevronLeft } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+
+type NavigationProp = NativeStackNavigationProp<
+  CopierStackParamList,
+  'MasterAccountDetails'
+>;
+type RoutePropType = RouteProp<CopierStackParamList, 'MasterAccountDetails'>;
 
 const COLORS = {
   white: '#FFFFFF',
@@ -41,14 +50,23 @@ const CustomSwitch = ({
   </TouchableOpacity>
 );
 
-const Header = () => (
+const Header = ({
+  accountName,
+  onBackPress,
+}: {
+  accountName: string;
+  onBackPress: () => void;
+}) => (
   <View style={styles.headerSection}>
     <View style={styles.header}>
-      <Image
-        source={require('../../../assets/images/logo_icon.png')}
-        style={styles.logoIcon}
-      />
-      <Text style={styles.headerTitle}>Master Account 1</Text>
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={onBackPress}
+        activeOpacity={0.7}
+      >
+        <ChevronLeft size={24} color="#0B0F20" />
+      </TouchableOpacity>
+      <Text style={styles.headerTitle}>{accountName}</Text>
       <View style={styles.headerIcons}>
         <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
           <Ellipsis size={24} color="#0B0F20" />
@@ -59,11 +77,13 @@ const Header = () => (
 );
 
 const MasterAccountCard = ({
+  accountName,
   enabled,
   onToggle,
   slavesEnabled,
   slavesDisabled,
 }: {
+  accountName: string;
   enabled: boolean;
   onToggle: () => void;
   slavesEnabled: number;
@@ -74,7 +94,7 @@ const MasterAccountCard = ({
     <View style={styles.masterCard}>
       <View style={styles.masterCardContent}>
         <View style={styles.masterCardInfo}>
-          <Text style={styles.masterCardTitle}>Master Account 1</Text>
+          <Text style={styles.masterCardTitle}>{accountName}</Text>
           <Text style={styles.masterCardStatus}>
             Slaves Enabled: {slavesEnabled} Disabled: {slavesDisabled}
           </Text>
@@ -131,6 +151,10 @@ const EnabledSlaves = ({
 );
 
 const MasterAccountScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<RoutePropType>();
+  const { accountName } = route.params;
+
   const [masterEnabled, setMasterEnabled] = useState(true);
   const [slaves, setSlaves] = useState<SlaveAccount[]>([
     {
@@ -196,6 +220,10 @@ const MasterAccountScreen = () => {
     );
   };
 
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
   const enabledCount = slaves.filter(s => s.enabled).length;
   const disabledCount = slaves.length - enabledCount;
 
@@ -207,8 +235,9 @@ const MasterAccountScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header />
+          <Header accountName={accountName} onBackPress={handleBackPress} />
           <MasterAccountCard
+            accountName={accountName}
             enabled={masterEnabled}
             onToggle={handleMasterToggle}
             slavesEnabled={enabledCount}

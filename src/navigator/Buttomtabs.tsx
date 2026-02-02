@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DashboardStack from './DashboardStack';
-import CopierScreen from '../screen/Copier/CopierScreen';
+import CopierStack from './CopierStack';
 import AnalyzerScreen from '../screen/Analyzer/AnalyzerScreen';
 import CompareScreen from '../screen/Compare/CompareScreen';
 import SentimentsScreen from '../screen/Sentiments/SentimentsScreen';
@@ -119,7 +119,7 @@ export default function BottomTabs() {
       }}
     >
       <Tab.Screen name="Dashboard" component={DashboardStack} />
-      <Tab.Screen name="Copier" component={CopierScreen} />
+      <Tab.Screen name="Copier" component={CopierStack} />
       <Tab.Screen name="Analyzer" component={AnalyzerScreen} />
       <Tab.Screen name="Compare" component={CompareScreen} />
       <Tab.Screen name="Sentiments" component={SentimentsScreen} />
