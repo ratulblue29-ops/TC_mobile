@@ -115,11 +115,17 @@ const MasterAccountCard = ({
 const SlaveAccountCard = ({
   account,
   onToggle,
+  onCardPress,
 }: {
   account: SlaveAccount;
   onToggle: (id: number) => void;
+  onCardPress: () => void;
 }) => (
-  <View style={styles.slaveCard}>
+  <TouchableOpacity
+    style={styles.slaveCard}
+    onPress={onCardPress}
+    activeOpacity={0.7}
+  >
     <View style={styles.slaveCardContent}>
       <View style={styles.slaveCardInfo}>
         <Text style={styles.slaveCardName}>{account.name}</Text>
@@ -128,22 +134,32 @@ const SlaveAccountCard = ({
         </Text>
       </View>
       <View style={styles.slaveSwitchContainer}>
-        <CustomSwitch
-          value={account.enabled}
-          onValueChange={() => onToggle(account.id)}
-          activeColor={COLORS.orange}
-        />
+        <TouchableOpacity
+          onPress={e => {
+            e.stopPropagation();
+            onToggle(account.id);
+          }}
+          activeOpacity={0.8}
+        >
+          <CustomSwitch
+            value={account.enabled}
+            onValueChange={() => onToggle(account.id)}
+            activeColor={COLORS.orange}
+          />
+        </TouchableOpacity>
       </View>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const EnabledSlaves = ({
   slaves,
   onToggle,
+  onSlavePress,
 }: {
   slaves: SlaveAccount[];
   onToggle: (id: number) => void;
+  onSlavePress: (slave: SlaveAccount) => void;
 }) => (
   <View style={styles.slavesContainer}>
     <Text style={styles.subsectionTitle}>
@@ -151,7 +167,12 @@ const EnabledSlaves = ({
     </Text>
     <View style={styles.slavesList}>
       {slaves.map(slave => (
-        <SlaveAccountCard key={slave.id} account={slave} onToggle={onToggle} />
+        <SlaveAccountCard
+          key={slave.id}
+          account={slave}
+          onToggle={onToggle}
+          onCardPress={() => onSlavePress(slave)}
+        />
       ))}
     </View>
   </View>
@@ -228,6 +249,14 @@ const MasterAccountScreen = () => {
     );
   };
 
+  const handleSlavePress = (slave: SlaveAccount) => {
+    navigation.navigate('SlaveAccountDetails', {
+      accountName: slave.name,
+      riskType: slave.riskType,
+      riskPercentage: slave.riskPercentage,
+    });
+  };
+
   const handleBackPress = () => {
     navigation.goBack();
   };
@@ -273,7 +302,11 @@ const MasterAccountScreen = () => {
           />
           <View style={styles.content}>
             <Text style={styles.sectionTitle}>Slaves</Text>
-            <EnabledSlaves slaves={slaves} onToggle={handleSlaveToggle} />
+            <EnabledSlaves
+              slaves={slaves}
+              onToggle={handleSlaveToggle}
+              onSlavePress={handleSlavePress}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>

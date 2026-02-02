@@ -2,12 +2,18 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CopierScreen from '../screen/Copier/CopierScreen';
 import MasterAccountScreen from '../screen/MasterAccount/MasterAccountScreen';
+import SlaveAccountScreen from '../screen/SlaveAccount/SlaveAccountScreen';
 
 export type CopierStackParamList = {
   CopierHome: undefined;
   MasterAccountDetails: {
     accountId: number;
     accountName: string;
+  };
+  SlaveAccountDetails: {
+    accountName: string;
+    riskType: string;
+    riskPercentage: string;
   };
 };
 
@@ -21,6 +27,7 @@ const CopierStack = () => {
         name="MasterAccountDetails"
         component={MasterAccountScreen}
       />
+      <Stack.Screen name="SlaveAccountDetails" component={SlaveAccountScreen} />
     </Stack.Navigator>
   );
 };
