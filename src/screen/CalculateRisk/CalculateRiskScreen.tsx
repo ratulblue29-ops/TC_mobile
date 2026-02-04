@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Image,
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,6 +13,7 @@ import { RootStackParamList } from '../../navigator/RootNavigator';
 import { ChevronLeft, Ellipsis } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import RiskSettings from '../../components/modal/CopierModal/RiskSettings';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -175,6 +175,8 @@ const CalculateRiskScreen = () => {
   const [activeTab, setActiveTab] = useState<TabType>('Based');
   const [masterRisk, setMasterRisk] = useState('');
   const [slaveRisk, setSlaveRisk] = useState('');
+  const [isRiskSettingsModalVisible, setIsRiskSettingsModalVisible] =
+    useState(false);
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -185,7 +187,16 @@ const CalculateRiskScreen = () => {
   };
 
   const handleApplySettings = () => {
+    setIsRiskSettingsModalVisible(true);
+  };
+
+  const handleCloseRiskSettingsModal = () => {
+    setIsRiskSettingsModalVisible(false);
+  };
+
+  const handleConfirmApply = () => {
     console.log('Apply Risk Settings:', { masterRisk, slaveRisk, activeTab });
+    setIsRiskSettingsModalVisible(false);
     navigation.goBack();
   };
 
@@ -215,6 +226,13 @@ const CalculateRiskScreen = () => {
         </ScrollView>
         <ApplyButton onPress={handleApplySettings} />
       </SafeAreaView>
+
+      <RiskSettings
+        visible={isRiskSettingsModalVisible}
+        onClose={handleCloseRiskSettingsModal}
+        onApply={handleConfirmApply}
+        recommendedSetting="100%"
+      />
     </LinearGradient>
   );
 };
