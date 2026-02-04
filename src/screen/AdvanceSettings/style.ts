@@ -44,37 +44,30 @@ const styles = StyleSheet.create({
   calculateRiskCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    paddingVertical: 20,
     paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderWidth: 1,
+    borderColor: '#E3E3E3',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
   },
   calculateIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: '#E0F2F1',
-    justifyContent: 'center',
-    alignItems: 'center',
     marginRight: 12,
   },
   calculateTextContainer: {
     flex: 1,
   },
   calculateTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
     marginBottom: 4,
   },
   calculateSubtitle: {
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: 'InstrumentSans-Regular',
-    color: '#757575',
-  },
-  chevronRight: {
-    transform: [{ rotate: '90deg' }],
+    color: '#4E5D66',
   },
   // Advance Settings Card
   advanceCard: {
@@ -87,9 +80,9 @@ const styles = StyleSheet.create({
   },
   advanceCardLabel: {
     fontSize: 14,
-    fontFamily: 'InstrumentSans-Regular',
-    color: '#757575',
-    marginBottom: 16,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#AAB3BA',
+    marginBottom: 14,
   },
   // Toggle Section
   toggleSection: {
@@ -103,24 +96,24 @@ const styles = StyleSheet.create({
   },
   toggleLabel: {
     fontSize: 16,
-    fontFamily: 'InstrumentSans-SemiBold',
+    fontFamily: 'InstrumentSans-Medium',
     color: '#0B0F20',
   },
   // Switch Styles
   switchTrack: {
-    width: 51,
-    height: 31,
+    width: 58,
+    height: 28,
     borderRadius: 16,
     backgroundColor: '#E0E0E0',
     justifyContent: 'center',
     paddingHorizontal: 2,
   },
   switchTrackActive: {
-    backgroundColor: '#FF9800',
+    backgroundColor: '#E67E22',
   },
   switchThumb: {
-    width: 27,
-    height: 27,
+    width: 35,
+    height: 23,
     borderRadius: 14,
     backgroundColor: '#FFFFFF',
     alignSelf: 'flex-start',
@@ -130,11 +123,10 @@ const styles = StyleSheet.create({
   },
   // Input Section
   inputSection: {
-    gap: 12,
   },
   inputField: {
-    backgroundColor: '#F5F5F5',
-    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
     paddingVertical: 16,
     paddingHorizontal: 16,
     fontSize: 14,
@@ -145,9 +137,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   inputPlaceholder: {
-    fontSize: 14,
-    fontFamily: 'InstrumentSans-Regular',
-    color: '#757575',
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-Medium',
+    color: '#7E8A93',
   },
   // Button Container
   buttonContainer: {
@@ -155,7 +147,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   saveButton: {
-    backgroundColor: '#00BFA5',
+    backgroundColor: '#00897B',
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',

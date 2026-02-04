@@ -8,7 +8,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { ChevronLeft, ChevronDown, Calculator } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  ChevronDown,
+  Calculator,
+  ChevronRight,
+} from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -64,7 +69,7 @@ const CalculateRiskCard = ({ onPress }: { onPress: () => void }) => (
       <Text style={styles.calculateTitle}>Calculate Risk Settings</Text>
       <Text style={styles.calculateSubtitle}>Description will go here ...</Text>
     </View>
-    <ChevronDown size={20} color="#5C5C5C" style={styles.chevronRight} />
+    <ChevronRight size={20} color="#5C5C5C" />
   </TouchableOpacity>
 );
 
@@ -86,12 +91,14 @@ const ToggleRow = ({
 const DropdownField = ({
   placeholder,
   onPress,
+  containerStyle,
 }: {
   placeholder: string;
   onPress: () => void;
+  containerStyle?: object;
 }) => (
   <TouchableOpacity
-    style={styles.inputField}
+    style={[styles.inputField, containerStyle]}
     onPress={onPress}
     activeOpacity={0.7}
   >
@@ -105,14 +112,16 @@ const InputField = ({
   value,
   onChangeText,
   keyboardType,
+  containerStyle,
 }: {
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
   keyboardType?: 'default' | 'numeric';
+  containerStyle?: object;
 }) => (
   <TextInput
-    style={styles.inputField}
+    style={[styles.inputField, containerStyle]}
     placeholder={placeholder}
     placeholderTextColor="#757575"
     value={value}
@@ -197,6 +206,7 @@ const AdvanceSettingsCard = ({
       <DropdownField
         placeholder="Copy Trade Account"
         onPress={onCopyTradePress}
+        containerStyle={{ borderTopStartRadius: 16, borderTopEndRadius: 16 }}
       />
       <InputField
         placeholder="Enter Custom Comment"
@@ -221,6 +231,10 @@ const AdvanceSettingsCard = ({
         placeholder="Lot Refiner"
         value={lotRefiner}
         onChangeText={onLotRefinerChange}
+        containerStyle={{
+          borderBottomLeftRadius: 16,
+          borderBottomRightRadius: 16,
+        }}
       />
     </View>
   </View>
