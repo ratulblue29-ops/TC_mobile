@@ -125,25 +125,23 @@ const InputFields = ({
 }) => (
   <View style={styles.inputCard}>
     <View style={styles.inputFieldContainer}>
-      <Text style={styles.inputLabel}>Master trade Risk</Text>
       <TextInput
         style={styles.input}
         value={masterRisk}
         onChangeText={onMasterRiskChange}
-        placeholder="Enter master risk"
-        placeholderTextColor="#9CA3AF"
+        placeholder="Master trade Risk"
+        placeholderTextColor="#7E8A93"
         keyboardType="numeric"
       />
     </View>
     <View style={styles.inputDivider} />
     <View style={[styles.inputFieldContainer, styles.inputFieldContainerLast]}>
-      <Text style={styles.inputLabel}>Slave Trade Risk</Text>
       <TextInput
         style={styles.input}
         value={slaveRisk}
         onChangeText={onSlaveRiskChange}
-        placeholder="Enter slave risk"
-        placeholderTextColor="#9CA3AF"
+        placeholder="Slave Trade Risk"
+        placeholderTextColor="#7E8A93"
         keyboardType="numeric"
       />
     </View>
@@ -204,14 +202,16 @@ const CalculateRiskScreen = () => {
         >
           <Header onBackPress={handleBackPress} />
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-          <InfoBanner />
-          <InputFields
-            masterRisk={masterRisk}
-            slaveRisk={slaveRisk}
-            onMasterRiskChange={setMasterRisk}
-            onSlaveRiskChange={setSlaveRisk}
-          />
-          <CalculateButton onPress={handleCalculate} />
+          <View style={styles.container2}>
+            <InfoBanner />
+            <InputFields
+              masterRisk={masterRisk}
+              slaveRisk={slaveRisk}
+              onMasterRiskChange={setMasterRisk}
+              onSlaveRiskChange={setSlaveRisk}
+            />
+            <CalculateButton onPress={handleCalculate} />
+          </View>
         </ScrollView>
         <ApplyButton onPress={handleApplySettings} />
       </SafeAreaView>

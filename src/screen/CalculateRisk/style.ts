@@ -8,6 +8,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
   },
+  container2: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    margin: 20,
+    paddingBottom: 20,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E3E3E3',
+  },
   scrollContent: {
     paddingBottom: 100,
   },
@@ -30,7 +39,6 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: '600',
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
   },
   tabPill: {
     flexDirection: 'row',
-    backgroundColor: '#D4DADF',
+    backgroundColor: '#E6EAED',
     borderRadius: 12,
     padding: 4,
   },
@@ -63,7 +71,6 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 14,
-    fontWeight: '600',
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#0B0F20',
   },
@@ -81,8 +88,7 @@ const styles = StyleSheet.create({
   infoBannerText: {
     fontSize: 14,
     fontFamily: 'InstrumentSans-Regular',
-    fontWeight: '400',
-    color: '#1C1C1E',
+    color: '#000000',
     lineHeight: 20,
   },
   inputCard: {
@@ -91,14 +97,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 20,
     paddingHorizontal: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
   },
   inputFieldContainer: {
     paddingVertical: 16,
@@ -106,23 +106,15 @@ const styles = StyleSheet.create({
   inputFieldContainerLast: {
     paddingBottom: 16,
   },
-  inputLabel: {
-    fontSize: 14,
-    fontFamily: 'InstrumentSans-Medium',
-    fontWeight: '500',
-    color: '#8E8E93',
-    marginBottom: 8,
-  },
   input: {
     fontSize: 16,
     fontFamily: 'InstrumentSans-Regular',
-    fontWeight: '400',
-    color: '#1C1C1E',
+    color: '#000000',
     paddingVertical: 8,
   },
   inputDivider: {
     height: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#C8C8C8',
   },
   calculateButton: {
     backgroundColor: '#1A1D2E',
@@ -134,9 +126,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   calculateButtonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'InstrumentSans-SemiBold',
-    fontWeight: '600',
     color: '#FFFFFF',
   },
   applyButtonContainer: {
@@ -159,7 +150,6 @@ const styles = StyleSheet.create({
   applyButtonText: {
     fontSize: 16,
     fontFamily: 'InstrumentSans-SemiBold',
-    fontWeight: '600',
     color: '#FFFFFF',
   },
 });
