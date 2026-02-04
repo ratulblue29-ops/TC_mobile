@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigator/RootNavigator';
 import {
   ChevronLeft,
@@ -20,6 +21,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import CopyAccount from '../../components/modal/CopierModal/CopyAccount';
 
 type RoutePropType = RouteProp<RootStackParamList, 'EditSlave'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const COLORS = {
   white: '#FFFFFF',
@@ -217,7 +219,7 @@ const AdvanceSettingsSection = ({ onPress }: { onPress: () => void }) => (
 );
 
 const EditSlaveScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RoutePropType>();
   const { accountName, riskType, riskPercentage } = route.params;
 
@@ -267,7 +269,7 @@ const EditSlaveScreen = () => {
   };
 
   const handleAdvanceSettingsPress = () => {
-    console.log('Navigate to advance settings');
+    navigation.navigate('AdvanceSettings');
   };
 
   const handleSaveSettings = () => {

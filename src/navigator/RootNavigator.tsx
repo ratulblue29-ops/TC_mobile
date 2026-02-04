@@ -13,6 +13,7 @@ import AddAccountScreen from '../screen/AddAccount/AddAccountScreen';
 import EquityProtectorScreen from '../screen/EquityProtector/EquityProtectorScreen';
 import TradingSymbolsScreen from '../screen/TradingSymbols/TradingSymbolsScreen';
 import EditSlaveScreen from '../screen/EditSlave/EditSlaveScreen';
+import AdvanceSettingsScreen from '../screen/AdvanceSettings/AdvanceSettingsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -28,6 +29,7 @@ export type RootStackParamList = {
     riskType: string;
     riskPercentage: string;
   };
+  AdvanceSettings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -50,6 +52,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="EquityProtector" component={EquityProtectorScreen} />
       <Stack.Screen name="TradingSymbols" component={TradingSymbolsScreen} />
       <Stack.Screen name="EditSlave" component={EditSlaveScreen} />
+      <Stack.Screen name="AdvanceSettings" component={AdvanceSettingsScreen} />
     </Stack.Navigator>
   );
 };
