@@ -8,7 +8,7 @@ import {
   Modal,
   StyleSheet,
 } from 'react-native';
-import { Search, Mic } from 'lucide-react-native';
+import { Search, Mic, ArrowUpRight } from 'lucide-react-native';
 
 const COLORS = {
   white: '#FFFFFF',
@@ -193,7 +193,10 @@ const CopyAccount = ({
 
                 <View style={styles.accountRight}>
                   <Text style={styles.balanceText}>{account.balance}</Text>
-                  <Text style={styles.changeText}>{account.change}</Text>
+                  <View style={styles.accountChange}>
+                    <Text style={styles.changeText}>{account.change}</Text>
+                    <ArrowUpRight size={16} color={COLORS.teal} />
+                  </View>
                 </View>
               </TouchableOpacity>
             ))}
@@ -299,6 +302,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: COLORS.textMain,
+  },
+  accountChange: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   statusBadge: {
     backgroundColor: COLORS.lightTeal,
