@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigator/RootNavigator';
 import {
   ChevronLeft,
@@ -18,12 +17,8 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import CopyAccountModal from '../../components/modal/CopierModal/CopyAccount';
+import CopyAccount from '../../components/modal/CopierModal/CopyAccount';
 
-type NavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'EditSlave'
->;
 type RoutePropType = RouteProp<RootStackParamList, 'EditSlave'>;
 
 const COLORS = {
@@ -104,10 +99,9 @@ const CopySettingsSection = ({
         onPress={onCopyToPress}
         activeOpacity={0.7}
       >
-        <Text style={styles.fieldLabel}>Copy to Account</Text>
         <View style={styles.fieldValue}>
           <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
-            {copyToAccount || 'Select account'}
+            {copyToAccount || 'Copy to Account'}
           </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
@@ -118,8 +112,10 @@ const CopySettingsSection = ({
         onPress={onRiskTypePress}
         activeOpacity={0.7}
       >
-        <Text style={styles.fieldLabel}>Risk Type</Text>
         <View style={styles.fieldValue}>
+          <Text style={[styles.fieldText, styles.fieldPlaceholder]}>
+            Risk Type
+          </Text>
           <ChevronDown size={20} color="#5C5C5C" />
         </View>
       </TouchableOpacity>
@@ -221,7 +217,7 @@ const AdvanceSettingsSection = ({ onPress }: { onPress: () => void }) => (
 );
 
 const EditSlaveScreen = () => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
   const route = useRoute<RoutePropType>();
   const { accountName, riskType, riskPercentage } = route.params;
 
@@ -231,19 +227,23 @@ const EditSlaveScreen = () => {
   const [copyStopLoss, setCopyStopLoss] = useState(true);
   const [copyTakeProfit, setCopyTakeProfit] = useState(true);
   const [copyPendingOrders, setCopyPendingOrders] = useState(true);
-  const [isCopyFromModalVisible, setIsCopyFromModalVisible] = useState(false);
-  const [isCopyToModalVisible, setIsCopyToModalVisible] = useState(false);
+  const [isCopyAccountModalVisible, setIsCopyAccountModalVisible] =
+    useState(false);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleCopyFromPress = () => {
-    setIsCopyFromModalVisible(true);
+    setIsCopyAccountModalVisible(true);
+  };
+
+  const handleSelectAccount = (account: any) => {
+    setCopyFromAccount(account.number);
   };
 
   const handleCopyToPress = () => {
-    setIsCopyToModalVisible(true);
+    console.log('Select copy to account');
   };
 
   const handleRiskTypePress = () => {
@@ -273,22 +273,6 @@ const EditSlaveScreen = () => {
   const handleSaveSettings = () => {
     console.log('Save settings');
     navigation.goBack();
-  };
-
-  const handleSelectCopyFromAccount = (accountNumber: string) => {
-    setCopyFromAccount(accountNumber);
-  };
-
-  const handleSelectCopyToAccount = (accountNumber: string) => {
-    setCopyToAccount(accountNumber);
-  };
-
-  const handleCloseCopyFromModal = () => {
-    setIsCopyFromModalVisible(false);
-  };
-
-  const handleCloseCopyToModal = () => {
-    setIsCopyToModalVisible(false);
   };
 
   return (
@@ -334,18 +318,11 @@ const EditSlaveScreen = () => {
         </ScrollView>
       </SafeAreaView>
 
-      <CopyAccountModal
-        visible={isCopyFromModalVisible}
-        onClose={handleCloseCopyFromModal}
-        onSelectAccount={handleSelectCopyFromAccount}
-        currentAccount={copyFromAccount}
-      />
-
-      <CopyAccountModal
-        visible={isCopyToModalVisible}
-        onClose={handleCloseCopyToModal}
-        onSelectAccount={handleSelectCopyToAccount}
-        currentAccount={copyToAccount}
+      <CopyAccount
+        visible={isCopyAccountModalVisible}
+        onClose={() => setIsCopyAccountModalVisible(false)}
+        onSelectAccount={handleSelectAccount}
+        selectedAccount={copyFromAccount}
       />
     </LinearGradient>
   );
