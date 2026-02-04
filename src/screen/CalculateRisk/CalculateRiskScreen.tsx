@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  TextInput,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ellipsis } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
+import { ChevronLeft, Ellipsis } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'CalculateRisk'
+>;
 type TabType = 'Based' | 'Lot Based' | 'Fixed Lot';
 
 const COLORS = {
@@ -13,20 +27,21 @@ const COLORS = {
   orange: '#E67E22',
 };
 
-const Header = () => (
+const Header = ({ onBackPress }: { onBackPress: () => void }) => (
   <View style={styles.headerSection}>
-    <View>
-      <View style={styles.header}>
-        <Image
-          source={require('../../../assets/images/logo_icon.png')}
-          style={styles.logoIcon}
-        />
-        <Text style={styles.headerTitle}>Calculate Risk</Text>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
-            <Ellipsis size={24} color="#0B0F20" />
-          </TouchableOpacity>
-        </View>
+    <View style={styles.header}>
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={onBackPress}
+        activeOpacity={0.7}
+      >
+        <ChevronLeft size={24} color="#0B0F20" />
+      </TouchableOpacity>
+      <Text style={styles.headerTitle}>Calculate Risk</Text>
+      <View style={styles.headerIcons}>
+        <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+          <Ellipsis size={24} color="#0B0F20" />
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -87,15 +102,94 @@ const TabNavigation = ({
   </View>
 );
 
+const InfoBanner = () => (
+  <View style={styles.infoBanner}>
+    <Text style={styles.infoBannerText}>
+      When you place a trade on your master account, do you calculate your
+      position sizing using a % of the account balance, for example, 1% risk, or
+      do you trade based on lot sizes, for example, 0.5 lots per trade?
+    </Text>
+  </View>
+);
+
+const InputFields = ({
+  masterRisk,
+  slaveRisk,
+  onMasterRiskChange,
+  onSlaveRiskChange,
+}: {
+  masterRisk: string;
+  slaveRisk: string;
+  onMasterRiskChange: (text: string) => void;
+  onSlaveRiskChange: (text: string) => void;
+}) => (
+  <View style={styles.inputCard}>
+    <View style={styles.inputFieldContainer}>
+      <Text style={styles.inputLabel}>Master trade Risk</Text>
+      <TextInput
+        style={styles.input}
+        value={masterRisk}
+        onChangeText={onMasterRiskChange}
+        placeholder="Enter master risk"
+        placeholderTextColor="#9CA3AF"
+        keyboardType="numeric"
+      />
+    </View>
+    <View style={styles.inputDivider} />
+    <View style={[styles.inputFieldContainer, styles.inputFieldContainerLast]}>
+      <Text style={styles.inputLabel}>Slave Trade Risk</Text>
+      <TextInput
+        style={styles.input}
+        value={slaveRisk}
+        onChangeText={onSlaveRiskChange}
+        placeholder="Enter slave risk"
+        placeholderTextColor="#9CA3AF"
+        keyboardType="numeric"
+      />
+    </View>
+  </View>
+);
+
+const CalculateButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity
+    style={styles.calculateButton}
+    onPress={onPress}
+    activeOpacity={0.7}
+  >
+    <Text style={styles.calculateButtonText}>Calculate</Text>
+  </TouchableOpacity>
+);
+
+const ApplyButton = ({ onPress }: { onPress: () => void }) => (
+  <View style={styles.applyButtonContainer}>
+    <TouchableOpacity
+      style={styles.applyButton}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
+      <Text style={styles.applyButtonText}>Apply Risk Settings</Text>
+    </TouchableOpacity>
+  </View>
+);
+
 const CalculateRiskScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
   const [activeTab, setActiveTab] = useState<TabType>('Based');
-  const [expandedSections, setExpandedSections] = useState<
-    Record<number, boolean>
-  >({
-    1: true,
-    2: true,
-    3: true,
-  });
+  const [masterRisk, setMasterRisk] = useState('');
+  const [slaveRisk, setSlaveRisk] = useState('');
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
+  const handleCalculate = () => {
+    console.log('Calculate:', { masterRisk, slaveRisk });
+  };
+
+  const handleApplySettings = () => {
+    console.log('Apply Risk Settings:', { masterRisk, slaveRisk, activeTab });
+    navigation.goBack();
+  };
 
   return (
     <LinearGradient
@@ -104,10 +198,22 @@ const CalculateRiskScreen = () => {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Header />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <Header onBackPress={handleBackPress} />
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+          <InfoBanner />
+          <InputFields
+            masterRisk={masterRisk}
+            slaveRisk={slaveRisk}
+            onMasterRiskChange={setMasterRisk}
+            onSlaveRiskChange={setSlaveRisk}
+          />
+          <CalculateButton onPress={handleCalculate} />
         </ScrollView>
+        <ApplyButton onPress={handleApplySettings} />
       </SafeAreaView>
     </LinearGradient>
   );

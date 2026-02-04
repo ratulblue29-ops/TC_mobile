@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import {
   ChevronLeft,
   ChevronDown,
@@ -16,6 +18,11 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'AdvanceSettings'
+>;
 
 const COLORS = {
   white: '#FFFFFF',
@@ -241,7 +248,7 @@ const AdvanceSettingsCard = ({
 );
 
 const AdvanceSettingsScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   const [forceMinLot, setForceMinLot] = useState(true);
   const [forceMaxLot, setForceMaxLot] = useState(true);
@@ -258,7 +265,7 @@ const AdvanceSettingsScreen = () => {
   };
 
   const handleCalculateRiskPress = () => {
-    console.log('Calculate Risk Settings');
+    navigation.navigate('CalculateRisk');
   };
 
   const handleCopyTradePress = () => {
