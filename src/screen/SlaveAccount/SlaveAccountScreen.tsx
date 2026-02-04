@@ -220,7 +220,7 @@ const SlaveAccountScreen = () => {
   };
 
   const handleMapSymbolsPress = () => {
-    console.log('Map symbols');
+    navigation.navigate('MapSymbols');
   };
 
   const handleOverridePress = () => {

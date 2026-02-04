@@ -15,6 +15,7 @@ import TradingSymbolsScreen from '../screen/TradingSymbols/TradingSymbolsScreen'
 import EditSlaveScreen from '../screen/EditSlave/EditSlaveScreen';
 import AdvanceSettingsScreen from '../screen/AdvanceSettings/AdvanceSettingsScreen';
 import CalculateRiskScreen from '../screen/CalculateRisk/CalculateRiskScreen';
+import MapSymbolsScreen from '../screen/MapSymbols/MapSymbolsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -32,6 +33,7 @@ export type RootStackParamList = {
   };
   AdvanceSettings: undefined;
   CalculateRisk: undefined;
+  MapSymbols: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -54,6 +56,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="EquityProtector" component={EquityProtectorScreen} />
       <Stack.Screen name="TradingSymbols" component={TradingSymbolsScreen} />
       <Stack.Screen name="EditSlave" component={EditSlaveScreen} />
+      <Stack.Screen name="MapSymbols" component={MapSymbolsScreen} />
       <Stack.Screen name="AdvanceSettings" component={AdvanceSettingsScreen} />
       <Stack.Screen name="CalculateRisk" component={CalculateRiskScreen} />
     </Stack.Navigator>

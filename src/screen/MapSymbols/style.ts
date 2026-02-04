@@ -36,6 +36,170 @@ const styles = StyleSheet.create({
   iconButton: {
     padding: 4,
   },
+  content: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontFamily: 'InstrumentSans-Bold',
+    color: '#0B0F20',
+    marginBottom: 12,
+  },
+  addMapCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginBottom: 30,
+    borderWidth: 1,
+    borderColor: '#E2E2E2',
+  },
+  dropdownField: {
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C8C8',
+  },
+  dropdownFieldFirst: {
+    marginBottom: 8,
+  },
+  dropdownLabel: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#999999',
+    marginBottom: 8,
+  },
+  dropdownValue: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  dropdownText: {
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#0B0F20',
+  },
+  dropdownPlaceholder: {
+    color: '#BDBDBD',
+    fontFamily: 'InstrumentSans-Regular',
+  },
+  createButton: {
+    backgroundColor: '#00897B',
+    borderRadius: 10,
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  createButtonText: {
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#FFFFFF',
+  },
+  mappedCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#E2E2E2',
+  },
+  mappedHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  mappedLabel: {
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#0B0F20',
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  checkbox: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 2,
+    borderColor: '#999999',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxInner: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+  },
+  checkboxLabel: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-Medium',
+    color: '#0B0F20',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    marginBottom: 20,
+    height: 48,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#0B0F20',
+    marginHorizontal: 12,
+  },
+  mappingsList: {
+    gap: 16,
+  },
+  mappingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  symbolPill: {
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    minWidth: 100,
+    alignItems: 'center',
+  },
+  symbolPillFrom: {
+    backgroundColor: '#E3F2FD',
+    borderColor: '#4A90E2',
+  },
+  symbolPillTo: {
+    backgroundColor: '#E8F5E9',
+    borderColor: '#52C41A',
+  },
+  symbolPillText: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-SemiBold',
+  },
+  symbolPillTextFrom: {
+    color: '#4A90E2',
+  },
+  symbolPillTextTo: {
+    color: '#52C41A',
+  },
+  deleteButton: {
+    padding: 8,
+  },
   sectionContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
@@ -213,6 +377,99 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#FFFFFF',
+  },
+  slaveCardContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  slaveTitle: {
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#2C3440',
+    marginBottom: 8,
+  },
+  slaveCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderWidth: 1,
+    borderColor: '#E2E2E2',
+  },
+  slaveCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  slaveCardInfo: {
+    flex: 1,
+    marginRight: 12,
+  },
+  slaveCardName: {
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#0B0F20',
+    marginBottom: 8,
+  },
+  slaveCardDetails: {
+    fontSize: 15,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#4E5D66',
+    marginBottom: 4,
+  },
+  slaveCardLabel: {
+    color: '#757575',
+  },
+  slaveCardValue: {
+    color: '#0B0F20',
+    fontFamily: 'InstrumentSans-Medium',
+  },
+  slaveSwitchContainer: {
+    alignItems: 'flex-end',
+  },
+  settingsContainer: {
+    paddingHorizontal: 20,
+    marginTop: 30,
+  },
+  settingsHeader: {
+    fontSize: 14,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#AAB3BA',
+    marginBottom: 16,
+  },
+  menuList: {
+    gap: 0,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E2E2E2',
+  },
+  menuItemLast: {
+    borderBottomWidth: 0,
+  },
+  menuIconContainer: {
+    marginRight: 16,
+  },
+  menuTextContainer: {
+    flex: 1,
+    marginRight: 12,
+  },
+  menuTitle: {
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#0B0F20',
+    marginBottom: 4,
+  },
+  menuTitleDestructive: {
+    color: '#F44336',
+  },
+  menuSubtitle: {
+    fontSize: 15,
+    fontFamily: 'InstrumentSans-Regular',
+    color: '#4E5D66',
   },
 });
 
