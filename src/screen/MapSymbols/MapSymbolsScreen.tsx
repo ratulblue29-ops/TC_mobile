@@ -134,18 +134,22 @@ const AddMapSymbolCard = ({
   onCreateMapping: () => void;
 }) => (
   <View style={styles.addMapCard}>
-    <DropdownField
-      label="Map From Symbol"
-      value={mapFromSymbol}
-      placeholder="Select Symbol"
-      onPress={onMapFromPress}
-      isFirst
-    />
-    <DropdownField
-      value={mapToSymbol}
-      placeholder="Map To Symbol"
-      onPress={onMapToPress}
-    />
+    <View style={styles.DropdownFieldWrap1}>
+      <DropdownField
+        label="Map From Symbol"
+        value={mapFromSymbol}
+        placeholder="Select Symbol"
+        onPress={onMapFromPress}
+        isFirst
+      />
+    </View>
+    <View style={styles.DropdownFieldWrap2}>
+      <DropdownField
+        value={mapToSymbol}
+        placeholder="Map To Symbol"
+        onPress={onMapToPress}
+      />
+    </View>
     <TouchableOpacity
       style={styles.createButton}
       onPress={onCreateMapping}
@@ -191,8 +195,10 @@ const MappingRow = ({
   onDelete: (id: string) => void;
 }) => (
   <View style={styles.mappingRow}>
-    <SymbolPill symbol={mapping.fromSymbol} type="from" />
-    <SymbolPill symbol={mapping.toSymbol} type="to" />
+    <View style={styles.mappingRowwrap}>
+      <SymbolPill symbol={mapping.fromSymbol} type="from" />
+      <SymbolPill symbol={mapping.toSymbol} type="to" />
+    </View>
     <TouchableOpacity
       style={styles.deleteButton}
       onPress={() => onDelete(mapping.id)}

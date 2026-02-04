@@ -41,10 +41,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontFamily: 'InstrumentSans-Bold',
-    color: '#0B0F20',
+    fontSize: 18,
+    fontFamily: 'InstrumentSans-SemiBold',
+    color: '#2C3440',
     marginBottom: 12,
+    marginHorizontal: 20,
   },
   addMapCard: {
     backgroundColor: '#FFFFFF',
@@ -55,20 +56,31 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E2E2E2',
   },
-  dropdownField: {
-    paddingVertical: 12,
+  DropdownFieldWrap1: {
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    borderTopStartRadius: 15,
+    borderTopEndRadius: 15,
     paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#C8C8C8',
+    paddingVertical: 12,
+  },
+  DropdownFieldWrap2: {
+    borderWidth: 1,
+    borderColor: '#C8C8C8',
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    paddingHorizontal: 12,
+    paddingVertical: 20,
+  },
+  dropdownField: {
   },
   dropdownFieldFirst: {
-    marginBottom: 8,
   },
   dropdownLabel: {
     fontSize: 14,
-    fontFamily: 'InstrumentSans-Regular',
-    color: '#999999',
-    marginBottom: 8,
+    fontFamily: 'InstrumentSans-Medium',
+    color: '#4E5D66',
+    marginBottom: 2,
   },
   dropdownValue: {
     flexDirection: 'row',
@@ -77,7 +89,7 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     fontSize: 18,
-    fontFamily: 'InstrumentSans-SemiBold',
+    fontFamily: 'InstrumentSans-Medium',
     color: '#0B0F20',
   },
   dropdownPlaceholder: {
@@ -128,10 +140,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   checkbox: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    borderWidth: 2,
+    width: 16,
+    height: 16,
+    borderRadius: 5,
+    borderWidth: 1,
     borderColor: '#999999',
     alignItems: 'center',
     justifyContent: 'center',
@@ -153,7 +165,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 16,
     marginBottom: 20,
-    height: 48,
   },
   searchInput: {
     flex: 1,
@@ -170,32 +181,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 12,
+    backgroundColor: '#F7F8FA',
+    padding: 15,
+    borderRadius: 15,
+  },
+  mappingRowwrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F7F8FA',
+    gap: 10,
   },
   symbolPill: {
     paddingHorizontal: 14,
     paddingVertical: 10,
-    borderRadius: 20,
+    borderRadius: 8,
     borderWidth: 1,
     minWidth: 100,
     alignItems: 'center',
   },
   symbolPillFrom: {
     backgroundColor: '#E3F2FD',
-    borderColor: '#4A90E2',
+    borderColor: '#215B84',
   },
   symbolPillTo: {
     backgroundColor: '#E8F5E9',
-    borderColor: '#52C41A',
+    borderColor: '#45934E',
   },
   symbolPillText: {
     fontSize: 14,
     fontFamily: 'InstrumentSans-SemiBold',
   },
   symbolPillTextFrom: {
-    color: '#4A90E2',
+    color: '#215B84',
   },
   symbolPillTextTo: {
-    color: '#52C41A',
+    color: '#45934E',
   },
   deleteButton: {
     padding: 8,
