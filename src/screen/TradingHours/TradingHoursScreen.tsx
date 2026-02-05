@@ -7,6 +7,7 @@ import { RootStackParamList } from '../../navigator/RootNavigator';
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import AddTradingHours from '../../components/modal/CopierModal/AddTradingHours';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -70,7 +71,9 @@ const AddTradingHoursCard = ({ onPress }: { onPress: () => void }) => (
       </View>
       <View style={styles.addCardTextContainer}>
         <Text style={styles.addCardTitle}>Add Trading Hours</Text>
-        <Text style={styles.addCardSubtitle}>Description will go here ...</Text>
+        <Text style={styles.addCardSubtitle}>
+          Configure trading hours for specific days
+        </Text>
       </View>
     </View>
     <ChevronRight size={20} color={COLORS.gray} />
@@ -143,12 +146,34 @@ const TradingHoursScreen = () => {
     },
   ]);
 
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleAddPress = () => {
-    console.log('Add trading hours');
+    setIsAddModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsAddModalVisible(false);
+  };
+
+  const handleAddTradingHour = (
+    day: string,
+    startTime: string,
+    endTime: string,
+  ) => {
+    const newId = Math.max(...schedules.map(s => s.id), 0) + 1;
+    const newSchedule: DaySchedule = {
+      id: newId,
+      day,
+      startTime,
+      endTime,
+      enabled: true,
+    };
+    setSchedules(prev => [...prev, newSchedule]);
   };
 
   const handleToggleDay = (id: number) => {
@@ -193,6 +218,12 @@ const TradingHoursScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      <AddTradingHours
+        visible={isAddModalVisible}
+        onClose={handleCloseModal}
+        onAdd={handleAddTradingHour}
+      />
     </LinearGradient>
   );
 };
