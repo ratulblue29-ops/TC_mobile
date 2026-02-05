@@ -19,6 +19,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import SelectPropFirm from '../../components/modal/CompareModal/SelectPropFirm';
 
 type TabType = 'Prop Firms' | 'Broker';
 
@@ -100,6 +101,8 @@ const CompareScreen = () => {
   const [selectedFirm1, setSelectedFirm1] = useState('FundingPips');
   const [selectedFirm2, setSelectedFirm2] = useState('');
   const [pinnedFirms, setPinnedFirms] = useState<number[]>([1]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentSelectingFirm, setCurrentSelectingFirm] = useState<1 | 2>(2);
 
   const togglePin = (firmId: number) => {
     setPinnedFirms(prev =>
@@ -107,6 +110,20 @@ const CompareScreen = () => {
         ? prev.filter(id => id !== firmId)
         : [...prev, firmId],
     );
+  };
+
+  const handleOpenModal = (firmNumber: 1 | 2) => {
+    setCurrentSelectingFirm(firmNumber);
+    setIsModalVisible(true);
+  };
+
+  const handleSelectFirm = (firm: { id: number; name: string }) => {
+    if (currentSelectingFirm === 1) {
+      setSelectedFirm1(firm.name);
+    } else {
+      setSelectedFirm2(firm.name);
+    }
+    setIsModalVisible(false);
   };
 
   return (
@@ -185,20 +202,26 @@ const CompareScreen = () => {
           <View style={styles.compareSection}>
             <Text style={styles.compareTitle}>Compare Prop Firms</Text>
             <View style={styles.compareCard}>
-              <View
+              <TouchableOpacity
                 style={[
                   styles.dropdownContainer,
                   styles.dropdownContainerFirst,
                 ]}
+                onPress={() => handleOpenModal(1)}
+                activeOpacity={0.7}
               >
                 <View style={styles.iconBox} />
                 <View style={styles.dropdownContent}>
                   <Text style={styles.dropdownText}>{selectedFirm1}</Text>
                 </View>
                 <ChevronDown size={20} color={COLORS.textSecondary} />
-              </View>
+              </TouchableOpacity>
 
-              <View style={styles.dropdownContainer}>
+              <TouchableOpacity
+                style={styles.dropdownContainer}
+                onPress={() => handleOpenModal(2)}
+                activeOpacity={0.7}
+              >
                 <View style={styles.dropdownContent}>
                   <Text
                     style={[
@@ -210,7 +233,7 @@ const CompareScreen = () => {
                   </Text>
                 </View>
                 <ChevronDown size={20} color={COLORS.textSecondary} />
-              </View>
+              </TouchableOpacity>
 
               <View
                 style={[styles.dropdownContainer, styles.dropdownContainerLast]}
@@ -332,6 +355,16 @@ const CompareScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      <SelectPropFirm
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onSelectFirm={handleSelectFirm}
+        selectedFirm={
+          currentSelectingFirm === 1 ? selectedFirm1 : selectedFirm2
+        }
+        modalTitle={`Select Prop Firm ${currentSelectingFirm}`}
+      />
     </LinearGradient>
   );
 };
