@@ -13,12 +13,14 @@ import { Search, Mic } from 'lucide-react-native';
 const COLORS = {
   white: '#FFFFFF',
   teal: '#00897B',
-  textMain: '#0B0F20',
+  lightTeal: '#E0F7F4',
+  textMain: '#000000',
   textSecondary: '#666666',
-  lightGray: '#F5F5F5',
-  border: '#E0E0E0',
-  success: '#4CAF50',
-  lightTeal: '#E0F2F1',
+  placeholderGray: '#5C5C5C',
+  lightGray: '#EEF0F4',
+  borderGray: '#DCDCDC',
+  dragHandleGray: '#CCCCCC',
+  homeIndicator: '#000000',
 };
 
 type Symbol = {
@@ -35,142 +37,22 @@ type MaptoSymbolProps = {
 };
 
 const symbolsData: Symbol[] = [
-  {
-    id: 1,
-    number: 'ADAUSD',
-  },
-  {
-    id: 2,
-    number: 'AUDCAD',
-  },
-  {
-    id: 3,
-    number: 'AUDCHF',
-  },
-  {
-    id: 4,
-    number: 'AUDJPY',
-  },
-  {
-    id: 5,
-    number: 'AUDNZD',
-  },
-  {
-    id: 6,
-    number: 'AUDSGD',
-  },
-  {
-    id: 7,
-    number: 'AUDUSD',
-  },
-  {
-    id: 8,
-    number: 'AUS200',
-  },
-  {
-    id: 9,
-    number: 'AVXUSD',
-  },
-  {
-    id: 10,
-    number: 'BTCUSD',
-  },
-  {
-    id: 11,
-    number: 'CADCHF',
-  },
-  {
-    id: 12,
-    number: 'CADJPY',
-  },
-  {
-    id: 13,
-    number: 'CHFJPY',
-  },
-  {
-    id: 14,
-    number: 'DE30',
-  },
-  {
-    id: 15,
-    number: 'DE40',
-  },
-  {
-    id: 16,
-    number: 'EURCHF',
-  },
-  {
-    id: 17,
-    number: 'EURGBP',
-  },
-  {
-    id: 18,
-    number: 'EURJPY',
-  },
-  {
-    id: 19,
-    number: 'EURUSD',
-  },
-  {
-    id: 20,
-    number: 'GBPAUD',
-  },
-  {
-    id: 21,
-    number: 'GBPCAD',
-  },
-  {
-    id: 22,
-    number: 'GBPCHF',
-  },
-  {
-    id: 23,
-    number: 'GBPJPY',
-  },
-  {
-    id: 24,
-    number: 'GBPNZD',
-  },
-  {
-    id: 25,
-    number: 'GBPUSD',
-  },
-  {
-    id: 26,
-    number: 'NZDCAD',
-  },
-  {
-    id: 27,
-    number: 'NZDCHF',
-  },
-  {
-    id: 28,
-    number: 'NZDJPY',
-  },
-  {
-    id: 29,
-    number: 'NZDUSD',
-  },
-  {
-    id: 30,
-    number: 'USDCAD',
-  },
-  {
-    id: 31,
-    number: 'USDCHF',
-  },
-  {
-    id: 32,
-    number: 'USDJPY',
-  },
-  {
-    id: 33,
-    number: 'XAUUSD',
-  },
-  {
-    id: 34,
-    number: 'XAGUSD',
-  },
+  { id: 1, number: 'ADAUSD' },
+  { id: 2, number: 'AUDCAD' },
+  { id: 3, number: 'AUDCHF' },
+  { id: 4, number: 'AUDJPY' },
+  { id: 5, number: 'AUDNZD' },
+  { id: 6, number: 'AUDSGD' },
+  { id: 7, number: 'AUDUSD' },
+  { id: 8, number: 'AUS200' },
+  { id: 9, number: 'AVXUSD' },
+  { id: 10, number: 'BTCUSD' },
+  { id: 11, number: 'CADCHF' },
+  { id: 12, number: 'CADJPY' },
+  { id: 13, number: 'CHFJPY' },
+  { id: 14, number: 'DE30' },
+  { id: 15, number: 'DE40' },
+  { id: 16, number: 'EURCHF' },
 ];
 
 const MaptoSymbol = ({
@@ -178,7 +60,7 @@ const MaptoSymbol = ({
   onClose,
   onSelectSymbol,
   selectedSymbol,
-  modalTitle = 'Select Symbol',
+  modalTitle = 'Map to Symbol',
 }: MaptoSymbolProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredSymbols, setFilteredSymbols] = useState(symbolsData);
@@ -195,7 +77,6 @@ const MaptoSymbol = ({
     onSelectSymbol(symbol);
     setSearchQuery('');
     setFilteredSymbols(symbolsData);
-    onClose();
   };
 
   const handleClose = () => {
@@ -223,47 +104,65 @@ const MaptoSymbol = ({
         >
           <View style={styles.dragHandle} />
 
-          <View style={styles.header}>
+          <View style={styles.headerSection}>
             <Text style={styles.modalTitle}>{modalTitle}</Text>
             <Text style={styles.modalSubtitle}>
-              Select a symbol from the list below
+              Showing the list of all the symbols
             </Text>
           </View>
 
           <View style={styles.searchContainer}>
-            <Search size={20} color={COLORS.textSecondary} />
+            <Search size={22} color={COLORS.placeholderGray} />
             <TextInput
               placeholder="Search"
-              placeholderTextColor={COLORS.textSecondary}
+              placeholderTextColor={COLORS.placeholderGray}
               style={styles.searchInput}
               value={searchQuery}
               onChangeText={handleSearch}
             />
-            <Mic size={20} color={COLORS.textSecondary} />
+            <Mic size={22} color={COLORS.placeholderGray} />
           </View>
 
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.symbolList}
+            contentContainerStyle={styles.symbolListContent}
           >
-            {filteredSymbols.map(symbol => (
-              <TouchableOpacity
-                key={symbol.id}
-                style={[
-                  styles.symbolCard,
-                  selectedSymbol === symbol.number && styles.symbolCardSelected,
-                ]}
-                onPress={() => handleSelectSymbol(symbol)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.symbolLeft}>
-                  <View style={styles.symbolHeader}>
-                    <Text style={styles.symbolNumber}>{symbol.number}</Text>
+            {filteredSymbols.map(symbol => {
+              const isSelected = selectedSymbol === symbol.number;
+              return (
+                <TouchableOpacity
+                  key={symbol.id}
+                  style={[
+                    styles.symbolCard,
+                    isSelected && styles.symbolCardSelected,
+                  ]}
+                  onPress={() => handleSelectSymbol(symbol)}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.symbolText}>{symbol.number}</Text>
+                  <View
+                    style={[
+                      styles.selectionCircle,
+                      isSelected && styles.selectionCircleSelected,
+                    ]}
+                  >
+                    {isSelected && <View style={styles.selectionDot} />}
                   </View>
-                </View>
-              </TouchableOpacity>
-            ))}
+                </TouchableOpacity>
+              );
+            })}
           </ScrollView>
+
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={handleClose}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.addButtonText}>Add Symbol</Text>
+          </TouchableOpacity>
+
+          <View style={styles.homeIndicator} />
         </TouchableOpacity>
       </TouchableOpacity>
     </Modal>
@@ -280,51 +179,51 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 20,
-    maxHeight: '85%',
+    paddingBottom: 0,
   },
   dragHandle: {
-    width: 40,
-    height: 4,
-    backgroundColor: COLORS.lightGray,
-    borderRadius: 2,
     alignSelf: 'center',
     marginVertical: 12,
+    backgroundColor: COLORS.dragHandleGray,
+    borderRadius: 3,
   },
-  header: {
-    marginBottom: 20,
+  headerSection: {
+    paddingHorizontal: 22,
+    marginBottom: 22,
   },
   modalTitle: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: 20,
+    fontFamily: 'InstrumentSans-Bold',
     color: COLORS.textMain,
-    marginBottom: 4,
   },
   modalSubtitle: {
-    fontSize: 14,
-    fontWeight: '400',
+    fontSize: 15,
+    fontFamily: 'InstrumentSans-Regular',
     color: COLORS.textSecondary,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.lightGray,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    marginBottom: 20,
-    height: 48,
+    borderRadius: 13,
+    paddingHorizontal: 14,
+    marginHorizontal: 22,
+    marginBottom: 18,
   },
   searchInput: {
     flex: 1,
-    marginHorizontal: 12,
+    marginHorizontal: 10,
+    paddingVertical: 14,
     fontSize: 16,
+    fontFamily: 'InstrumentSans-Regular',
     color: COLORS.textMain,
   },
   symbolList: {
-    flexGrow: 0,
-    maxHeight: '60%',
+    maxHeight: '50%',
+    paddingHorizontal: 22,
+  },
+  symbolListContent: {
+    paddingBottom: 12,
   },
   symbolCard: {
     flexDirection: 'row',
@@ -332,27 +231,60 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.white,
     borderWidth: 1,
-    borderColor: COLORS.border,
-    borderRadius: 12,
-    padding: 16,
+    borderColor: COLORS.borderGray,
+    borderRadius: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 8,
     marginBottom: 12,
   },
   symbolCardSelected: {
-    borderColor: COLORS.teal,
+    backgroundColor: COLORS.lightTeal,
     borderWidth: 2,
+    borderColor: COLORS.teal,
   },
-  symbolLeft: {
-    flex: 1,
-  },
-  symbolHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  symbolNumber: {
-    fontSize: 16,
-    fontWeight: '600',
+  symbolText: {
+    fontSize: 17,
+    fontFamily: 'InstrumentSans-SemiBold',
     color: COLORS.textMain,
+  },
+  selectionCircle: {
+    width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderColor: COLORS.borderGray,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectionCircleSelected: {
+    borderColor: COLORS.teal,
+  },
+  selectionDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 6,
+    backgroundColor: COLORS.teal,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addButton: {
+    backgroundColor: COLORS.teal,
+    paddingVertical: 12,
+    marginTop: 12,
+    alignItems: 'center',
+    marginHorizontal: 15,
+    borderRadius: 8,
+  },
+  addButtonText: {
+    fontSize: 19,
+    fontFamily: 'InstrumentSans-Bold',
+    color: COLORS.white,
+  },
+  homeIndicator: {
+    alignSelf: 'center',
+    marginVertical: 10,
+    backgroundColor: COLORS.homeIndicator,
+    borderRadius: 3,
   },
 });
 
