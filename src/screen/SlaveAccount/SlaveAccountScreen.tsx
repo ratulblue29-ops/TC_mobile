@@ -228,7 +228,7 @@ const SlaveAccountScreen = () => {
   };
 
   const handleTradingHoursPress = () => {
-    console.log('Trading hours');
+    navigation.navigate('TradingHours');
   };
 
   const handleDeletePress = () => {
