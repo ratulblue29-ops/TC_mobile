@@ -43,9 +43,6 @@ const COLORS = {
   secondary: '#0B0F20',
   background: '#F7F8FA',
   white: '#FFFFFF',
-  cardBg: '#FFFFFF',
-  textMain: '#0B0F20',
-  textSecondary: '#2C3440',
   textMuted: '#4E5D66',
   success: '#00897B',
   warning: '#C3881B',
@@ -58,7 +55,6 @@ const COLORS = {
   balanceChange: '#4DB6AC',
   copierFollowers: '#E67E22',
   upgradeCard: '#E0F2F1',
-  sectionChevronBg: '#EEF0F4',
 };
 
 const PERIODS = ['Week', 'Month', 'Year'] as const;
@@ -451,10 +447,9 @@ const LinkedAccountCard = ({
   isFirst: boolean;
   isLast: boolean;
 }) => {
-  const navigation = useNavigation<DashboardNavigationProp>(); // Add this
+  const navigation = useNavigation<DashboardNavigationProp>();
 
   const handlePress = () => {
-    // Add this function
     navigation.navigate('AccountDetails', {
       accountId: account.id,
       accountNumber: account.number,
@@ -462,14 +457,14 @@ const LinkedAccountCard = ({
   };
 
   return (
-    <TouchableOpacity // Changed from View to TouchableOpacity
+    <TouchableOpacity
       style={[
         styles.accountCard,
         isFirst && styles.accountCardFirst,
         isLast && styles.accountCardLast,
       ]}
-      onPress={handlePress} // Add this
-      activeOpacity={0.7} // Add this
+      onPress={handlePress}
+      activeOpacity={0.7}
     >
       <View style={styles.accountCardLeft}>
         <View style={styles.accountCardHeader}>
