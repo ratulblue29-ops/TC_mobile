@@ -11,7 +11,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigator/RootNavigator';
-import { CopierStackParamList } from '../../navigator/CopierStack';
 import {
   ChevronLeft,
   ChevronDown,
@@ -21,8 +20,9 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
+import MaptoSymbol from '../../components/modal/CopierModal/MaptoSymbol';
 
-type RoutePropType = RouteProp<RootStackParamList, 'EditSlave'>;
+type RoutePropType = RouteProp<RootStackParamList, 'MapSymbols'>;
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const COLORS = {
@@ -42,6 +42,11 @@ type SymbolMapping = {
   id: string;
   fromSymbol: string;
   toSymbol: string;
+};
+
+type Symbol = {
+  id: number;
+  number: string;
 };
 
 const MOCK_MAPPINGS: SymbolMapping[] = [
@@ -281,7 +286,6 @@ const SymbolsMappedCard = ({
 };
 
 const MapSymbolsScreen = () => {
-  // const navigation = useNavigation<NavigationProp>();
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RoutePropType>();
 
@@ -291,17 +295,27 @@ const MapSymbolsScreen = () => {
   const [filterFrom, setFilterFrom] = useState(false);
   const [filterTo, setFilterTo] = useState(false);
   const [mappings, setMappings] = useState<SymbolMapping[]>(MOCK_MAPPINGS);
+  const [isMapFromModalVisible, setIsMapFromModalVisible] = useState(false);
+  const [isMapToModalVisible, setIsMapToModalVisible] = useState(false);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleMapFromPress = () => {
-    console.log('Select Map From Symbol');
+    setIsMapFromModalVisible(true);
   };
 
   const handleMapToPress = () => {
-    console.log('Select Map To Symbol');
+    setIsMapToModalVisible(true);
+  };
+
+  const handleSelectMapFromSymbol = (symbol: Symbol) => {
+    setMapFromSymbol(symbol.number);
+  };
+
+  const handleSelectMapToSymbol = (symbol: Symbol) => {
+    setMapToSymbol(symbol.number);
   };
 
   const handleCreateMapping = () => {
@@ -362,6 +376,22 @@ const MapSymbolsScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      <MaptoSymbol
+        visible={isMapFromModalVisible}
+        onClose={() => setIsMapFromModalVisible(false)}
+        onSelectSymbol={handleSelectMapFromSymbol}
+        selectedSymbol={mapFromSymbol}
+        modalTitle="Map To Symbol"
+      />
+
+      <MaptoSymbol
+        visible={isMapToModalVisible}
+        onClose={() => setIsMapToModalVisible(false)}
+        onSelectSymbol={handleSelectMapToSymbol}
+        selectedSymbol={mapToSymbol}
+        modalTitle="Map To Symbol"
+      />
     </LinearGradient>
   );
 };
