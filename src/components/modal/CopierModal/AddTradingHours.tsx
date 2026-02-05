@@ -12,10 +12,10 @@ import { ChevronDown } from 'lucide-react-native';
 const COLORS = {
   white: '#FFFFFF',
   teal: '#00897B',
-  textMain: '#0B0F20',
+  textMain: '#000000',
   textSecondary: '#9CA3AF',
-  labelGray: '#6B7280',
-  borderGray: '#E5E7EB',
+  labelGray: '#000000',
+  borderGray: '#C8C8C8',
   dragHandleGray: '#CCCCCC',
   placeholderGray: '#9CA3AF',
 };
@@ -119,7 +119,6 @@ const AddTradingHours = ({ visible, onClose, onAdd }: AddTradingHoursProps) => {
               onPress={handleStartTimePress}
               activeOpacity={0.7}
             >
-              <Text style={styles.fieldLabel}>Start Time</Text>
               <View style={styles.fieldContent}>
                 <Text
                   style={[
@@ -140,7 +139,6 @@ const AddTradingHours = ({ visible, onClose, onAdd }: AddTradingHoursProps) => {
               onPress={handleEndTimePress}
               activeOpacity={0.7}
             >
-              <Text style={styles.fieldLabel}>End Time</Text>
               <View style={styles.fieldContent}>
                 <Text
                   style={[
@@ -194,7 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   modalTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'InstrumentSans-Bold',
     color: COLORS.textMain,
     marginBottom: 4,
@@ -234,6 +232,7 @@ const styles = StyleSheet.create({
   fieldPlaceholder: {
     color: COLORS.placeholderGray,
     fontFamily: 'InstrumentSans-Regular',
+    paddingVertical: 7,
   },
   fieldDivider: {
     height: 1,
