@@ -261,7 +261,9 @@ const CompareScreen = () => {
                 Prop Firms Leaderboard
               </Text>
               <TouchableOpacity activeOpacity={0.7}>
-                <ListFilter size={24} color={COLORS.dark} />
+                <View style={styles.WrapListFilter}>
+                  <ListFilter size={24} color={COLORS.dark} />
+                </View>
               </TouchableOpacity>
             </View>
 

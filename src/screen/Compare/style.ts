@@ -177,6 +177,11 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-SemiBold',
     color: '#2C3440',
   },
+  WrapListFilter: {
+    backgroundColor: '#EEF0F4',
+    padding: 10,
+    borderRadius: 22,
+  },
   WarpSearchFirm: {
     backgroundColor: '#ffffff',
     padding: 10,
