@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 20,
     paddingVertical: 20,
-    marginBottom: 20,
     borderWidth: 1,
     borderColor: '#E2E2E2',
   },
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#EEF0F4',
     borderRadius: 10,
     paddingHorizontal: 16,
     marginBottom: 20,
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   mappingsList: {
-    gap: 16,
+    gap: 6,
   },
   mappingRow: {
     flexDirection: 'row',

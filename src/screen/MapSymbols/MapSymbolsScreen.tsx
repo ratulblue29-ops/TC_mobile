@@ -34,7 +34,7 @@ const COLORS = {
   greenLight: '#E8F5E9',
   greenBorder: '#52C41A',
   greenText: '#52C41A',
-  gray: '#999999',
+  gray: '#5C5C5C',
   searchBg: '#F5F5F5',
 };
 
@@ -204,7 +204,7 @@ const MappingRow = ({
       onPress={() => onDelete(mapping.id)}
       activeOpacity={0.7}
     >
-      <Trash2 size={20} color={COLORS.gray} />
+      <Trash2 size={20} color="#6C6C6C" />
     </TouchableOpacity>
   </View>
 );
