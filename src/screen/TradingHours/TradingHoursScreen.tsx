@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigator/RootNavigator';
-import { ChevronLeft } from 'lucide-react-native';
+import { ChevronLeft, ChevronRight, Clock } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -12,16 +12,35 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const COLORS = {
   white: '#FFFFFF',
-  teal: '#00897B',
-  blueLight: '#E3F2FD',
-  blueBorder: '#4A90E2',
-  blueText: '#4A90E2',
-  greenLight: '#E8F5E9',
-  greenBorder: '#52C41A',
-  greenText: '#52C41A',
-  gray: '#5C5C5C',
-  searchBg: '#F5F5F5',
+  teal: '#00A896',
+  orange: '#FF9500',
+  black: '#000000',
+  gray: '#616161',
 };
+
+type DaySchedule = {
+  id: number;
+  day: string;
+  startTime: string;
+  endTime: string;
+  enabled: boolean;
+};
+
+const CustomSwitch = ({
+  value,
+  onValueChange,
+}: {
+  value: boolean;
+  onValueChange: () => void;
+}) => (
+  <TouchableOpacity
+    style={[styles.switchTrack, value && styles.switchTrackActive]}
+    onPress={onValueChange}
+    activeOpacity={0.8}
+  >
+    <View style={[styles.switchThumb, value && styles.switchThumbActive]} />
+  </TouchableOpacity>
+);
 
 const Header = ({ onBackPress }: { onBackPress: () => void }) => (
   <View style={styles.headerSection}>
@@ -31,7 +50,7 @@ const Header = ({ onBackPress }: { onBackPress: () => void }) => (
         onPress={onBackPress}
         activeOpacity={0.7}
       >
-        <ChevronLeft size={24} color="#0B0F20" />
+        <ChevronLeft size={24} color={COLORS.black} />
       </TouchableOpacity>
       <Text style={styles.headerTitle}>Trading Hours</Text>
       <View style={styles.headerIcons} />
@@ -39,11 +58,111 @@ const Header = ({ onBackPress }: { onBackPress: () => void }) => (
   </View>
 );
 
+const AddTradingHoursCard = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity
+    style={styles.addCard}
+    onPress={onPress}
+    activeOpacity={0.7}
+  >
+    <View style={styles.addCardLeft}>
+      <View style={styles.clockIconContainer}>
+        <Clock size={24} color={COLORS.teal} />
+      </View>
+      <View style={styles.addCardTextContainer}>
+        <Text style={styles.addCardTitle}>Add Trading Hours</Text>
+        <Text style={styles.addCardSubtitle}>Description will go here ...</Text>
+      </View>
+    </View>
+    <ChevronRight size={20} color={COLORS.gray} />
+  </TouchableOpacity>
+);
+
+const DayItem = ({
+  schedule,
+  onToggle,
+  onPress,
+  isLast,
+}: {
+  schedule: DaySchedule;
+  onToggle: (id: number) => void;
+  onPress: (schedule: DaySchedule) => void;
+  isLast: boolean;
+}) => (
+  <TouchableOpacity
+    style={[styles.dayItem, isLast && styles.dayItemLast]}
+    onPress={() => onPress(schedule)}
+    activeOpacity={0.7}
+  >
+    <View style={styles.dayItemLeft}>
+      <Text style={styles.dayName}>{schedule.day}</Text>
+      <Text style={styles.timeInfo}>
+        Start: {schedule.startTime} End: {schedule.endTime}
+      </Text>
+    </View>
+    <View style={styles.daySwitchContainer}>
+      <TouchableOpacity
+        onPress={e => {
+          e.stopPropagation();
+          onToggle(schedule.id);
+        }}
+        activeOpacity={0.8}
+      >
+        <CustomSwitch
+          value={schedule.enabled}
+          onValueChange={() => onToggle(schedule.id)}
+        />
+      </TouchableOpacity>
+    </View>
+  </TouchableOpacity>
+);
+
 const TradingHoursScreen = () => {
   const navigation = useNavigation<NavigationProp>();
 
+  const [schedules, setSchedules] = useState<DaySchedule[]>([
+    {
+      id: 1,
+      day: 'Monday',
+      startTime: '00:00',
+      endTime: '00:00',
+      enabled: true,
+    },
+    {
+      id: 2,
+      day: 'Tuesday',
+      startTime: '00:00',
+      endTime: '00:00',
+      enabled: true,
+    },
+    {
+      id: 3,
+      day: 'Wednesday',
+      startTime: '00:00',
+      endTime: '00:00',
+      enabled: true,
+    },
+  ]);
+
   const handleBackPress = () => {
     navigation.goBack();
+  };
+
+  const handleAddPress = () => {
+    console.log('Add trading hours');
+  };
+
+  const handleToggleDay = (id: number) => {
+    setSchedules(prev =>
+      prev.map(schedule =>
+        schedule.id === id
+          ? { ...schedule, enabled: !schedule.enabled }
+          : schedule,
+      ),
+    );
+  };
+
+  const handleDayPress = (schedule: DaySchedule) => {
+    console.log('Edit day:', schedule.day);
   };
 
   return (
@@ -55,6 +174,23 @@ const TradingHoursScreen = () => {
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Header onBackPress={handleBackPress} />
+
+          <AddTradingHoursCard onPress={handleAddPress} />
+
+          <View style={styles.content}>
+            <View style={styles.daysContainer}>
+              <Text style={styles.sectionHeader}>Added Trading Hours</Text>
+              {schedules.map((schedule, index) => (
+                <DayItem
+                  key={schedule.id}
+                  schedule={schedule}
+                  onToggle={handleToggleDay}
+                  onPress={handleDayPress}
+                  isLast={index === schedules.length - 1}
+                />
+              ))}
+            </View>
+          </View>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
