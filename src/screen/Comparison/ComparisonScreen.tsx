@@ -168,6 +168,7 @@ const ComparisonScreen = () => {
 
         <View style={styles.firmSelection}>
           <View style={styles.firmPill}>
+            <View style={styles.iconBox} />
             <Text style={styles.firmPillText}>{firm1}</Text>
             <TouchableOpacity
               onPress={() => handleRemoveFirm(firm1)}
@@ -177,6 +178,7 @@ const ComparisonScreen = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.firmPill}>
+            <View style={styles.iconBox} />
             <Text style={styles.firmPillText}>{firm2}</Text>
             <TouchableOpacity
               onPress={() => handleRemoveFirm(firm2)}
@@ -248,11 +250,17 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Country</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text style={styles.valueText}>{firm1Data.country}</Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text style={styles.valueText}>{firm2Data.country}</Text>
               </View>
             </View>
@@ -260,7 +268,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Years in Operation</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -277,7 +288,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -298,7 +312,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Trust Score</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -315,7 +332,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -336,7 +356,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Users in Platform</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -353,7 +376,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -374,7 +400,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Funding & Rules</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -391,7 +420,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -412,7 +444,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Leverage</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -429,7 +464,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -450,13 +488,19 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Evaluation Type</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text style={[styles.valueText, { color: COLORS.neutral }]}>
                   {firm1Data.evaluationType}
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text style={[styles.valueText, { color: COLORS.neutral }]}>
                   {firm2Data.evaluationType}
                 </Text>
@@ -466,7 +510,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Daily Drawdown %</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -483,7 +530,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -504,7 +554,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Max Drawdown %</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -521,7 +574,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -542,7 +598,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Profit Target %</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -559,7 +618,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -580,7 +642,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Payout</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -597,7 +662,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -618,7 +686,10 @@ const ComparisonScreen = () => {
             <View style={styles.comparisonRow}>
               <Text style={styles.metricTitle}>Payout Speed (Days)</Text>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm1}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm1}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,
@@ -635,7 +706,10 @@ const ComparisonScreen = () => {
                 </Text>
               </View>
               <View style={styles.valueRow}>
-                <Text style={styles.firmLabel}>{firm2}</Text>
+                <View style={styles.valueRow}>
+                  <View style={styles.iconBox} />
+                  <Text style={styles.firmLabel}>{firm2}</Text>
+                </View>
                 <Text
                   style={[
                     styles.valueText,

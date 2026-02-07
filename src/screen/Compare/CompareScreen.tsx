@@ -240,6 +240,7 @@ const CompareScreen = () => {
                 onPress={() => handleOpenModal(2)}
                 activeOpacity={0.7}
               >
+                <View style={styles.iconBox} />
                 <View style={styles.dropdownContent}>
                   <Text
                     style={[
