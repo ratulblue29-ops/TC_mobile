@@ -48,15 +48,18 @@ const styles = StyleSheet.create({
   },
   filterOption: {
     backgroundColor: '#FFFFFF',
-    // borderRadius: 10,
-    // borderTopStartRadius: 10,
-    // borderTopEndRadius: 10,
-    // borderBottomLeftRadius: 10,
-    // borderBottomRightRadius: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
     paddingHorizontal: 16,
     paddingVertical: 16,
+  },
+  filterOptionFirst: {
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
+  },
+  filterOptionLast: {
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   filterContent: {
     flexDirection: 'row',

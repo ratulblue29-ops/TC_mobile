@@ -155,7 +155,14 @@ const FilterPropFirmsScreen = () => {
 
           {filters.map((filter, index) => (
             <View key={filter.id}>
-              <TouchableOpacity style={styles.filterOption} activeOpacity={0.7}>
+              <TouchableOpacity
+                style={[
+                  styles.filterOption,
+                  index === 0 && styles.filterOptionFirst,
+                  index === filters.length - 1 && styles.filterOptionLast,
+                ]}
+                activeOpacity={0.7}
+              >
                 <View style={styles.filterContent}>
                   <View style={styles.filterTextContainer}>
                     <Text style={styles.filterOptionLabel}>{filter.label}</Text>
