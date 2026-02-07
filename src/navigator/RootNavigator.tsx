@@ -18,6 +18,7 @@ import CalculateRiskScreen from '../screen/CalculateRisk/CalculateRiskScreen';
 import MapSymbolsScreen from '../screen/MapSymbols/MapSymbolsScreen';
 import TradingHoursScreen from '../screen/TradingHours/TradingHoursScreen';
 import FilterPropFirmsScreen from '../screen/FilterPropFirms/FilterPropFirmsScreen';
+import ComparisonScreen from '../screen/Comparison/ComparisonScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -38,6 +39,10 @@ export type RootStackParamList = {
   MapSymbols: undefined;
   TradingHours: undefined;
   FilterPropFirms: undefined;
+  Comparison: {
+    firm1: string;
+    firm2: string;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -65,6 +70,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="AdvanceSettings" component={AdvanceSettingsScreen} />
       <Stack.Screen name="CalculateRisk" component={CalculateRiskScreen} />
       <Stack.Screen name="FilterPropFirms" component={FilterPropFirmsScreen} />
+      <Stack.Screen name="Comparison" component={ComparisonScreen} />
     </Stack.Navigator>
   );
 };

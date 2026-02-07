@@ -25,6 +25,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import SelectPropFirm from '../../components/modal/CompareModal/SelectPropFirmModal';
 
 type TabType = 'Prop Firms' | 'Broker';
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const COLORS = {
   primary: '#00897B',
@@ -100,8 +101,7 @@ const propFirmsData = [
 ];
 
 const CompareScreen = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp>();
   const [activeTab, setActiveTab] = useState<TabType>('Prop Firms');
   const [selectedFirm1, setSelectedFirm1] = useState('FundingPips');
   const [selectedFirm2, setSelectedFirm2] = useState('');
@@ -111,6 +111,15 @@ const CompareScreen = () => {
 
   const handleFilterPress = () => {
     navigation.navigate('FilterPropFirms');
+  };
+
+  const handleComparePress = () => {
+    if (selectedFirm1 && selectedFirm2) {
+      navigation.navigate('Comparison', {
+        firm1: selectedFirm1,
+        firm2: selectedFirm2,
+      });
+    }
   };
 
   const togglePin = (firmId: number) => {
@@ -258,6 +267,7 @@ const CompareScreen = () => {
               <TouchableOpacity
                 style={styles.compareButton}
                 activeOpacity={0.7}
+                onPress={handleComparePress}
               >
                 <Text style={styles.compareButtonText}>Compare</Text>
               </TouchableOpacity>
