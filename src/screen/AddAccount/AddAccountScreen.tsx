@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import SelectBroker from '../../components/modal/AccountModal/SelectBroker';
+import SelectBroker from '../../components/modal/dashboardModal/SelectBrokerModal';
 
 const COLORS = {
   primary: '#00897B',

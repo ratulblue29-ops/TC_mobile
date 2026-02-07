@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../../navigator/RootNavigator';
 import UserSettingsIcon from '../../svg/AccGear';
 import ShieldWalletIcon from '../../svg/ProCard';
 import CurrencyCircleIcon from '../../svg/Euro';
-import DeleteAccount from './DeleteAccount';
+import DeleteAccount from './DeleteAccountModal';
 
 const COLORS = {
   white: '#FFFFFF',

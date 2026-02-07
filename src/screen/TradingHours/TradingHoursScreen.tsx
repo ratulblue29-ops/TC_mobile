@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../navigator/RootNavigator';
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import AddTradingHours from '../../components/modal/CopierModal/AddTradingHours';
+import AddTradingHours from '../../components/modal/CopierModal/AddTradingHoursModal';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 

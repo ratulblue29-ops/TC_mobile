@@ -19,7 +19,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import SelectPropFirm from '../../components/modal/CompareModal/SelectPropFirm';
+import SelectPropFirm from '../../components/modal/CompareModal/SelectPropFirmModal';
 
 type TabType = 'Prop Firms' | 'Broker';
 

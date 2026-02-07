@@ -18,7 +18,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import CopyAccount from '../../components/modal/CopierModal/CopyAccount';
+import CopyAccount from '../../components/modal/CopierModal/CopyAccountModal';
 
 type RoutePropType = RouteProp<RootStackParamList, 'EditSlave'>;
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;

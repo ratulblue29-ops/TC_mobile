@@ -27,7 +27,7 @@ import { LineChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import AccountSettingsModal from '../../components/modal/AccountModal/AccountSettingsModal';
+import AccountSettingsModal from '../../components/modal/dashboardModal/AccountSettingsModal';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigator/RootNavigator';

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import MaptoSymbol from '../../components/modal/CopierModal/MaptoSymbol';
+import MaptoSymbol from '../../components/modal/CopierModal/MaptoSymbolModal';
 
 type RoutePropType = RouteProp<RootStackParamList, 'MapSymbols'>;
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;

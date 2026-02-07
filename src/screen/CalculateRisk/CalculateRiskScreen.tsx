@@ -13,7 +13,7 @@ import { RootStackParamList } from '../../navigator/RootNavigator';
 import { ChevronLeft, Ellipsis } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import RiskSettings from '../../components/modal/CopierModal/RiskSettings';
+import RiskSettings from '../../components/modal/CopierModal/RiskSettingsModal';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
