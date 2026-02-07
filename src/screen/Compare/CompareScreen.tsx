@@ -8,6 +8,9 @@ import {
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigator/RootNavigator';
 import {
   Bell,
   Menu,
@@ -97,12 +100,18 @@ const propFirmsData = [
 ];
 
 const CompareScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [activeTab, setActiveTab] = useState<TabType>('Prop Firms');
   const [selectedFirm1, setSelectedFirm1] = useState('FundingPips');
   const [selectedFirm2, setSelectedFirm2] = useState('');
   const [pinnedFirms, setPinnedFirms] = useState<number[]>([1]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentSelectingFirm, setCurrentSelectingFirm] = useState<1 | 2>(2);
+
+  const handleFilterPress = () => {
+    navigation.navigate('FilterPropFirms');
+  };
 
   const togglePin = (firmId: number) => {
     setPinnedFirms(prev =>
@@ -260,7 +269,7 @@ const CompareScreen = () => {
               <Text style={styles.leaderboardTitle}>
                 Prop Firms Leaderboard
               </Text>
-              <TouchableOpacity activeOpacity={0.7}>
+              <TouchableOpacity activeOpacity={0.7} onPress={handleFilterPress}>
                 <View style={styles.WrapListFilter}>
                   <ListFilter size={24} color={COLORS.dark} />
                 </View>

@@ -17,6 +17,7 @@ import AdvanceSettingsScreen from '../screen/AdvanceSettings/AdvanceSettingsScre
 import CalculateRiskScreen from '../screen/CalculateRisk/CalculateRiskScreen';
 import MapSymbolsScreen from '../screen/MapSymbols/MapSymbolsScreen';
 import TradingHoursScreen from '../screen/TradingHours/TradingHoursScreen';
+import FilterPropFirmsScreen from '../screen/FilterPropFirms/FilterPropFirmsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
   CalculateRisk: undefined;
   MapSymbols: undefined;
   TradingHours: undefined;
+  FilterPropFirms: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -62,6 +64,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="TradingHours" component={TradingHoursScreen} />
       <Stack.Screen name="AdvanceSettings" component={AdvanceSettingsScreen} />
       <Stack.Screen name="CalculateRisk" component={CalculateRiskScreen} />
+      <Stack.Screen name="FilterPropFirms" component={FilterPropFirmsScreen} />
     </Stack.Navigator>
   );
 };
