@@ -34,6 +34,7 @@ CompareScreen
 → "Select Prop Firm 2" dropdown → SelectPropFirmModal
 → filter icon beside Prop Firms Leaderboard → FilterPropFirmsScreen
 → CompareButton → ComparisonScreen
+→ firmCard → FirmDetailsScreen
 
 Tab 5: Sentiments
 SentimentsScreen

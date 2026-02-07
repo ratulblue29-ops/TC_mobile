@@ -374,10 +374,15 @@ const FirmDetailsScreen = () => {
                 label: 'Years in Operation',
                 value: firmData.yearsInOperation.toString(),
               },
-            ].map((item, index) => (
-              <View key={index} style={styles.detailRow}>
-                <Text style={styles.detailLabel}>{item.label}</Text>
-                <Text style={styles.detailValue}>{item.value}</Text>
+            ].map((item, index, array) => (
+              <View key={index}>
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>{item.label}</Text>
+                  <Text style={styles.detailValue}>{item.value}</Text>
+                </View>
+                {index !== array.length - 1 && (
+                  <View style={styles.separator} />
+                )}
               </View>
             ))}
           </View>
@@ -385,23 +390,30 @@ const FirmDetailsScreen = () => {
 
         <View style={styles.overviewSection}>
           <Text style={styles.overviewLabel}>Overview</Text>
-          {[
-            { key: 'Broker', value: firmData.broker },
-            {
-              key: 'Payment Methods',
-              value: firmData.paymentMethods1.join(', '),
-            },
-            { key: 'Platforms', value: firmData.platforms.join(', ') },
-            {
-              key: 'Payment Methods',
-              value: firmData.paymentMethods2.join(', '),
-            },
-          ].map((item, index) => (
-            <View key={index} style={styles.overviewRow}>
-              <Text style={styles.overviewKey}>{item.key}</Text>
-              <Text style={styles.overviewValue}>{item.value}</Text>
-            </View>
-          ))}
+          <View style={styles.wrapOverview}>
+            {[
+              { key: 'Broker', value: firmData.broker },
+              {
+                key: 'Payment Methods',
+                value: firmData.paymentMethods1.join(', '),
+              },
+              { key: 'Platforms', value: firmData.platforms.join(', ') },
+              {
+                key: 'Payment Methods',
+                value: firmData.paymentMethods2.join(', '),
+              },
+            ].map((item, index, array) => (
+              <View key={index}>
+                <View style={styles.overviewRow}>
+                  <Text style={styles.overviewKey}>{item.key}</Text>
+                  <Text style={styles.overviewValue}>{item.value}</Text>
+                </View>
+                {index !== array.length - 1 && (
+                  <View style={styles.separator2} />
+                )}
+              </View>
+            ))}
+          </View>
         </View>
 
         <View style={styles.leverageSection}>
@@ -409,8 +421,8 @@ const FirmDetailsScreen = () => {
           {(['fx', 'metals', 'indices', 'energy', 'crypto'] as const).map(
             asset => (
               <View key={asset} style={styles.assetContainer}>
-                <Text style={styles.assetTitle}>{asset.toUpperCase()}</Text>
                 <View style={styles.leverageTable}>
+                  <Text style={styles.assetTitle}>{asset.toUpperCase()}</Text>
                   <View style={styles.tableRow}>
                     {['Instant', '1-Step', '2-Steps', '3-Steps'].map(header => (
                       <Text key={header} style={styles.tableHeader}>
