@@ -5,7 +5,7 @@ BOTTOM TABS (Main App)
 Tab 1: Dashboard Stack
 DashboardScreen
 → "Linked Accounts" section chevron → Opens SelectAccountModal
-→ Account card click → AccountsScreen → Header Plus icon → AddAccountScreen → Select Broker chevronDown → SelectBrokerModal
+→ Account card → AccountsScreen → Header Plus icon → AddAccountScreen → Select Broker chevronDown → SelectBrokerModal
 → Header Settings icon → AccountSettingsModal
 ↓
 AccountSettingsModal
