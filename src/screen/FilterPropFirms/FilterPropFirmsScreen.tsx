@@ -164,7 +164,6 @@ const FilterPropFirmsScreen = () => {
                   <ChevronDown size={20} color={COLORS.textSecondary} />
                 </View>
               </TouchableOpacity>
-              {index < filters.length - 1 && <View style={styles.separator} />}
             </View>
           ))}
         </View>
