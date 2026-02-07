@@ -20,7 +20,7 @@ import {
 } from 'lucide-react-native';
 import styles from './style';
 import LinearGradient from 'react-native-linear-gradient';
-import MaptoSymbol from '../../components/modal/CopierModal/MaptoSymbolModal';
+import MaptoSymbol from '../../components/modal/CopierModal/MapSymbolModal';
 
 type RoutePropType = RouteProp<RootStackParamList, 'MapSymbols'>;
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -382,7 +382,7 @@ const MapSymbolsScreen = () => {
         onClose={() => setIsMapFromModalVisible(false)}
         onSelectSymbol={handleSelectMapFromSymbol}
         selectedSymbol={mapFromSymbol}
-        modalTitle="Map To Symbol"
+        modalTitle="Map From Symbol"
       />
 
       <MaptoSymbol
