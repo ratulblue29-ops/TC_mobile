@@ -307,40 +307,52 @@ const CompareScreen = () => {
                       index === propFirmsData.length - 1 && styles.firmCardLast,
                     ]}
                   >
-                    <View style={styles.firmLeft}>
-                      <View style={styles.firmIconBox} />
-                      <View style={styles.firmInfo}>
-                        <Text style={styles.firmName}>{firm.name}</Text>
-                        <Text style={styles.firmMeta}>
-                          {firm.location} • {firm.years} • ★ {firm.rating}
-                        </Text>
-                      </View>
-                      <Text style={styles.rankNumber}>#{firm.rank}</Text>
-                    </View>
-                    <View style={styles.firmInfo}>
-                      <View style={styles.firmStats}>
-                        <View style={styles.statItem}>
-                          <Text style={styles.statLabel}>Max Allocation</Text>
-                          <Text style={styles.statValue}>
-                            {firm.maxAllocation}
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate('FirmDetails', {
+                          firmId: firm.id,
+                          firmName: firm.name,
+                        })
+                      }
+                      activeOpacity={0.7}
+                    >
+                      <View style={styles.firmLeft}>
+                        <View style={styles.firmIconBox} />
+                        <View style={styles.firmInfo}>
+                          <Text style={styles.firmName}>{firm.name}</Text>
+                          <Text style={styles.firmMeta}>
+                            {firm.location} • {firm.years} • ★ {firm.rating}
                           </Text>
                         </View>
+                        <Text style={styles.rankNumber}>#{firm.rank}</Text>
+                      </View>
+                      <View style={styles.firmInfo}>
+                        <View style={styles.firmStats}>
+                          <View style={styles.statItem}>
+                            <Text style={styles.statLabel}>Max Allocation</Text>
+                            <Text style={styles.statValue}>
+                              {firm.maxAllocation}
+                            </Text>
+                          </View>
 
-                        <View style={styles.separator} />
+                          <View style={styles.separator} />
 
-                        <View style={styles.statItem}>
-                          <Text style={styles.statLabel}>Leverage</Text>
-                          <Text style={styles.statValue}>{firm.leverage}</Text>
-                        </View>
+                          <View style={styles.statItem}>
+                            <Text style={styles.statLabel}>Leverage</Text>
+                            <Text style={styles.statValue}>
+                              {firm.leverage}
+                            </Text>
+                          </View>
 
-                        <View style={styles.separator} />
+                          <View style={styles.separator} />
 
-                        <View style={styles.statItem}>
-                          <Text style={styles.statLabel}>Daily DD</Text>
-                          <Text style={styles.statValue}>{firm.dailyDD}</Text>
+                          <View style={styles.statItem}>
+                            <Text style={styles.statLabel}>Daily DD</Text>
+                            <Text style={styles.statValue}>{firm.dailyDD}</Text>
+                          </View>
                         </View>
                       </View>
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.firmRight}>
                       <TouchableOpacity

@@ -30,8 +30,10 @@ AnalyzerScreen
 
 Tab 4: Compare
 CompareScreen
-"Select Prop Firm 1" dropdown → SelectPropFirmModal
-"Select Prop Firm 2" dropdown → SelectPropFirmModal
+→ "Select Prop Firm 1" dropdown → SelectPropFirmModal
+→ "Select Prop Firm 2" dropdown → SelectPropFirmModal
+→ filter icon beside Prop Firms Leaderboard → FilterPropFirmsScreen
+→ CompareButton → ComparisonScreen
 
 Tab 5: Sentiments
 SentimentsScreen

@@ -19,6 +19,7 @@ import MapSymbolsScreen from '../screen/MapSymbols/MapSymbolsScreen';
 import TradingHoursScreen from '../screen/TradingHours/TradingHoursScreen';
 import FilterPropFirmsScreen from '../screen/FilterPropFirms/FilterPropFirmsScreen';
 import ComparisonScreen from '../screen/Comparison/ComparisonScreen';
+import FirmDetailsScreen from '../screen/FirmDetails/FirmDetailsScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -42,6 +43,10 @@ export type RootStackParamList = {
   Comparison: {
     firm1: string;
     firm2: string;
+  };
+  FirmDetails: {
+    firmId: number;
+    firmName: string;
   };
 };
 
@@ -71,6 +76,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="CalculateRisk" component={CalculateRiskScreen} />
       <Stack.Screen name="FilterPropFirms" component={FilterPropFirmsScreen} />
       <Stack.Screen name="Comparison" component={ComparisonScreen} />
+      <Stack.Screen name="FirmDetails" component={FirmDetailsScreen} />
     </Stack.Navigator>
   );
 };
