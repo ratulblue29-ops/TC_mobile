@@ -256,6 +256,7 @@ const ComparisonScreen = () => {
                 </View>
                 <Text style={styles.valueText}>{firm1Data.country}</Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -287,6 +288,7 @@ const ComparisonScreen = () => {
                   {firm1Data.yearsInOperation}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -331,6 +333,7 @@ const ComparisonScreen = () => {
                   {firm1Data.trustScore}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -375,6 +378,7 @@ const ComparisonScreen = () => {
                   {formatNumber(firm1Data.usersInPlatform)}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -419,6 +423,7 @@ const ComparisonScreen = () => {
                   {formatNumber(firm1Data.fundingRules)}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -463,6 +468,7 @@ const ComparisonScreen = () => {
                   {firm1Data.leverage}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -496,6 +502,7 @@ const ComparisonScreen = () => {
                   {firm1Data.evaluationType}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -529,6 +536,7 @@ const ComparisonScreen = () => {
                   {firm1Data.dailyDrawdown}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -573,6 +581,7 @@ const ComparisonScreen = () => {
                   {firm1Data.maxDrawdown}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -617,6 +626,7 @@ const ComparisonScreen = () => {
                   {firm1Data.profitTarget}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -661,6 +671,7 @@ const ComparisonScreen = () => {
                   {firm1Data.payout}
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />
@@ -705,6 +716,7 @@ const ComparisonScreen = () => {
                   {firm1Data.payoutSpeedDays} Days
                 </Text>
               </View>
+              <View style={styles.separator} />
               <View style={styles.valueRow}>
                 <View style={styles.valueRow}>
                   <View style={styles.iconBox} />

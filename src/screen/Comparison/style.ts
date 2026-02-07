@@ -155,6 +155,10 @@ const styles = StyleSheet.create({
     borderColor: '#C8C8C8',
     backgroundColor: 'transparent',
   },
+  separator: {
+    height: 1,
+    backgroundColor: '#D1DDE6',
+  },
 });
 
 export default styles;
